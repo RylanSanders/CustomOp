@@ -5,10 +5,11 @@ I shouldn't be passing around the data, I should really only have operations ret
 		then do a comparison where it picks the most recent operation - store all of the operations in order in the data
 
 Fix the XMLParser to load all of the operations from assemblies in an operations folder
-Add an option to the base operation config to let you manually set variables (something like <StaticVar methodVar="" value="">) and try to infer the type
+Add an option to the base operation config to let you manually set variables (something like <StaticVar methodVar="" value="">) and try to infer the type - Rename the var map and put it in there
 Operations:
 	String templating
 	Database operations
 	HTTP requests
 	File Write Operations
 	GUIInput - Parent of many other guis - Configurable form gui for lazy gui coding
+	Persistent Variable save

@@ -56,5 +56,14 @@ namespace CustomOp.Objects
             data.Add(name, new MutableObject(i));
         }
 
+        public OpData merge(OpData otherData)
+        {
+            foreach(var key in otherData.data.Keys)
+            {
+                data.Add(key, otherData.data[key]);
+            }
+            return this;
+        }
+
     }
 }

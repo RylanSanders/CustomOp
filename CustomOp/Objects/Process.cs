@@ -24,7 +24,6 @@ namespace CustomOp.Objects
                 }
             }
             inputData = new OpData();
-            inputData = XMLParser.parseInput(config.Element("Input"), inputData);
             name = config.Attribute("name").Value.ToString();
         }
 
@@ -36,7 +35,7 @@ namespace CustomOp.Objects
                 {
                     op.execute(inputData);
                 }
-                catch
+                catch(Exception e)
                 {
                     op.onError();
                 }
