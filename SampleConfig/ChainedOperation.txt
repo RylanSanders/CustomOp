@@ -1,0 +1,14 @@
+<CompositeOperation name="Main" type="Sequential">
+	<Operation type="KillProcess" name="KillFLX">
+		<Input name="FLX_Server" type="String" value="SabreFLX.exe">
+	</Operation>
+	<Operation type="KillProcess" name="KillFLXReporting">
+		<Input name="FLXReporting" type="String" value="FlxReportingService.exe">
+	</Operation>
+	<Operation type="FileMove" name="MoveReportCore">
+		<Input name="dllBuildPath" type="string" value="BuildPath">
+	</Operation>
+	<Operation type="StartProcess" name="StartFLXReporting">
+		<Input name="FLXReporting" type="String" value="FlxReportingService.exe">
+	</Operation>
+</CompositeOperation>

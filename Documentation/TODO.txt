@@ -1,0 +1,14 @@
+Operations need to execute in their own thread
+Inputs should just be a set operation, not a custom thing
+I shouldn't be passing around the data, I should really only have operations return data - atleast if I want to only do block coding
+		-Could instead make each variable have a unique identifier - like have the data have the name and an operation for comparison
+		then do a comparison where it picks the most recent operation - store all of the operations in order in the data
+
+Fix the XMLParser to load all of the operations from assemblies in an operations folder
+Add an option to the base operation config to let you manually set variables (something like <StaticVar methodVar="" value="">) and try to infer the type
+Operations:
+	String templating
+	Database operations
+	HTTP requests
+	File Write Operations
+	GUIInput - Parent of many other guis - Configurable form gui for lazy gui coding

@@ -1,0 +1,42 @@
+<Processes>
+<Process name="Test1">
+<Input>
+	<Data name="SrcFile" type="string" value="C:/test/test.txt" />
+	<Data name="DestFile" type="string" value="C:/test/final.txt" />
+	<Data name="ToKillProcess" type="string" value="FireFox" />
+	<Data name="WaitTime" type="int" value="10000" />
+</Input>
+<Operation type="FileMove" name="BasicFileMove">
+	<VarMap>
+		<Mapping methodName="SourceFile" varName="SrcFile" />
+		<Mapping methodName="DestinationFile" varName="DestFile" />
+	</VarMap>
+</Operation>
+<Operation type="Wait" name="Wait" />
+<Operation type="KillProcess" name="KillFireFox" />
+</Process>
+<Process name="Test2">
+<Input>
+	<Data name="ToStopService" type="string" value="Steam Client Service" />
+</Input>
+<Operation type="StopService" name="StartSteamService" />
+</Process>
+<Process name="TextTest">
+<Input>
+	<Data name="Output1" type="string" value="First Check point" />
+	<Data name="WaitTime" type="int" value="10000" />
+	<Data name="Output2" type="string" value="Second Check Point" />
+</Input>
+<Operation type="ConsoleOutput" name="OutputTest1" >
+	<VarMap>
+		<Mapping methodName="ConsoleOutputText" varName="Output1" />
+	</VarMap>
+</Operation>
+<Operation type="Wait" name="Wait" />
+<Operation type="ConsoleOutput" name="OutputTest2" >
+	<VarMap>
+		<Mapping methodName="ConsoleOutputText" varName="Output2" />
+	</VarMap>
+</Operation>
+</Process>
+</Processes>

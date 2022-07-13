@@ -1,0 +1,10 @@
+<Input>
+	<Data name="SrcFile" type="string" value="C:/test/test.txt">
+	<Data name="DestFile" type="string" value="C:/temp/final.txt">
+</Input>
+<Operation type="FileMove" name="BasicFileMove">
+	<VarMap>
+		<Mapping methodName="SourceFile" varName="SrcFile">
+		<Mapping methodName="DestinationFile" varName="DestFile">
+	</VarMap>
+<Operation>

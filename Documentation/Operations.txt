@@ -1,0 +1,29 @@
+
+FileMove - Moves a file
+	Inputs:
+		SourceFile - The path to the original file to move
+		DestinationFile - The path to place the file at
+==============================================================================
+KillProcess - Kills a process
+	Inputs:
+		ToKillProcess - The name of the process(es) to kill
+==============================================================================
+Wait - Waits for a specified amount of time
+	Inputs:
+		WaitTime - The amount of time to wait
+==============================================================================
+StartProcess - Starts a Process
+	Inputs:
+		ToStartProcess - the path of the process(es) to start
+==============================================================================
+StartService - Starts a Service
+	Inputs:
+		ToStartService - the name of the service to start
+==============================================================================
+StopService - Stops a Service
+	Inputs:
+		ToStopService - the name of the service to stop
+==============================================================================
+ConsoleOutput - 
+	Inputs:
+		ConsoleOuputText - The string to output in the console
