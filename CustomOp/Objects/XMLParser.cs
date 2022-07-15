@@ -21,7 +21,7 @@ namespace CustomOp.Objects
                 case "StartProcess": return new StartProcessOperation(element); break;
                 case "StartService": return new StartServiceOperation(element); break;
                 case "StopService": return new StopServiceOperation(element); break;
-                case "ConsoleOutput": return new ConsoleOutputOperation(element); break;
+                case "LogOutput": return new LogOutputOperation(element); break;
                 case "SetVar": return new SetVarOperation(element); break;
                 default: throw new Exception($"Invalid Operation Type ({element.Attribute("type").Value})");
             }

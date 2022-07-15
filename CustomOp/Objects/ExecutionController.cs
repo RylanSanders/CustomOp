@@ -33,7 +33,7 @@ namespace CustomOp.Objects
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.StackTrace);
+                Logger.log.Error(e.StackTrace);
             }
 
         }

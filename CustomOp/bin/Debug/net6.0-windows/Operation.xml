@@ -27,15 +27,15 @@
 	<Data name="WaitTime" type="int" value="10000" />
 	<Data name="Output2" type="string" value="Second Check Point" />
 </Operation>
-<Operation type="ConsoleOutput" name="OutputTest1" >
+<Operation type="LogOutput" name="OutputTest1" >
 	<VarMap>
-		<Mapping methodName="ConsoleOutputText" varName="Output1" />
+		<Mapping methodName="LogOutputText" varName="Output1" />
 	</VarMap>
 </Operation>
 <Operation type="Wait" name="Wait" />
-<Operation type="ConsoleOutput" name="OutputTest2" >
+<Operation type="LogOutput" name="OutputTest2" >
 	<VarMap>
-		<Mapping methodName="ConsoleOutputText" varName="Output2" />
+		<Mapping methodName="LogOutputText" varName="Output2" />
 	</VarMap>
 </Operation>
 </Process>

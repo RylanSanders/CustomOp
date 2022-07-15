@@ -54,13 +54,13 @@ namespace CustomOp.Objects
 
         public void onEnter()
         {
-            Console.WriteLine($"Starting Process: {name}");
+            Logger.log.Info($"Starting Process: {name}");
         }
 
 
         public void onExit()
         {
-            Console.WriteLine($"Finished Process: {name}");
+            Logger.log.Info($"Finished Process: {name}");
         }
 
 

@@ -8,9 +8,9 @@ using System.Xml.Linq;
 
 namespace CustomOp.Operations
 {
-    internal class ConsoleOutputOperation : Operation
+    internal class LogOutputOperation : Operation
     {
-        public ConsoleOutputOperation(XElement config) : base(config)
+        public LogOutputOperation(XElement config) : base(config)
         {
         }
 
@@ -18,7 +18,7 @@ namespace CustomOp.Operations
         {
             base.execute(data);
 
-            File.AppendAllText("FakeLog.txt",data.getString("ConsoleOutputText"));
+            Logger.log.Info(data.getString("LogOutputText"));
         }
     }
 }
