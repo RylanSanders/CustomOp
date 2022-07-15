@@ -33,7 +33,9 @@ namespace CustomOp.Objects
             {
                 try
                 {
+                    op.onEnter(inputData);
                     op.execute(inputData);
+                    op.onExit(inputData);
                 }
                 catch(Exception e)
                 {

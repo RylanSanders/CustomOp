@@ -8,8 +8,12 @@ Fix the XMLParser to load all of the operations from assemblies in an operations
 Add an option to the base operation config to let you manually set variables (something like <StaticVar methodVar="" value="">) and try to infer the type - Rename the var map and put it in there
 Operations:
 	String templating
+	Lists
 	Database operations
 	HTTP requests
+	JSON and XML
 	File Write Operations
 	GUIInput - Parent of many other guis - Configurable form gui for lazy gui coding
 	Persistent Variable save
+	Schema validation
+	Fix onError in base operation to print a log

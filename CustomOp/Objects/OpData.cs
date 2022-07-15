@@ -65,5 +65,13 @@ namespace CustomOp.Objects
             return this;
         }
 
+        public void remove(string id)
+        {
+            if (data.ContainsKey(id))
+            {
+                data.Remove(id);
+            }
+        }
+
     }
 }

@@ -7,10 +7,10 @@
 	<Data name="WaitTime" type="int" value="10000" />
 </Operation>
 <Operation type="FileMove" name="BasicFileMove">
-	<VarMap>
+	<Vars>
 		<Mapping methodName="SourceFile" varName="SrcFile" />
 		<Mapping methodName="DestinationFile" varName="DestFile" />
-	</VarMap>
+	</Vars>
 </Operation>
 <Operation type="Wait" name="Wait" />
 <Operation type="KillProcess" name="KillFireFox" />
@@ -28,15 +28,15 @@
 	<Data name="Output2" type="string" value="Second Check Point" />
 </Operation>
 <Operation type="LogOutput" name="OutputTest1" >
-	<VarMap>
+	<Vars>
 		<Mapping methodName="LogOutputText" varName="Output1" />
-	</VarMap>
+	</Vars>
 </Operation>
 <Operation type="Wait" name="Wait" />
 <Operation type="LogOutput" name="OutputTest2" >
-	<VarMap>
+	<Vars>
 		<Mapping methodName="LogOutputText" varName="Output2" />
-	</VarMap>
+	</Vars>
 </Operation>
 </Process>
 </Processes>

@@ -20,18 +20,19 @@ namespace CustomOp.Objects
         //TODO change the varmap to only work in the space of the operation - otherwise you won't beable to use 2 operations with different inputs, unless you change them which is fine
         Dictionary<string, string> varMappings;
         public string name;
-
+        List<String> tempVars;
         public Operation(XElement config)
         {
             varMappings = new Dictionary<string, string>();
+            tempVars = new List<string>();
             Configure(config);
         }
         public void Configure(XElement element)
         {
             name = element.Attribute("name").Value.ToString();
-            if (!(element.Element("VarMap") is null))
+            if (!(element.Element("Vars") is null))
             {
-                var mappings = from mapping in element.Element("VarMap").Descendants("Mapping")
+                var mappings = from mapping in element.Element("Vars").Descendants("Mapping")
                                select new
                                {
                                    Original = mapping.Attribute("varName").Value.ToString(),
@@ -46,7 +47,7 @@ namespace CustomOp.Objects
 
         public virtual void execute(OpData data)
         {
-            processInput(data);
+
         }
 
         private void processInput(OpData data)
@@ -56,6 +57,11 @@ namespace CustomOp.Objects
                 if (data.contains(mapping))
                 {
                     data.put(varMappings[mapping], data.getObject(mapping));
+                    //If we are adding a new variable from the var map, remove it in the on exit (if the variable already existed and we are just changing it, keep it)
+                    if (!data.contains(varMappings[mapping]))
+                    {
+                        tempVars.Add(varMappings[mapping]);
+                    }
                 }
             }
         }
@@ -63,6 +69,20 @@ namespace CustomOp.Objects
         public void onError()
         {
 
+        }
+
+        public void onEnter(OpData data)
+        {
+            processInput(data);
+        }
+
+        public void onExit(OpData data)
+        {
+            foreach(string key in tempVars)
+            {
+                data.remove(key);
+            }
+            tempVars.Clear();
         }
     }
 }
