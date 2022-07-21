@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "babcbfa5-ec40-40c3-bbea-5b97cba10735": {
+      "ProjectGuid": "babcbfa5-ec40-40c3-bbea-5b97cba10735",
+      "DisplayName": "CustomOp",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}
