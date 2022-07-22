@@ -29,7 +29,7 @@ namespace CustomOp.Objects
             }
         }
 
-        public static OpData parseInput(XElement element, OpData data)
+        public static OpData parseDataTags(XElement element, OpData data)
         {
             var inputs = from input in element.Descendants("Data")
                          select new
@@ -51,5 +51,7 @@ namespace CustomOp.Objects
             }
             return data;
         }
+
+
     }
 }

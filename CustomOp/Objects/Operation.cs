@@ -21,8 +21,10 @@ namespace CustomOp.Objects
         Dictionary<string, string> varMappings;
         public string name;
         List<String> tempVars;
+        OpData storedVars;
         public Operation(XElement config)
         {
+            storedVars = new OpData();
             varMappings = new Dictionary<string, string>();
             tempVars = new List<string>();
             Configure(config);
@@ -42,6 +44,8 @@ namespace CustomOp.Objects
                 {
                     varMappings.Add(mapping.Original, mapping.New);
                 }
+
+                XMLParser.parseDataTags(element.Element("Vars"), storedVars);
             }
         }
 
@@ -64,6 +68,8 @@ namespace CustomOp.Objects
                     }
                 }
             }
+            data.merge(storedVars);
+            tempVars.AddRange(storedVars.getIDs());
         }
 
         public void onError()

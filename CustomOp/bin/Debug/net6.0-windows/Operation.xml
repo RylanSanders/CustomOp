@@ -42,12 +42,12 @@
 <Process name="MessageTest">
 <Operation type="SetVar" name="SetVars">
 	<Data name="T1" type="string" value="This is a message testing test !" />
-	<Data name="RegexMatch" type="string" value="e.t" />
-	<Data name="RegexReplace" type="string" value="Eat" />
 </Operation>
 <Operation type="RegexReplace" name="RegexTest">
 	<Vars>
 		<Mapping methodName="RegexInput" varName="T1" />
+		<Data name="RegexMatch" type="string" value="e.t" />
+		<Data name="RegexReplace" type="string" value="Eat" />
 	</Vars>
 </Operation>
 <Operation type="MessageBox" name="MessageBox">

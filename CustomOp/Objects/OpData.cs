@@ -73,5 +73,10 @@ namespace CustomOp.Objects
             }
         }
 
+        public List<string> getIDs()
+        {
+            return data.Keys.ToList<string>();
+        }
+
     }
 }
