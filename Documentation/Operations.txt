@@ -39,3 +39,17 @@ RegexReplace - Replaces all instances of the match with the replace
 MessageBox - Shows a message pop up
 	Inputs:
 		Message - the text to show in the message box
+==============================================================================
+GenerateIntList - Generates a list of ints
+	Inputs:
+		StartInt - the starting int of the range
+		EndInt - The ending int of the range
+		Step - The step size of the generator
+	Outputs:
+		IntListOutput - The generated list of ints
+==============================================================================
+ProcessList - Runs a process over a list of ints. Add ListIntVal to the data to reference int
+	Config:
+		OperatedProcess - The Process config to iterate over the list
+	Inputs:
+		InputList - The list to iterate over

@@ -17,7 +17,7 @@ namespace CustomOp
                 processes.Add(p.name, p);
                 Button b = new Button();
                 b.Text = p.name;
-                b.MouseClick += new MouseEventHandler((sender, e)=>controller.runProcess(p));
+                b.MouseClick += new MouseEventHandler((sender, e)=>ExecutionController.runProcess(p));
                 this.flowLayoutPanel1.Controls.Add(b);
             }
 

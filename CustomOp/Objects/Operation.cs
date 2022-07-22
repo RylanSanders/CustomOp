@@ -16,8 +16,6 @@ namespace CustomOp.Objects
         //Instead of the above could do something weird where I use the op data to store what values I should need whenever I create an operation then have a validate method inside
         //That checks if the both have similar vars with the same types
 
-
-        //TODO change the varmap to only work in the space of the operation - otherwise you won't beable to use 2 operations with different inputs, unless you change them which is fine
         Dictionary<string, string> varMappings;
         public string name;
         List<String> tempVars;
@@ -44,7 +42,6 @@ namespace CustomOp.Objects
                 {
                     varMappings.Add(mapping.Original, mapping.New);
                 }
-
                 XMLParser.parseDataTags(element.Element("Vars"), storedVars);
             }
         }

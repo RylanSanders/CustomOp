@@ -25,6 +25,8 @@ namespace CustomOp.Objects
                 case "SetVar": return new SetVarOperation(element); break;
                 case "RegexReplace": return new RegexOperation(element); break;
                 case "MessageBox": return new MessageBoxOperation(element); break;
+                case "GenerateIntList": return new GenerateIntListOperation(element); break;
+                case "ProcessList": return new ProcessListOperation(element); break;
                 default: throw new Exception($"Invalid Operation Type ({element.Attribute("type").Value})");
             }
         }

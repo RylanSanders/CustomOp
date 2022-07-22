@@ -27,6 +27,27 @@ namespace CustomOp.Objects
             name = config.Attribute("name").Value.ToString();
         }
 
+        public Process(XElement config, OpData presetData)
+        {
+            ops = new List<Operation>();
+            foreach (XElement x in config.Elements())
+            {
+                if (x.Name.ToString().Equals("Operation"))
+                {
+                    ops.Add(XMLParser.parseOpXML(x));
+                }
+            }
+            inputData = new OpData();
+            inputData.merge(presetData);
+            name = config.Attribute("name").Value.ToString();
+        }
+
+        public Process(List<Operation> listOps, OpData presetData)
+        {
+            ops = listOps;
+            inputData = presetData;
+        }
+
         public void run()
         {
             foreach(Operation op in ops)
@@ -39,9 +60,22 @@ namespace CustomOp.Objects
                 }
                 catch(Exception e)
                 {
+                    Logger.log.Error("Error in run method of process: " + e.StackTrace);
                     op.onError();
                 }
             }
+        }
+
+        public void addOpData(OpData data)
+        {
+            inputData.merge(data);
+        }
+
+        public Process clone()
+        {
+            Process c = new Process(ops, inputData);
+            c.name = name;
+            return c;
         }
 
         public Action generateAction()

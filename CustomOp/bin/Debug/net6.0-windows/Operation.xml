@@ -1,59 +1,85 @@
 <Processes>
-<Process name="Test1">
-<Operation type="SetVar" name="SetVars">
-	<Data name="SrcFile" type="string" value="C:/test/test.txt" />
-	<Data name="DestFile" type="string" value="C:/test/final.txt" />
-	<Data name="ToKillProcess" type="string" value="FireFox" />
-	<Data name="WaitTime" type="int" value="10000" />
-</Operation>
-<Operation type="FileMove" name="BasicFileMove">
-	<Vars>
-		<Mapping methodName="SourceFile" varName="SrcFile" />
-		<Mapping methodName="DestinationFile" varName="DestFile" />
-	</Vars>
-</Operation>
-<Operation type="Wait" name="Wait" />
-<Operation type="KillProcess" name="KillFireFox" />
-</Process>
-<Process name="Test2">
-<Operation type="SetVar" name="SetVars">
-	<Data name="ToStopService" type="string" value="Steam Client Service" />
-</Operation>
-<Operation type="StopService" name="StartSteamService" />
-</Process>
-<Process name="TextTest">
-<Operation type="SetVar" name="SetVars">
-	<Data name="Output1" type="string" value="First Check point" />
-	<Data name="WaitTime" type="int" value="10000" />
-	<Data name="Output2" type="string" value="Second Check Point" />
-</Operation>
-<Operation type="LogOutput" name="OutputTest1" >
-	<Vars>
-		<Mapping methodName="LogOutputText" varName="Output1" />
-	</Vars>
-</Operation>
-<Operation type="Wait" name="Wait" />
-<Operation type="LogOutput" name="OutputTest2" >
-	<Vars>
-		<Mapping methodName="LogOutputText" varName="Output2" />
-	</Vars>
-</Operation>
-</Process>
-<Process name="MessageTest">
-<Operation type="SetVar" name="SetVars">
-	<Data name="T1" type="string" value="This is a message testing test !" />
-</Operation>
-<Operation type="RegexReplace" name="RegexTest">
-	<Vars>
-		<Mapping methodName="RegexInput" varName="T1" />
-		<Data name="RegexMatch" type="string" value="e.t" />
-		<Data name="RegexReplace" type="string" value="Eat" />
-	</Vars>
-</Operation>
-<Operation type="MessageBox" name="MessageBox">
-	<Vars>
-		<Mapping methodName="Message" varName="RegexOutput" />
-	</Vars>
-</Operation>
-</Process>
+	<Process name="Test1">
+		<Operation type="SetVar" name="SetVars">
+			<Data name="SrcFile" type="string" value="C:/test/test.txt" />
+			<Data name="DestFile" type="string" value="C:/test/final.txt" />
+			<Data name="ToKillProcess" type="string" value="FireFox" />
+			<Data name="WaitTime" type="int" value="10000" />
+		</Operation>
+		<Operation type="FileMove" name="BasicFileMove">
+			<Vars>
+				<Mapping methodName="SourceFile" varName="SrcFile" />
+				<Mapping methodName="DestinationFile" varName="DestFile" />
+			</Vars>
+		</Operation>
+		<Operation type="Wait" name="Wait" />
+		<Operation type="KillProcess" name="KillFireFox" />
+	</Process>
+	<Process name="Test2">
+		<Operation type="SetVar" name="SetVars">
+			<Data name="ToStopService" type="string" value="Steam Client Service" />
+		</Operation>
+		<Operation type="StopService" name="StartSteamService" />
+	</Process>
+	<Process name="TextTest">
+		<Operation type="SetVar" name="SetVars">
+			<Data name="Output1" type="string" value="First Check point" />
+			<Data name="WaitTime" type="int" value="10000" />
+			<Data name="Output2" type="string" value="Second Check Point" />
+		</Operation>
+		<Operation type="LogOutput" name="OutputTest1" >
+			<Vars>
+				<Mapping methodName="LogOutputText" varName="Output1" />
+			</Vars>
+		</Operation>
+		<Operation type="Wait" name="Wait" />
+		<Operation type="LogOutput" name="OutputTest2" >
+			<Vars>
+				<Mapping methodName="LogOutputText" varName="Output2" />
+			</Vars>
+		</Operation>
+	</Process>
+	<Process name="MessageTest">
+		<Operation type="SetVar" name="SetVars">
+			<Data name="T1" type="string" value="This is a message testing test !" />
+		</Operation>
+		<Operation type="RegexReplace" name="RegexTest">
+			<Vars>
+				<Mapping methodName="RegexInput" varName="T1" />
+				<Data name="RegexMatch" type="string" value="e.t" />
+				<Data name="RegexReplace" type="string" value="Eat" />
+			</Vars>
+		</Operation>
+		<Operation type="MessageBox" name="MessageBox">
+			<Vars>
+				<Mapping methodName="Message" varName="RegexOutput" />
+			</Vars>
+		</Operation>
+	</Process>
+	<Process name="ListTest">
+		<Operation type="SetVar" name="SetVars">
+			<Data name="T1" type="string" value="This is a message testing test !" />
+		</Operation>
+		<Operation type="GenerateIntList" name="ListGenerator">
+			<Vars>
+				<Data name="StartInt" type = "int" value="0" />
+				<Data name="EndInt" type="int" value="10" />
+				<Data name="Step" type="int" value="1" />
+			</Vars>
+		</Operation>
+		<Operation type="ProcessList" name="ListProcessor">
+			<Vars>
+				<Mapping methodName="InputList" varName="IntListOutput" />
+			</Vars>
+			<OperatedProcess>
+				<Process name="SubProcess">
+					<Operation type="MessageBox" name="MessageBox">
+						<Vars>
+							<Data name="Message" type="string" value="This is a message" />
+						</Vars>
+					</Operation>
+				</Process>
+			</OperatedProcess>
+		</Operation>
+	</Process>
 </Processes>

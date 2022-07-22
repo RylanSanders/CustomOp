@@ -24,7 +24,7 @@ namespace CustomOp.Objects
             }
         }
 
-        public void runProcess(Process process)
+        public static void runProcess(Process process)
         {
             try
             {

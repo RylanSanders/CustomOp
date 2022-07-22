@@ -47,6 +47,17 @@ namespace CustomOp.Objects
             return (string)(data[id].getData());
         }
 
+        public List<int> getIntList(string id)
+        {
+            if (!data.ContainsKey(id) || !data[id].getType().Equals(typeof(List<int>)))
+            {
+                throw new Exception("Error in GetIntList Method in OpData. Invalid variable name ID");
+            }
+            return (List<int>)(data[id].getData());
+        }
+
+
+
         public void put(String name, Object i)
         {
             if (data.ContainsKey(name))
@@ -56,11 +67,16 @@ namespace CustomOp.Objects
             data.Add(name, new MutableObject(i));
         }
 
+
         public OpData merge(OpData otherData)
         {
             foreach(var key in otherData.data.Keys)
             {
-                data.Add(key, otherData.data[key]);
+                //Base OpData has priority in merge conflicts
+                if (!data.Keys.Contains(key))
+                {
+                    data.Add(key, otherData.data[key]);
+                }
             }
             return this;
         }
