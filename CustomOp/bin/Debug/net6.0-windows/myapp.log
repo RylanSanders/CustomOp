@@ -11,3 +11,15 @@
 2022-07-15 11:17:22,359 [3] INFO file - First Check point
 2022-07-15 11:17:32,363 [3] INFO file - Second Check Point
 2022-07-15 11:17:32,368 [3] INFO file - Finished Process: TextTest
+2022-07-21 19:04:01,833 [7] INFO file - Starting Process: MessageTest
+2022-07-21 19:04:03,136 [7] INFO file - Finished Process: MessageTest
+2022-07-21 19:10:22,986 [4] INFO file - Starting Process: MessageTest
+2022-07-21 19:10:25,130 [4] INFO file - Finished Process: MessageTest
+2022-07-21 19:10:50,207 [7] INFO file - Starting Process: MessageTest
+2022-07-21 19:10:51,791 [7] INFO file - Finished Process: MessageTest
+2022-07-21 19:11:05,945 [10] INFO file - Starting Process: MessageTest
+2022-07-21 19:11:07,715 [10] INFO file - Finished Process: MessageTest
+2022-07-21 19:15:11,303 [4] INFO file - Starting Process: MessageTest
+2022-07-21 19:15:13,080 [4] INFO file - Finished Process: MessageTest
+2022-07-21 19:16:04,311 [7] INFO file - Starting Process: MessageTest
+2022-07-21 19:16:18,166 [7] INFO file - Finished Process: MessageTest

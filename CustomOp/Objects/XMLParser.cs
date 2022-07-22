@@ -23,6 +23,8 @@ namespace CustomOp.Objects
                 case "StopService": return new StopServiceOperation(element); break;
                 case "LogOutput": return new LogOutputOperation(element); break;
                 case "SetVar": return new SetVarOperation(element); break;
+                case "RegexReplace": return new RegexOperation(element); break;
+                case "MessageBox": return new MessageBoxOperation(element); break;
                 default: throw new Exception($"Invalid Operation Type ({element.Attribute("type").Value})");
             }
         }

@@ -24,6 +24,18 @@ StopService - Stops a Service
 	Inputs:
 		ToStopService - the name of the service to stop
 ==============================================================================
-ConsoleOutput - 
+LogOutput - Logs an output
 	Inputs:
-		ConsoleOuputText - The string to output in the console
+		LogOuputText - The string to output in the console
+==============================================================================
+RegexReplace - Replaces all instances of the match with the replace
+	Inputs:
+		RegexInput - The string to search
+		RegexMatch - The string to search for
+		RegexReplace - The string to replace the match with
+	Outputs:
+		RegexOutput - The new string that replaced all of the matches with replace
+==============================================================================
+MessageBox - Shows a message pop up
+	Inputs:
+		Message - the text to show in the message box
