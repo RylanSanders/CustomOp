@@ -53,3 +53,9 @@ ProcessList - Runs a process over a list of ints. Add ListIntVal to the data to 
 		OperatedProcess - The Process config to iterate over the list
 	Inputs:
 		InputList - The list to iterate over
+===============================================================================
+HttpRequest - Gets the result of calling an http request
+	Inputs:
+		HttpRequestURL - The URL to send
+	Outputs:
+		HttpResponse - The responded data in JSON - May need to change later

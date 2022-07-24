@@ -82,4 +82,16 @@
 			</OperatedProcess>
 		</Operation>
 	</Process>
+	<Process name="HttpTest">
+		<Operation type="HttpRequest" name="DeckGet">
+			<Vars>
+				<Data name="HttpRequestURL" type = "string" value='https://archidekt.com/api/decks/cards/?name&#61;&#38;formats&#61;3&#38;pageSize&#61;20' />
+			</Vars>
+		</Operation>
+		<Operation type="MessageBox" name="DeckMessage">
+			<Vars>
+				<Mapping methodName="Message" varName="HttpResponse" />
+			</Vars>
+		</Operation>
+	</Process>
 </Processes>

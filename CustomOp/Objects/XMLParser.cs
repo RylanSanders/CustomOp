@@ -27,6 +27,7 @@ namespace CustomOp.Objects
                 case "MessageBox": return new MessageBoxOperation(element); break;
                 case "GenerateIntList": return new GenerateIntListOperation(element); break;
                 case "ProcessList": return new ProcessListOperation(element); break;
+                case "HttpRequest": return new HttpOperation(element); break;
                 default: throw new Exception($"Invalid Operation Type ({element.Attribute("type").Value})");
             }
         }
