@@ -30,6 +30,7 @@ namespace CustomOp.Objects
                 case "HttpRequest": return new HttpOperation(element); break;
                 case "StoreMapToDB": return new StoreMapToDBOperation(element); break;
                 case "GenerateMap": return new GenerateMapOperation(element); break;
+                case "MapToString": return new MapToStringOperation(element); break;
                 default: throw new Exception($"Invalid Operation Type ({element.Attribute("type").Value})");
             }
         }

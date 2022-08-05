@@ -77,3 +77,9 @@ StoreMapToDB - Stores a single map to a database
 			<DBCols DBCol="" VarName="">
 	Inputs:
 		MapToDB
+================================================================================
+MapToString - writes out a map as a string
+	Inputs:
+		MapToString
+	Outputs:
+		MappedString
