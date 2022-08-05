@@ -19,7 +19,7 @@ namespace CustomOp.Operations
         {
             base.execute(data);
 
-            MessageBox.Show(data.getString("Message"));
+            MessageBox.Show(data.getObject("Message").ToString());
         }
     }
 }
