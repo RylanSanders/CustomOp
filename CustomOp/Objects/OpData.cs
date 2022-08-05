@@ -56,6 +56,14 @@ namespace CustomOp.Objects
             return (List<int>)(data[id].getData());
         }
 
+        public Dictionary<string,string> getMap(string id)
+        {
+            if (!data.ContainsKey(id) || !data[id].getType().Equals(typeof(Dictionary<string, string>)))
+            {
+                throw new Exception("Error in GetMap Method in OpData. Invalid variable name ID");
+            }
+            return (Dictionary<string, string>)(data[id].getData());
+        }
 
 
         public void put(String name, Object i)

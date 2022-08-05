@@ -6,6 +6,10 @@ I shouldn't be passing around the data, I should really only have operations ret
 
 Fix the XMLParser to load all of the operations from assemblies in an operations folder
 Add an option to the base operation config to let you manually set variables (something like <StaticVar methodVar="" value="">) and try to infer the type - Rename the var map and put it in there
+
+When a process errors out - the rest of the process shouldn't run
+
+There should be an overall Option that configures the program as a whole for example for logs
 Operations:
 	String templating
 	Lists

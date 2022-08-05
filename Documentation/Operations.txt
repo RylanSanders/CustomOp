@@ -58,4 +58,22 @@ HttpRequest - Gets the result of calling an http request
 	Inputs:
 		HttpRequestURL - The URL to send
 	Outputs:
-		HttpResponse - The responded data in JSON - May need to change later
+		HttpResponse - The responded data in JSON - May need to change later (This is just a string)
+===============================================================================
+GenerateMap - Generates a Map data object
+	Config:
+		<Data name="" value="" /> - the data to generate
+	Outputs:
+		GeneratedMap
+===============================================================================
+StoreMapToDB - Stores a single map to a database
+	Config:
+		DataSource
+		InitialCatalog
+		Password
+		User
+		Database
+		DBCols - The mapping from map keys to database columns (DBCol= database col, VarName = the key name)
+			<DBCols DBCol="" VarName="">
+	Inputs:
+		MapToDB
