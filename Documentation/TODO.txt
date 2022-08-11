@@ -9,6 +9,10 @@ Add an option to the base operation config to let you manually set variables (so
 
 When a process errors out - the rest of the process shouldn't run
 
+GUI - A gui library for configuring the starting up thing as well as any kind of form
+
+Generic TypeCasting - 1 Operation that detects the type of the variable and attempts to cast it to the desired type
+
 There should be an overall Option that configures the program as a whole for example for logs
 Operations:
 	String templating
@@ -21,3 +25,4 @@ Operations:
 	Persistent Variable save
 	Schema validation
 	Fix onError in base operation to print a log
+	Is is possible to dynamically compile code to run a method? so basically I can just run methods that aren't involved in the code for testing

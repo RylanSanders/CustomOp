@@ -1,0 +1,3 @@
+-Custom Code editor specifically for building operations/GUIs
+-Comprehensive validation - may need to rethink how we handle OpData
+-Method of building parser - look at JSON parser for example of what I need

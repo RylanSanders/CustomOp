@@ -111,9 +111,41 @@
 				<Mapping methodName="MapToDB" varName="GeneratedMap" />
 			</Vars>
 		</Operation>
+		<Operation type="MapToString" name="MapString">
+			<Vars>
+				<Mapping methodName="MapToString" varName="GeneratedMap" />
+			</Vars>
+		</Operation>
 		<Operation type="MessageBox" name="DeckMessage">
 			<Vars>
-				<Data name="Message" type="string" value="Done" />
+				<Mapping methodName="Message" varName="MappedString" />
+			</Vars>
+		</Operation>
+	</Process>
+	<Process name="JSONProcessTest">
+		<Operation type="HttpRequest" name="DeckGet">
+			<Vars>
+				<Data name="HttpRequestURL" type = "string" value='https://archidekt.com/api/decks/cards/?name&#61;&#38;formats&#61;3&#38;pageSize&#61;20' />
+			</Vars>
+		</Operation>
+		<!--<Operation type="ReadFile" name="DeckGet">
+			<Vars>
+				<Data name="FilePath" type = "string" value='JSONtest.txt' />
+			</Vars>
+		</Operation>-->
+		<Operation type="JSONToMap" name="CastJSON">
+			<Vars>
+				<Mapping methodName="JSonString" varName="HttpResponse" />
+			</Vars>
+		</Operation>
+		<Operation type="MapToString" name="MapToString">
+			<Vars>
+				<Mapping methodName="MapToString" varName="DeserializedJSonMap" />
+			</Vars>
+		</Operation>
+		<Operation type="MessageBox" name="DeckMessage">
+			<Vars>
+				<Mapping methodName="Message" varName="MappedString" />
 			</Vars>
 		</Operation>
 	</Process>

@@ -83,3 +83,15 @@ MapToString - writes out a map as a string
 		MapToString
 	Outputs:
 		MappedString
+================================================================================
+JSONToMap - changes a JSON string to a map
+	Inputs:
+		JSonString
+	Outputs:
+		DeserializedJSonMap
+==================================================================================
+ReadFile - Reads text from a file and stores it in a string
+	Inputs:
+		FilePath
+	Outputs:
+		ReadText

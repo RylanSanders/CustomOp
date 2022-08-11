@@ -31,6 +31,8 @@ namespace CustomOp.Objects
                 case "StoreMapToDB": return new StoreMapToDBOperation(element); break;
                 case "GenerateMap": return new GenerateMapOperation(element); break;
                 case "MapToString": return new MapToStringOperation(element); break;
+                case "JSONToMap": return new JSONToMapOperation(element); break;
+                case "ReadFile": return new ReadFileOperation(element); break;
                 default: throw new Exception($"Invalid Operation Type ({element.Attribute("type").Value})");
             }
         }
