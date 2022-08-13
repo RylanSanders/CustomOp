@@ -7,13 +7,22 @@ I shouldn't be passing around the data, I should really only have operations ret
 Fix the XMLParser to load all of the operations from assemblies in an operations folder
 Add an option to the base operation config to let you manually set variables (something like <StaticVar methodVar="" value="">) and try to infer the type - Rename the var map and put it in there
 
-When a process errors out - the rest of the process shouldn't run
-
 GUI - A gui library for configuring the starting up thing as well as any kind of form
+	-This would be for creating custom programs 
+	-Also make a simple GUI system built into the base config of operations to be able to modify the basic launch form
 
 Generic TypeCasting - 1 Operation that detects the type of the variable and attempts to cast it to the desired type
 
-There should be an overall Option that configures the program as a whole for example for logs
+Threads - Implement Thread Pool
+
+Error Handeling Plan
+	When an Operation Errors out the process should stop and show a message detailing the issue. This should be an overridable method in Process
+	Improve error messages - Go through all of the code and clean up errors (for example opData needs to be improved) - maybe read a book on good error handeling
+	Also need to improve SQL and HTTP error handeling - should give detailed information on the issue
+	
+Add a verifier to things like the SQL and HTTP process to say that the process worked
+
+There should be an overall Option that configures the program as a whole for example for logs and other stuff
 Operations:
 	String templating
 	Lists

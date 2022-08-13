@@ -35,6 +35,7 @@ namespace CustomOp.Objects
                 case "ReadFile": return new ReadFileOperation(element); break;
                 case "GenerateTable": return new GenerateDataTableOperation(element);break;
                 case "TableToString": return new TableToStringOperation(element);break;
+                case "StoreTableToDB": return new StoreTableToDBOperation(element);break;
                 default: throw new Exception($"Invalid Operation Type ({element.Attribute("type").Value})");
             }
         }

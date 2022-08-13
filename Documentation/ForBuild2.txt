@@ -1,3 +1,11 @@
 -Custom Code editor specifically for building operations/GUIs
 -Comprehensive validation - may need to rethink how we handle OpData
 -Method of building parser - look at JSON parser for example of what I need
+-Redo Datatypes and Vars - Need some way of defining things like tables or maps
+-Redo the structure of config files - should be able to reference other files's config and reference other processes by name
+	-Basically have a main config file then that file can reference other configs
+
+
+
+-Research others - Look into power automate and other Workflow Automaters also look into datacentric languages like pandas maybe f# too
+-Research SQL/SQL integration in .Net - StoredProcedures? - need a sql editor as well

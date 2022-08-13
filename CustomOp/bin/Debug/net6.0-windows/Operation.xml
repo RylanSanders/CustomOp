@@ -150,11 +150,6 @@
 		</Operation>
 	</Process>
 	<Process name="TableTest">
-		<!--<Operation type="ReadFile" name="DeckGet">
-			<Vars>
-				<Data name="FilePath" type = "string" value='JSONtest.txt' />
-			</Vars>
-		</Operation>-->
 		<Operation type="GenerateTable" name="MakeTable">
 			<Table>
 				<Row name="Jery" last_name="Seinfield" age="1004" />
@@ -171,6 +166,31 @@
 		<Operation type="MessageBox" name="DeckMessage">
 			<Vars>
 				<Mapping methodName="Message" varName="TableString" />
+			</Vars>
+		</Operation>
+	</Process>
+	<Process name="TableDBTest">
+		<Operation type="GenerateTable" name="MakeTable">
+			<Table>
+				<Row customID="-100" color="Test1" />
+				<Row customID="-101" color="Test2" />
+			</Table>
+		</Operation>
+		<Operation type="StoreTableToDB" name="StoreMap">
+			<DataSource>.</DataSource>
+			<InitialCatalog>MTG</InitialCatalog>
+			<Password>TestUser</Password>
+			<User>TestUser</User>
+			<DataBase>Colors</DataBase>
+			<DBCols DBCol="customID" VarName = "customID" />
+			<DBCols DBCol="color" VarName = "color" />
+			<Vars>
+				<Mapping methodName="TableToDB" varName="GeneratedDataTable" />
+			</Vars>
+		</Operation>
+		<Operation type="MessageBox" name="DeckMessage">
+			<Vars>
+				<Data name="Message" type="string" value="DBOperation Completed" />
 			</Vars>
 		</Operation>
 	</Process>

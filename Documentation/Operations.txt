@@ -112,3 +112,15 @@ TableToString
 		TableToString
 	Output:
 		TableString
+====================================================================================
+StoreTableToDB- Stores a DataTable to the Database
+	Config:
+		DataSource
+		InitialCatalog
+		Password
+		User
+		Database
+		DBCols - The mapping from map keys to database columns (DBCol= database col, VarName = the key name)
+			<DBCols DBCol="" VarName="">
+	Inputs:
+		TableToDB

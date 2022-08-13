@@ -67,7 +67,7 @@ namespace CustomOp.Objects
 
         public string generateInsertStatement(string database)
         {
-            StringBuilder sb = new StringBuilder($"INSERT {database} (");
+            StringBuilder sb = new StringBuilder($"INSERT INTO {database} (");
             foreach (string k in colValues.Keys)
             {
                 sb.Append($"{k},");
@@ -85,9 +85,10 @@ namespace CustomOp.Objects
                     sb.Append($"'{colValues[key][rowNum]}',");
                 }
                 sb.Remove(sb.Length - 1, 1);
-                sb.Append(")");
+                sb.Append("),");
                 rowNum++;
             }
+            sb.Remove(sb.Length - 1, 1);
             return sb.ToString();
         }
 
