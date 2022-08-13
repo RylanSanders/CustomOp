@@ -95,3 +95,20 @@ ReadFile - Reads text from a file and stores it in a string
 		FilePath
 	Outputs:
 		ReadText
+===================================================================================
+GenerateTable
+	Config:
+		<Table>
+			<Row name="Jery" last_name="Seinfield" age="1004" />
+			<Row name="Mery" last_name="Springstein" age="453" />
+			<Row name="kia" last_name="lexus" age="4" occupation="car" />
+			<Row name="Last" last_name="Trye" />
+		</Table>
+	Output:
+		GeneratedDataTable
+===================================================================================
+TableToString
+	Input:
+		TableToString
+	Output:
+		TableString

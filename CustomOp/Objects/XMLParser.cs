@@ -33,6 +33,8 @@ namespace CustomOp.Objects
                 case "MapToString": return new MapToStringOperation(element); break;
                 case "JSONToMap": return new JSONToMapOperation(element); break;
                 case "ReadFile": return new ReadFileOperation(element); break;
+                case "GenerateTable": return new GenerateDataTableOperation(element);break;
+                case "TableToString": return new TableToStringOperation(element);break;
                 default: throw new Exception($"Invalid Operation Type ({element.Attribute("type").Value})");
             }
         }

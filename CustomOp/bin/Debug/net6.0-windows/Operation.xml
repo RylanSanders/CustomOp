@@ -149,4 +149,29 @@
 			</Vars>
 		</Operation>
 	</Process>
+	<Process name="TableTest">
+		<!--<Operation type="ReadFile" name="DeckGet">
+			<Vars>
+				<Data name="FilePath" type = "string" value='JSONtest.txt' />
+			</Vars>
+		</Operation>-->
+		<Operation type="GenerateTable" name="MakeTable">
+			<Table>
+				<Row name="Jery" last_name="Seinfield" age="1004" />
+				<Row name="Mery" last_name="Springstein" age="453" />
+				<Row name="kia" last_name="lexus" age="4" occupation="car" />
+				<Row name="Last" last_name="Trye" />
+			</Table>
+		</Operation>
+		<Operation type="TableToString" name="TableToString">
+			<Vars>
+				<Mapping methodName="TableToString" varName="GeneratedDataTable" />
+			</Vars>
+		</Operation>
+		<Operation type="MessageBox" name="DeckMessage">
+			<Vars>
+				<Mapping methodName="Message" varName="TableString" />
+			</Vars>
+		</Operation>
+	</Process>
 </Processes>
