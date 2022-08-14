@@ -15,6 +15,11 @@ namespace CustomOp.Objects
             colValues = new Dictionary<string, List<string>>();
         }
 
+        public DataTable(Dictionary<string, List<string>> table)
+        {
+            colValues = table;
+        }
+
         public void addRow(Dictionary<string, string> values)
         {
             foreach(string key in values.Keys)

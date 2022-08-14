@@ -194,4 +194,26 @@
 			</Vars>
 		</Operation>
 	</Process>
+	<Process name="SELECTSQLTest">
+		<Operation type="SQLSelect" name="MakeTable">
+			<DataSource>.</DataSource>
+			<InitialCatalog>MTG</InitialCatalog>
+			<Password>TestUser</Password>
+			<User>TestUser</User>
+			<DataBase>Colors</DataBase>
+			<Vars>
+				<Data name="SQLSelectStatement" type="string" value="Select * From Colors WHERE customID = '260'" />
+			</Vars>
+		</Operation>
+		<Operation type="TableToString" name="TableToString">
+			<Vars>
+				<Mapping methodName="TableToString" varName="SelectedTable" />
+			</Vars>
+		</Operation>
+		<Operation type="MessageBox" name="DeckMessage">
+			<Vars>
+				<Mapping methodName="Message" varName="TableString" />
+			</Vars>
+		</Operation>
+	</Process>
 </Processes>

@@ -36,6 +36,7 @@ namespace CustomOp.Objects
                 case "GenerateTable": return new GenerateDataTableOperation(element);break;
                 case "TableToString": return new TableToStringOperation(element);break;
                 case "StoreTableToDB": return new StoreTableToDBOperation(element);break;
+                case "SQLSelect": return new SQLSelectOperation(element);break;
                 default: throw new Exception($"Invalid Operation Type ({element.Attribute("type").Value})");
             }
         }

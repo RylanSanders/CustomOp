@@ -4,6 +4,8 @@
 -Redo Datatypes and Vars - Need some way of defining things like tables or maps
 -Redo the structure of config files - should be able to reference other files's config and reference other processes by name
 	-Basically have a main config file then that file can reference other configs
+-Scopes/Domains - Specialty environments to make it easier for different purposes such as a stats/Data Science or Process Automation Profiles
+-Add defuault Var values - like for SQL can set the config only once
 
 
 

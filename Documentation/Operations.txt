@@ -124,3 +124,15 @@ StoreTableToDB- Stores a DataTable to the Database
 			<DBCols DBCol="" VarName="">
 	Inputs:
 		TableToDB
+=====================================================================================
+SQLSelect - returns a datatable that resulted from the inputted sql select statement
+	Config:
+		DataSource
+		InitialCatalog
+		Password
+		User
+		Database
+	Input:
+		SQLSelectStatement
+	Output:
+		SelectedTable
