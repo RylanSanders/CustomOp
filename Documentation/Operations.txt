@@ -136,3 +136,10 @@ SQLSelect - returns a datatable that resulted from the inputted sql select state
 		SQLSelectStatement
 	Output:
 		SelectedTable
+=====================================================================================
+TableColToIntList - turns a column in a DataTable to an intlist
+	Input:
+		ColumnName
+		InputTable
+	Output:
+		ColIntList

@@ -22,6 +22,8 @@ Error Handeling Plan
 	
 Add a verifier to things like the SQL and HTTP process to say that the process worked
 
+Add another config element to Vars for OutputMap - at the end of the operation it automatically an output map to see if it should change a var name
+
 SQL Config - Clean it up also change DataBase to Table
 
 There should be an overall Option that configures the program as a whole for example for logs and other stuff

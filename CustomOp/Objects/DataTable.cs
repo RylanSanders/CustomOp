@@ -20,6 +20,11 @@ namespace CustomOp.Objects
             colValues = table;
         }
 
+        public List<string> getColumn(string colName)
+        {
+            return colValues[colName];
+        }
+
         public void addRow(Dictionary<string, string> values)
         {
             foreach(string key in values.Keys)

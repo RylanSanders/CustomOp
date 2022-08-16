@@ -1,0 +1,1 @@
+Select * From Colors Where customID < 2

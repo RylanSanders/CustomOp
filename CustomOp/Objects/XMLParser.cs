@@ -37,6 +37,7 @@ namespace CustomOp.Objects
                 case "TableToString": return new TableToStringOperation(element);break;
                 case "StoreTableToDB": return new StoreTableToDBOperation(element);break;
                 case "SQLSelect": return new SQLSelectOperation(element);break;
+                case "TableColToIntList": return new TableColToIntListOperation(element);break;
                 default: throw new Exception($"Invalid Operation Type ({element.Attribute("type").Value})");
             }
         }

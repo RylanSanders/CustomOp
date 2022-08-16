@@ -195,6 +195,11 @@
 		</Operation>
 	</Process>
 	<Process name="SELECTSQLTest">
+		<Operation type="ReadFile" name="ReadSQLFile">
+			<Vars>
+				<Data name="FilePath" type="string" value="ColorTableSQLSelect.txt" />
+			</Vars>
+		</Operation>
 		<Operation type="SQLSelect" name="MakeTable">
 			<DataSource>.</DataSource>
 			<InitialCatalog>MTG</InitialCatalog>
@@ -202,18 +207,29 @@
 			<User>TestUser</User>
 			<DataBase>Colors</DataBase>
 			<Vars>
-				<Data name="SQLSelectStatement" type="string" value="Select * From Colors WHERE customID = '260'" />
+				<Mapping methodName="SQLSelectStatement" varName="ReadText" />
 			</Vars>
 		</Operation>
-		<Operation type="TableToString" name="TableToString">
+		<Operation type="TableColToIntList" name="MakeColIDs">
 			<Vars>
-				<Mapping methodName="TableToString" varName="SelectedTable" />
+				<Data name="ColumnName" type="string" value="customID" />
+				<Mapping methodName="InputTable" varName="SelectedTable" />
 			</Vars>
 		</Operation>
-		<Operation type="MessageBox" name="DeckMessage">
+		<Operation type="ProcessList" name="ListProcessor">
 			<Vars>
-				<Mapping methodName="Message" varName="TableString" />
+				<Mapping methodName="InputList" varName="ColIntList" />
 			</Vars>
+			<OperatedProcess>
+				<Process name="SubProcess">
+					<Operation type="MessageBox" name="MessageBox">
+						<Vars>
+							<!--<Mapping methodName="Message" varName="ListIntVal" />-->
+							<!--<Data name="Message" type="string" value="Meessage" />-->
+						</Vars>
+					</Operation>
+				</Process>
+			</OperatedProcess>
 		</Operation>
 	</Process>
 </Processes>
