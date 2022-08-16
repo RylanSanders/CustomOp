@@ -224,7 +224,7 @@
 				<Process name="SubProcess">
 					<Operation type="MessageBox" name="MessageBox">
 						<Vars>
-							<!--<Mapping methodName="Message" varName="ListIntVal" />-->
+							<Mapping methodName="Message" varName="ListIntVal" />
 							<!--<Data name="Message" type="string" value="Meessage" />-->
 						</Vars>
 					</Operation>

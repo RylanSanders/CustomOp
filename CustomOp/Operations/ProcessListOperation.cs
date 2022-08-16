@@ -26,7 +26,7 @@ namespace CustomOp.Operations
                 tempData.merge(data);
                 tempData.put("ListIntVal", i);
                 Process spawnedThread = operatedProcess.clone();
-                spawnedThread.addOpData(data);
+                spawnedThread.addOpData(tempData);
                 ExecutionController.runProcess(spawnedThread);
             }
         }

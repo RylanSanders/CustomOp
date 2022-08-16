@@ -68,7 +68,7 @@ namespace CustomOp.Objects
 
         public void addOpData(OpData data)
         {
-            inputData.merge(data);
+            inputData = data.merge(inputData);
         }
 
         public Process clone()
