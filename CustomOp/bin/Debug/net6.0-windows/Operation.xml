@@ -248,9 +248,15 @@
 				<Mapping methodName="MapToString" varName="DeserializedJSonMap" />
 			</Vars>
 		</Operation>
+		<Operation type="GetMapValue" name="MapToString">
+			<Vars>
+				<Mapping methodName="MapToRead" varName="DeserializedJSonMap" />
+				<Data name="MapKey" type="string" value="createdAt" />
+			</Vars>
+		</Operation>
 		<Operation type="WriteFile" name="DeckMessage">
 			<Vars>
-				<Mapping methodName="TextToWrite" varName="MappedString" />
+				<Mapping methodName="TextToWrite" varName="MapKeyValue" />
 				<Data name="WriteFilePath" type="string" value="output.txt" />
 			</Vars>
 		</Operation>

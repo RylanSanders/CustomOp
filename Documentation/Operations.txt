@@ -148,3 +148,10 @@ WriteFile
 	Input:
 		WriteFilePath
 		TextToWrite
+======================================================================================
+GetMapValue
+	Inputs:
+		MapKey
+		MapToRead
+	Output:
+		MapKeyValue

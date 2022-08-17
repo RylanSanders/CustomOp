@@ -39,6 +39,7 @@ namespace CustomOp.Objects
                 case "SQLSelect": return new SQLSelectOperation(element);break;
                 case "TableColToIntList": return new TableColToIntListOperation(element);break;
                 case "WriteFile": return new WriteFileOperation(element);break;
+                case "GetMapValue": return new GetMapValueOperation(element);break;
                 default: throw new Exception($"Invalid Operation Type ({element.Attribute("type").Value})");
             }
         }
