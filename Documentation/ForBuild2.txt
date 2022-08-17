@@ -12,5 +12,5 @@
 
 
 
--Research others - Look into power automate and other Workflow Automaters also look into datacentric languages like pandas maybe f# too
+-Research others - Look into power automate and other Workflow Automaters also look into datacentric languages like pandas maybe f# too, Serverless?
 -Research SQL/SQL integration in .Net - StoredProcedures? - need a sql editor as well

@@ -143,3 +143,8 @@ TableColToIntList - turns a column in a DataTable to an intlist
 		InputTable
 	Output:
 		ColIntList
+======================================================================================
+WriteFile
+	Input:
+		WriteFilePath
+		TextToWrite

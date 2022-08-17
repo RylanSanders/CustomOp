@@ -44,7 +44,7 @@ namespace CustomOp.Operations
 
             public JSONObject(string json)
             {
-                string processedJSON = json.Trim();
+                string processedJSON = json.Trim().Replace("\\\"", "");
                 if (processedJSON.Length == 0)
                 {
                     type = objTypes.String;
@@ -68,7 +68,7 @@ namespace CustomOp.Operations
                 else
                 {
                     type = objTypes.String;
-                    str = "";
+                    str = json;
                 }
             }
 
@@ -123,9 +123,14 @@ namespace CustomOp.Operations
                 Stack<CharPosition> containers = new Stack<CharPosition>();
                 List<int> lines = new List<int>();
                 bool doneParsing = false;
+                string trimmedJSon = json.Trim();
+                if (!trimmedJSon.Contains(","))
+                {
+                    return new List<int>() { trimmedJSon.Length};
+                }
                 while (!doneParsing)
                 {
-                    char c = json[pos];
+                    char c = trimmedJSon[pos];
                     if (c == '{' || c == '[')
                     {
                         containers.Push(new CharPosition(c, pos));
@@ -136,7 +141,7 @@ namespace CustomOp.Operations
                     }
                     if (c == '\"')
                     {
-                        if (containers.Peek().c == '\"')
+                        if (containers.Count!=0 && containers.Peek().c == '\"')
                         {
                             CharPosition startPos = containers.Pop();
                             //lines.Add(json.Substring(startPos.pos, pos-startPos.pos+1));
@@ -151,7 +156,7 @@ namespace CustomOp.Operations
                         lines.Add(pos);
                     }
                     pos++;
-                    if (pos >= json.Length)
+                    if (pos >= trimmedJSon.Length)
                     {
                         doneParsing = true;
                     }
@@ -160,6 +165,7 @@ namespace CustomOp.Operations
 
                 return lines;
             }
+
 
             private List<JSONObject> parseList(string jsonList)
             {
@@ -174,7 +180,10 @@ namespace CustomOp.Operations
                         list.Add(new JSONObject(jsonList.Substring(listSplits[i] + 1, listSplits[i + 1] - listSplits[i] - 1)));
                     }
                 }
-                list.Add(new JSONObject(jsonList.Substring(listSplits[listSplits.Count - 1] + 1, jsonList.Length - listSplits[listSplits.Count - 1] - 2)));
+                if (jsonList.Contains(","))
+                {
+                    list.Add(new JSONObject(jsonList.Substring(listSplits[listSplits.Count - 1] + 1, jsonList.Length - listSplits[listSplits.Count - 1] - 2)));
+                }
                 return list;
             }
 

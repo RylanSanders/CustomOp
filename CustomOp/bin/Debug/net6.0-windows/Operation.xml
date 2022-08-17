@@ -232,4 +232,59 @@
 			</OperatedProcess>
 		</Operation>
 	</Process>
+	<Process name="ArkidektScraper">
+		<Operation type="ReadFile" name="ReadSQLFile">
+			<Vars>
+				<Data name="FilePath" type="string" value="DeckList.Json" />
+			</Vars>
+		</Operation>
+		<Operation type="JSONToMap" name="CastJSON">
+			<Vars>
+				<Mapping methodName="JSonString" varName="ReadText" />
+			</Vars>
+		</Operation>
+		<Operation type="MapToString" name="MapToString">
+			<Vars>
+				<Mapping methodName="MapToString" varName="DeserializedJSonMap" />
+			</Vars>
+		</Operation>
+		<Operation type="WriteFile" name="DeckMessage">
+			<Vars>
+				<Mapping methodName="TextToWrite" varName="MappedString" />
+				<Data name="WriteFilePath" type="string" value="output.txt" />
+			</Vars>
+		</Operation>
+		<!--<Operation type="SQLSelect" name="MakeTable">
+			<DataSource>.</DataSource>
+			<InitialCatalog>MTG</InitialCatalog>
+			<Password>TestUser</Password>
+			<User>TestUser</User>
+			<DataBase>Colors</DataBase>
+			<Vars>
+				<Mapping methodName="SQLSelectStatement" varName="ReadText" />
+			</Vars>
+		</Operation>
+		<Operation type="TableColToIntList" name="MakeColIDs">
+			<Vars>
+				<Data name="ColumnName" type="string" value="customID" />
+				<Mapping methodName="InputTable" varName="SelectedTable" />
+			</Vars>
+		</Operation>
+		<Operation type="ProcessList" name="ListProcessor">
+			<Vars>
+				<Mapping methodName="InputList" varName="ColIntList" />
+			</Vars>
+			<OperatedProcess>
+				<Process name="SubProcess">
+					<Operation type="MessageBox" name="MessageBox">
+						<Vars>
+							<Mapping methodName="Message" varName="ListIntVal" />
+							<Data name="Message" type="string" value="Meessage" />
+						</Vars>
+					</Operation>
+				</Process>
+			</OperatedProcess>
+		</Operation>
+		-->
+	</Process>
 </Processes>
