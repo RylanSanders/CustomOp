@@ -102,6 +102,39 @@ namespace CustomOp.Objects
             return sb.ToString();
         }
 
+        public string generateInsertStatement(string database, Dictionary<string, string> colMap)
+        {
+            StringBuilder sb = new StringBuilder($"INSERT INTO {database} (");
+            foreach (string k in colValues.Keys)
+            {
+                if (colMap.ContainsValue(k))
+                {
+                    string key = colMap.Keys.Where((x) => colMap[x] == k).FirstOrDefault();
+                    sb.Append($"{key},");
+                }
+                
+            }
+            sb.Remove(sb.Length - 1, 1);
+            sb.Append(") VALUES ");
+
+            IEnumerable<string> usedColumns = colValues.Keys.Intersect(colMap.Keys);
+            int rowNum = 0;
+            while (rowNum < colValues[colValues.Keys.FirstOrDefault()].Count)
+            {
+
+                sb.Append("\n (");
+                foreach (string key in usedColumns)
+                {
+                    sb.Append($"'{colValues[key][rowNum].Replace("\'", "").Replace("\"", "")}',");
+                }
+                sb.Remove(sb.Length - 1, 1);
+                sb.Append("),");
+                rowNum++;
+            }
+            sb.Remove(sb.Length - 1, 1);
+            return sb.ToString();
+        }
+
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();

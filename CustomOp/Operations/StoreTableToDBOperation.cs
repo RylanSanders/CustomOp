@@ -62,7 +62,7 @@ namespace CustomOp.Operations
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.Connection = sqlConnection1;
-                cmd.CommandText = dt.generateInsertStatement(DataBase);
+                cmd.CommandText = dt.generateInsertStatement(DataBase, ColToVar);
                 cmd.ExecuteNonQuery();
                 connection.Close();
             }
