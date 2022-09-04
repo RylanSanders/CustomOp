@@ -19,31 +19,39 @@ namespace CustomOp.Objects
 
         public JSONObject(string json)
         {
-            string processedJSON = json.Trim().Replace("\\\"", "");
-            if (processedJSON.Length == 0)
+            try
             {
-                type = objTypes.String;
-                str = "";
-            }
-            else if (processedJSON[0] == '{')
+
+
+                string processedJSON = json.Trim().Replace("\\\"", "");
+                if (processedJSON.Length == 0)
+                {
+                    type = objTypes.String;
+                    str = "";
+                }
+                else if (processedJSON[0] == '{')
+                {
+                    type = objTypes.Map;
+                    map = parseMap(processedJSON);
+                }
+                else if (processedJSON[0] == '\"')
+                {
+                    type = objTypes.String;
+                    str = processedJSON.Replace("\"", "");
+                }
+                else if (processedJSON[0] == '[')
+                {
+                    type = objTypes.List;
+                    list = parseList(processedJSON);
+                }
+                else
+                {
+                    type = objTypes.String;
+                    str = json;
+                }
+            } catch(Exception e)
             {
-                type = objTypes.Map;
-                map = parseMap(processedJSON);
-            }
-            else if (processedJSON[0] == '\"')
-            {
-                type = objTypes.String;
-                str = processedJSON.Replace("\"", "");
-            }
-            else if (processedJSON[0] == '[')
-            {
-                type = objTypes.List;
-                list = parseList(processedJSON);
-            }
-            else
-            {
-                type = objTypes.String;
-                str = json;
+                throw new Exception($"Error Processing JSon: {json} \n- See the following error:{e.Message} \n {e.StackTrace}");
             }
         }
 
@@ -141,11 +149,68 @@ namespace CustomOp.Objects
             return lines;
         }
 
+        private List<int> getListSplits(string json)
+        {
+            int pos = 0;
+            Stack<CharPosition> containers = new Stack<CharPosition>();
+            List<int> lines = new List<int>();
+            bool doneParsing = false;
+            string trimmedJSon = json.Trim();
+            if (!trimmedJSon.Contains(","))
+            {
+                return new List<int>() { };
+            }
+            while (!doneParsing)
+            {
+                char c = trimmedJSon[pos];
+                if (c == '{' || c == '[')
+                {
+                    containers.Push(new CharPosition(c, pos));
+                }
+                if (c == '}' || c == ']')
+                {
+                    containers.Pop();
+                }
+                if (c == '\"')
+                {
+                    if (containers.Count != 0 && containers.Peek().c == '\"')
+                    {
+                        CharPosition startPos = containers.Pop();
+                        //lines.Add(json.Substring(startPos.pos, pos-startPos.pos+1));
+                    }
+                    else
+                    {
+                        containers.Push(new CharPosition(c, pos));
+                    }
+                }
+                if (c == ',' && containers.Count == 1)
+                {
+                    lines.Add(pos);
+                }
+                pos++;
+                if (pos >= trimmedJSon.Length)
+                {
+                    doneParsing = true;
+                }
+
+            }
+
+            return lines;
+        }
+
 
         private List<JSONObject> parseList(string jsonList)
         {
             List<JSONObject> list = new List<JSONObject>();
-            List<int> listSplits = getMapSplits(jsonList);
+            List<int> listSplits = getListSplits(jsonList);
+            if (listSplits.Count == 0 && jsonList.Trim() == "[]")
+            {
+                return new List<JSONObject>();
+            }
+            else if (listSplits.Count == 0)
+            {
+                return new List<JSONObject>() { new JSONObject(jsonList.Trim().Substring(1, jsonList.Trim().Length - 2)) };
+            }
             list.Add(new JSONObject(jsonList.Substring(1, listSplits[0] - 1)));
             for (int i = 0; i < listSplits.Count; i++)
             {
@@ -170,6 +235,8 @@ namespace CustomOp.Objects
             }
             else if (type == objTypes.List)
             {
+                if (list.Count == 0)
+                    return "[]";
                 string toRet = "[";
                 foreach (JSONObject o in list)
                 {
