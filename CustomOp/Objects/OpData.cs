@@ -33,7 +33,7 @@ namespace CustomOp.Objects
         {
             if (!data.ContainsKey(id) || !data[id].getType().Equals(typeof(Int32)))
             {
-                throw new Exception("Error in GetInt Method in OpData. Invalid variable name ID");
+                throw new Exception($"Error in GetInt Method in OpData. Invalid variable name ID: {id}");
             }
            return (int)(data[id].getData());
         }
@@ -42,7 +42,7 @@ namespace CustomOp.Objects
         {
             if (!data.ContainsKey(id) || !data[id].getType().Equals(typeof(string)))
             {
-                throw new Exception("Error in GetString Method in OpData. Invalid variable name ID");
+                throw new Exception($"Error in GetString Method in OpData. Invalid variable name ID: {id}");
             }
             return (string)(data[id].getData());
         }
@@ -51,7 +51,7 @@ namespace CustomOp.Objects
         {
             if (!data.ContainsKey(id) || !data[id].getType().Equals(typeof(List<int>)))
             {
-                throw new Exception("Error in GetIntList Method in OpData. Invalid variable name ID");
+                throw new Exception($"Error in GetIntList Method in OpData. Invalid variable name ID: {id}");
             }
             return (List<int>)(data[id].getData());
         }
@@ -60,7 +60,7 @@ namespace CustomOp.Objects
         {
             if (!data.ContainsKey(id) || !data[id].getType().Equals(typeof(Dictionary<string, string>)))
             {
-                throw new Exception("Error in GetMap Method in OpData. Invalid variable name ID");
+                throw new Exception($"Error in GetMap Method in OpData. Invalid variable name ID: {id}");
             }
             return (Dictionary<string, string>)(data[id].getData());
         }
@@ -69,7 +69,7 @@ namespace CustomOp.Objects
         {
             if (!data.ContainsKey(id) || !data[id].getType().Equals(typeof(DataTable)))
             {
-                throw new Exception("Error in GetDataTable Method in OpData. Invalid variable name ID");
+                throw new Exception($"Error in GetDataTable Method in OpData. Invalid variable name ID: {id}");
             }
             return (DataTable)(data[id].getData());
         }
