@@ -8,7 +8,7 @@ namespace CustomOp.Objects
 {
     internal class DataTable
     {
-        Dictionary<string, List<string>> colValues;
+        public Dictionary<string, List<string>> colValues;
 
         public DataTable()
         {
@@ -50,7 +50,7 @@ namespace CustomOp.Objects
             }
         }
 
-        private int getMaxNumRows()
+        public int getMaxNumRows()
         {
             if (colValues.Count == 0)
                 return 0;
