@@ -40,6 +40,7 @@ namespace CustomOp.Objects
                 case "TableColToIntList": return new TableColToIntListOperation(element);break;
                 case "WriteFile": return new WriteFileOperation(element);break;
                 case "GetMapValue": return new GetMapValueOperation(element);break;
+                case "JSONListToTable": return new JSONListToTableOperation(element);break;
                 case "DataTableColToList": return new DataTableColToListOperation(element);break;
                 case "Reduce": return new ReduceOperation(element);break;
                 default: throw new Exception($"Invalid Operation Type ({element.Attribute("type").Value})");
