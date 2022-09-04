@@ -12,6 +12,10 @@
 
 -There needs to be a better way to handle generics also need a language similar to the language use for power automate, it can be basic as long it has useful things like string manipulation and map hashing
 
+Some method of Multithreaded Byte reading for large amounts fo data
+
+GUI Default Behavior for operations so that things like loading bars can happen automatically
+
 
 
 -Research others - Look into power automate and other Workflow Automaters also look into datacentric languages like pandas maybe f# too, Serverless?

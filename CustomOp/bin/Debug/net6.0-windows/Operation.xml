@@ -354,34 +354,17 @@
 	<Process name="CardToCSV">
 		<Operation type="ReadFile" name="ReadSQLFile">
 			<Vars>
-				<Data name="FilePath" type="string" value="DeckList.Json" />
+				<Data name="FilePath" type="string" value="oracle-cards-20220904090207.json" />
 			</Vars>
 		</Operation>
-		<Operation type="JSONToMap" name="CastJSON">
+		<Operation type="JSONListToTable" name="Cards Table Maker">
 			<Vars>
-				<Mapping methodName="JSonString" varName="ReadText" />
+				<Mapping methodName="JSonListString" varName="ReadText" />
 			</Vars>
 		</Operation>
-		<Operation type="MapToString" name="MapToString">
+		<Operation type="DataTableToCSV" name="MapToString">
 			<Vars>
-				<Mapping methodName="MapToString" varName="DeserializedJSonMap" />
-			</Vars>
-		</Operation>
-		<Operation type="GetMapValue" name="MapToString">
-			<Vars>
-				<Mapping methodName="MapToRead" varName="DeserializedJSonMap" />
-				<Data name="cards" type="string" value="data" />
-			</Vars>
-		</Operation>
-		<Operation type="JSONListToTable" name="MapToString">
-			<Vars>
-				<Mapping methodName="JSonListString" varName="MapKeyValue" />
-				<Data name="MapKey" type="string" value="cards" />
-			</Vars>
-		</Operation>
-		<Operation type="JSONListToTable" name="MapToString">
-			<Vars>
-				<Mapping methodName="JSonListString" varName="" />
+				<Mapping methodName="DataTableToCSV" varName="JSONDataTable" />
 				<Data name="CSVFilePath" type="string" value="C:/test/MTGCards.csv" />
 			</Vars>
 		</Operation>

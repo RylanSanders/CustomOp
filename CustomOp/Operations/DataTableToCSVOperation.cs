@@ -46,15 +46,20 @@ namespace CustomOp.Operations
 
         private string handleQuotes(string str)
         {
+            if(str=="" || str == "\"\"")
+            {
+                return "\"\"";
+            }
             string toRet = str;
             toRet = toRet.Replace("\n", "");
             toRet = toRet.Replace("\r", "");
             toRet = toRet[0] + toRet.Substring(1, toRet.Length - 2).Replace("\"", "") + toRet[toRet.Length - 1];
+
             if (str.Trim()[0] != '\"')
             {
                 toRet = "\"" + toRet;
             }
-            if (str.Trim()[str.Trim().Length-1] != '\"')
+            if (str.Trim()[str.Trim().Length - 1] != '\"')
             {
                 toRet = toRet + "\"";
             }

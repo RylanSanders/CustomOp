@@ -51,7 +51,15 @@ namespace CustomOp.Objects
                 }
             } catch(Exception e)
             {
-                throw new Exception($"Error Processing JSon: {json} \n- See the following error:{e.Message} \n {e.StackTrace}");
+                if(json.Length > 2000)
+                {
+                    throw new Exception($"Error Processing JSon: {json.Substring(0,2000)} \n- See the following error:{e.Message} \n {e.StackTrace}");
+                }
+                else
+                {
+                    throw new Exception($"Error Processing JSon: {json} \n- See the following error:{e.Message} \n {e.StackTrace}");
+                }
+                
             }
         }
 
@@ -68,7 +76,9 @@ namespace CustomOp.Objects
                     mapEntries.Add(jsonMap.Substring(mapSplits[i] + 1, mapSplits[i + 1] - mapSplits[i] - 1));
                 }
             }
-            mapEntries.Add(jsonMap.Substring(mapSplits[mapSplits.Count - 1], jsonMap.Length - mapSplits[mapSplits.Count - 1] - 2));
+
+            if(mapSplits.Count!=1)
+                mapEntries.Add(jsonMap.Substring(mapSplits[mapSplits.Count - 1], jsonMap.Length - mapSplits[mapSplits.Count - 1] - 2));
 
             Dictionary<string, JSONObject> toRet = new Dictionary<string, JSONObject>();
             foreach (string part in mapEntries)
