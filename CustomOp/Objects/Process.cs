@@ -60,7 +60,7 @@ namespace CustomOp.Objects
                 }
                 catch(Exception e)
                 {
-                    Logger.log.Error("Error in run method of process: " + e.StackTrace);
+                    Logger.log.Error("Error in run method of process message: " + e.Message + "\n StackTrace:" + e.StackTrace);
                     op.onError();
                 }
             }

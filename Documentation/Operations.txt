@@ -155,3 +155,31 @@ GetMapValue
 		MapToRead
 	Output:
 		MapKeyValue
+=======================================================================================
+JSONListToTable
+	Inputs:
+		JSonListString
+	Output:
+		JSONDataTable
+=======================================================================================
+TableToCSV
+	Input:
+		TableToCSV
+		CSVFilePath
+========================================================================================
+Reduce
+	TODO: Need to make more generic and improve the accumuultor system
+	Config:
+		<Accumulator>JSonList</Accumulator>
+	Input:
+		ToReduceList
+	Output:
+		ReducedListString
+=========================================================================================
+DataTableColToList
+	Input:
+		ColName
+		DataTableToList
+	Output:
+		DataTableColList
+	

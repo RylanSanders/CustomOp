@@ -243,21 +243,79 @@
 				<Mapping methodName="JSonString" varName="ReadText" />
 			</Vars>
 		</Operation>
-		<Operation type="MapToString" name="MapToString">
-			<Vars>
-				<Mapping methodName="MapToString" varName="DeserializedJSonMap" />
-			</Vars>
-		</Operation>
 		<Operation type="GetMapValue" name="MapToString">
 			<Vars>
 				<Mapping methodName="MapToRead" varName="DeserializedJSonMap" />
-				<Data name="MapKey" type="string" value="createdAt" />
+				<Data name="MapKey" type="string" value="cards" />
 			</Vars>
 		</Operation>
-		<Operation type="WriteFile" name="DeckMessage">
+		<Operation type="JSONListToTable" name="MapToString">
 			<Vars>
-				<Mapping methodName="TextToWrite" varName="MapKeyValue" />
-				<Data name="WriteFilePath" type="string" value="output.txt" />
+				<Mapping methodName="JSonListString" varName="MapKeyValue" />
+			</Vars>
+		</Operation>
+		<Operation type="DataTableColToList" name="Initial DataTable Creation">
+			<Vars>
+				<Data name="ColName" type="string" value="card" />
+				<Mapping methodName="DataTableToList" varName="JSONDataTable" />
+			</Vars>
+		</Operation>
+		<Operation type="Reduce" name="DataTable Reduction">
+			<Accumulator>JSonList</Accumulator>
+			<Vars>
+				<Mapping methodName="ToReduceList" varName="DataTableColList" />
+			</Vars>
+		</Operation>
+		
+		<Operation type="JSONListToTable" name="Cards Table Maker">
+			<Vars>
+				<Mapping methodName="JSonListString" varName="ReducedListString" />
+			</Vars>
+		</Operation>
+		<Operation type="DataTableColToList" name="Initial DataTable Creation">
+			<Vars>
+				<Data name="ColName" type="string" value="oracleCard" />
+				<Mapping methodName="DataTableToList" varName="JSONDataTable" />
+			</Vars>
+		</Operation>
+		<Operation type="Reduce" name="DataTable Reduction">
+			<Accumulator>JSonList</Accumulator>
+			<Vars>
+				<Mapping methodName="ToReduceList" varName="DataTableColList" />
+			</Vars>
+		</Operation>
+		<Operation type="JSONListToTable" name="Cards Table Maker">
+			<Vars>
+				<Mapping methodName="JSonListString" varName="ReducedListString" />
+			</Vars>
+		</Operation>
+		<Operation type="WriteFile" name="WriteFile">
+			<Vars>
+				<Mapping methodName="TextToWrite" varName="ReducedListString" />
+				<Data name="WriteFilePath" type="string" value="intermediateJSON.txt" />
+			</Vars>
+		</Operation>
+		<Operation type="TableToString" name="MapToString">
+			<Vars>
+				<Mapping methodName="TableToString" varName="JSONDataTable" />
+			</Vars>
+		</Operation>
+		<Operation type="WriteFile" name="WriteFile">
+			<Vars>
+				<Mapping methodName="TextToWrite" varName="TableString" />
+				<Data name="WriteFilePath" type="string" value="FinalJSonCardList.txt" />
+			</Vars>
+		</Operation>
+		
+		<Operation type="StoreTableToDB" name="StoreMap">
+			<DataSource>.</DataSource>
+			<InitialCatalog>MTG</InitialCatalog>
+			<Password>TestUser</Password>
+			<User>TestUser</User>
+			<DataBase>Sets</DataBase>
+			<DBCols DBCol="name" VarName = "name" />
+			<Vars>
+				<Mapping methodName="TableToDB" varName="JSONDataTable" />
 			</Vars>
 		</Operation>
 		<!--<Operation type="SQLSelect" name="MakeTable">
@@ -292,5 +350,40 @@
 			</OperatedProcess>
 		</Operation>
 		-->
+	</Process>
+	<Process name="CardToCSV">
+		<Operation type="ReadFile" name="ReadSQLFile">
+			<Vars>
+				<Data name="FilePath" type="string" value="DeckList.Json" />
+			</Vars>
+		</Operation>
+		<Operation type="JSONToMap" name="CastJSON">
+			<Vars>
+				<Mapping methodName="JSonString" varName="ReadText" />
+			</Vars>
+		</Operation>
+		<Operation type="MapToString" name="MapToString">
+			<Vars>
+				<Mapping methodName="MapToString" varName="DeserializedJSonMap" />
+			</Vars>
+		</Operation>
+		<Operation type="GetMapValue" name="MapToString">
+			<Vars>
+				<Mapping methodName="MapToRead" varName="DeserializedJSonMap" />
+				<Data name="cards" type="string" value="data" />
+			</Vars>
+		</Operation>
+		<Operation type="JSONListToTable" name="MapToString">
+			<Vars>
+				<Mapping methodName="JSonListString" varName="MapKeyValue" />
+				<Data name="MapKey" type="string" value="cards" />
+			</Vars>
+		</Operation>
+		<Operation type="JSONListToTable" name="MapToString">
+			<Vars>
+				<Mapping methodName="JSonListString" varName="" />
+				<Data name="CSVFilePath" type="string" value="C:/test/MTGCards.csv" />
+			</Vars>
+		</Operation>
 	</Process>
 </Processes>

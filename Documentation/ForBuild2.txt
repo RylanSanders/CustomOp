@@ -8,9 +8,12 @@
 -Add defuault Var values - like for SQL can set the config only once
 -Maybe encapsulate all of the acutal behavior into an Action(Functional Interface) and operations can return the Action - makes Tasks easy and makes it easy to call other Operations from in code
 -Composite Operations - need to be able to Make a custom operation just by chaining together Operations in the config
--Actually be able to use names to reference things
+-Actually be able to use names to reference things 
+
+-There needs to be a better way to handle generics also need a language similar to the language use for power automate, it can be basic as long it has useful things like string manipulation and map hashing
 
 
 
 -Research others - Look into power automate and other Workflow Automaters also look into datacentric languages like pandas maybe f# too, Serverless?
+-CAS (Computer Algebra Systems)
 -Research SQL/SQL integration in .Net - StoredProcedures? - need a sql editor as well
