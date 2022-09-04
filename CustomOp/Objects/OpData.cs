@@ -74,6 +74,15 @@ namespace CustomOp.Objects
             return (DataTable)(data[id].getData());
         }
 
+        public List<string> getStringList(string id)
+        {
+            if (!data.ContainsKey(id) || !data[id].getType().Equals(typeof(List<string>)))
+            {
+                throw new Exception($"Error in GetDataTable Method in OpData. Invalid variable name ID: {id}");
+            }
+            return (List<string>)(data[id].getData());
+        }
+
 
         public void put(String name, Object i)
         {
