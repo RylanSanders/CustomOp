@@ -362,9 +362,72 @@
 				<Mapping methodName="JSonListString" varName="ReadText" />
 			</Vars>
 		</Operation>
+		<!-- A new kind of operation that is mainly config based to do several different kind of changes at once -->
+		<!-- Maybe do a list expands thing, need some kind of JSON Parse thing for prices-->
+		<Operation type="DataTableModify" name="Cards Table Maker">
+			<DTOperations>
+				<!--<RemoveCols>
+					<Col name="" />
+				</RemoveCols>-->
+				<KeepOnly>
+					<Col name="id" />
+					<Col name="name" />
+					<Col name="released_at" />
+					<Col name="uri" />
+					<Col name="mana_cost" />
+					<Col name="cmc" />
+					<Col name="type_line" />
+					<Col name="oracle_text" />
+					<Col name="power" />
+					<Col name="toughness" />
+					<Col name="set_name" />
+					<Col name="flavor_text" />
+					<Col name="edhrec_rank" />
+					<Col name="penny_rank" />
+					<Col name="color_identity" />
+					<Col name="keywords" />
+				</KeepOnly>
+				<CreateCols>
+					<!--<Col name="" type="string">
+						<Combine>
+							<Col name="thing" />
+							<col name="thing2" />
+						</Combine> 
+					</Col>-->
+					<Col name="is_black" type="bool">
+						<Conditions>
+							<Condition type="contains" col="color_identity" value="B" />
+						</Conditions>
+					</Col>
+					<Col name="is_red" type="bool">
+						<Conditions>
+							<Condition type="contains" col="color_identity" value="R" />
+						</Conditions>
+					</Col>
+					<Col name="is_blue" type="bool">
+						<Conditions>
+							<Condition type="contains" col="color_identity" value="U" />
+						</Conditions>
+					</Col>
+					<Col name="is_green" type="bool">
+						<Conditions>
+							<Condition type="contains" col="color_identity" value="G" />
+						</Conditions>
+					</Col>
+					<Col name="is_white" type="bool">
+						<Conditions>
+							<Condition type="contains" col="color_identity" value="W" />
+						</Conditions>
+					</Col>
+				</CreateCols>
+			</DTOperations>
+			<Vars>
+				<Mapping methodName="InputDataTable" varName="JSONDataTable" />
+			</Vars>
+		</Operation>
 		<Operation type="DataTableToCSV" name="MapToString">
 			<Vars>
-				<Mapping methodName="DataTableToCSV" varName="JSONDataTable" />
+				<Mapping methodName="DataTableToCSV" varName="ModifiedDataTable" />
 				<Data name="CSVFilePath" type="string" value="C:/test/MTGCards.csv" />
 			</Vars>
 		</Operation>

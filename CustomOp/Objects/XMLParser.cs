@@ -44,6 +44,7 @@ namespace CustomOp.Objects
                 case "DataTableColToList": return new DataTableColToListOperation(element);break;
                 case "Reduce": return new ReduceOperation(element);break;
                 case "DataTableToCSV": return new DataTableToCSVOperation(element);break;
+                case "DataTableModify": return new DataTableModifyOperation(element);break;
                 default: throw new Exception($"Invalid Operation Type ({element.Attribute("type").Value})");
             }
         }

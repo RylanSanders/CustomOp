@@ -57,6 +57,21 @@ namespace CustomOp.Objects
             return colValues[colValues.Keys.FirstOrDefault()].Count;
         }
 
+        public void addCol(string name, List<String> col)
+        {
+            colValues.Add(name, col);
+        }
+
+        public List<String> getCols()
+        {
+            return colValues.Keys.ToList();
+        }
+
+        public void removeCol(string colName)
+        {
+            colValues.Remove(colName);
+        }
+
         private List<string> getEmptyStringList(int length)
         {
             List<string> toRet = new List<string>();

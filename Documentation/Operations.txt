@@ -182,4 +182,23 @@ DataTableColToList
 		DataTableToList
 	Output:
 		DataTableColList
-	
+==========================================================================================
+DataTableModify
+	Config:
+		<DTOperations>
+				<KeepOnly>
+					<Col name="id" />
+
+				</KeepOnly>
+				<CreateCols>
+					<Col name="is_black" type="bool">
+						<Conditions>
+							<Condition type="contains" col="color_identity" value="B" />
+						</Conditions>
+					</Col>
+				</CreateCols>
+		</DTOperations>
+	Input:
+		InputDataTable
+	Output:
+		ModifiedDataTable
