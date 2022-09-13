@@ -46,6 +46,8 @@ namespace CustomOp.Objects
                 case "DataTableToCSV": return new DataTableToCSVOperation(element);break;
                 case "DataTableModify": return new DataTableModifyOperation(element);break;
                 case "ModifyDTCol": return new ModifyDTColOperation(element);break;
+                case "Cast": return new CastOperation(element);break;
+                case "ModifyString": return new ModifyStringOperation(element); break;
                 default: throw new Exception($"Invalid Operation Type ({element.Attribute("type").Value})");
             }
         }
