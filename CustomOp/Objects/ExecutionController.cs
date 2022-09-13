@@ -38,6 +38,20 @@ namespace CustomOp.Objects
 
         }
 
+        public static void syncRunProcess(Process process)
+        {
+            try
+            {
+                process.onEnter();
+                process.run();
+                process.onExit();
+            }
+            catch (Exception e)
+            {
+                Logger.log.Error(e.StackTrace);
+            }
+        }
+
 
     }
 }
