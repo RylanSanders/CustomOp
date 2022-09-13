@@ -23,6 +23,11 @@ namespace CustomOp.Objects
             return data.ContainsKey(id);
         }
 
+        public bool containsType(string id, Type t)
+        {
+            return data.ContainsKey(id) && data[id].getType().Equals(t);
+        }
+
         public Object getObject(String id)
         {
             return data[id].getData();
@@ -81,6 +86,15 @@ namespace CustomOp.Objects
                 throw new Exception($"Error in GetDataTable Method in OpData. Invalid variable name ID: {id}");
             }
             return (List<string>)(data[id].getData());
+        }
+
+        public Dictionary<string, MutableObject> getMutableMap(string id)
+        {
+            if (!data.ContainsKey(id) || !data[id].getType().Equals(typeof(Dictionary<string, MutableObject>)))
+            {
+                throw new Exception($"Error in getMutableMap Method in OpData. Invalid variable name ID: {id}");
+            }
+            return (Dictionary<string, MutableObject>)(data[id].getData());
         }
 
 
