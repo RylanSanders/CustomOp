@@ -76,9 +76,17 @@ namespace CustomOp.Objects
                     mapEntries.Add(jsonMap.Substring(mapSplits[i] + 1, mapSplits[i + 1] - mapSplits[i] - 1));
                 }
             }
-
-            if(mapSplits.Count!=1)
+            //only has 1 value
+            bool has1Val = mapSplits.Count == 1 && mapSplits[0] == jsonMap.Length;
+            if (jsonMap.Length - mapSplits[mapSplits.Count - 1] - 2 < 0 && !has1Val)
+            {
+                mapEntries.Add(jsonMap.Substring(mapSplits[mapSplits.Count - 1], jsonMap.Length - mapSplits[mapSplits.Count - 1]));
+            }
+            else if(!has1Val)
+            {
                 mapEntries.Add(jsonMap.Substring(mapSplits[mapSplits.Count - 1], jsonMap.Length - mapSplits[mapSplits.Count - 1] - 2));
+            }
+            
 
             Dictionary<string, JSONObject> toRet = new Dictionary<string, JSONObject>();
             foreach (string part in mapEntries)
@@ -91,11 +99,26 @@ namespace CustomOp.Objects
 
         private string[] parseMapEntry(string entry)
         {
-            int firstQuote = entry.IndexOf('"') + 1;
-            int secondQuoteLength = entry.Substring(firstQuote + 1).IndexOf('"') + 1;
-            string key = entry.Substring(firstQuote, secondQuoteLength);
-            string value = entry.Substring(entry.IndexOf(":") + 1);
-            return new string[] { key, value };
+            try
+            {
+                int firstQuote = entry.IndexOf('"') + 1;
+                int secondQuoteLength = entry.Substring(firstQuote + 1).IndexOf('"') + 1;
+                string key = entry.Substring(firstQuote, secondQuoteLength);
+                string value = entry.Substring(entry.IndexOf(":") + 1);
+                //If the entry still is contained in brackets, remove them from the values
+                if (entry.StartsWith("{"))
+                {
+                    int lastBracket = value.LastIndexOf("}");
+                    if(lastBracket!=-1)
+                        value = value.Remove(lastBracket, 1);
+                }
+                return new string[] { key, value };
+            }
+            catch
+            {
+                Console.WriteLine("A");
+            }
+            return null;
         }
 
         class CharPosition
@@ -123,37 +146,47 @@ namespace CustomOp.Objects
             }
             while (!doneParsing)
             {
-                char c = trimmedJSon[pos];
-                if (c == '{' || c == '[')
+                try
                 {
-                    containers.Push(new CharPosition(c, pos));
-                }
-                if (c == '}' || c == ']')
-                {
-                    containers.Pop();
-                }
-                if (c == '\"')
-                {
-                    if (containers.Count != 0 && containers.Peek().c == '\"')
-                    {
-                        CharPosition startPos = containers.Pop();
-                        //lines.Add(json.Substring(startPos.pos, pos-startPos.pos+1));
-                    }
-                    else
+                    char c = trimmedJSon[pos];
+                    if (c == '{' || c == '[')
                     {
                         containers.Push(new CharPosition(c, pos));
                     }
+                    if (c == '}' || c == ']')
+                    {
+                        containers.Pop();
+                    }
+                    if (c == '\"')
+                    {
+                        if (containers.Count != 0 && containers.Peek().c == '\"')
+                        {
+                            CharPosition startPos = containers.Pop();
+                            //lines.Add(json.Substring(startPos.pos, pos-startPos.pos+1));
+                        }
+                        else
+                        {
+                            containers.Push(new CharPosition(c, pos));
+                        }
+                    }
+                    if (c == ',' && containers.Count == 1)
+                    {
+                        lines.Add(pos);
+                    }
+                    pos++;
+                    if (pos >= trimmedJSon.Length)
+                    {
+                        doneParsing = true;
+                    }
                 }
-                if (c == ',' && containers.Count == 1)
+                catch(Exception e)
                 {
-                    lines.Add(pos);
+                    throw new Exception($"Error in getMapSplits: JSON: {json} Type: {e.GetType} StackTrace: {e.StackTrace}");
                 }
-                pos++;
-                if (pos >= trimmedJSon.Length)
-                {
-                    doneParsing = true;
-                }
-
+            }
+            if (lines.Count == 0)
+            {
+                return new List<int>() { trimmedJSon.Length };
             }
 
             return lines;

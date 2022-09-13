@@ -76,6 +76,7 @@ namespace CustomOp.Objects
 
         public void onEnter(OpData data)
         {
+            Logger.log.Info($"Starting Operation: {name}");
             processInput(data);
         }
 
@@ -86,6 +87,7 @@ namespace CustomOp.Objects
                 data.remove(key);
             }
             tempVars.Clear();
+            Logger.log.Info($"Finished Operation: {name}");
         }
     }
 }
