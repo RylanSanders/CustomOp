@@ -48,6 +48,9 @@ namespace CustomOp.Objects
                 case "ModifyDTCol": return new ModifyDTColOperation(element);break;
                 case "Cast": return new CastOperation(element);break;
                 case "ModifyString": return new ModifyStringOperation(element); break;
+                case "MapListOperation": return new MapListOperation(element);break;
+                case "GetFilesInDir": return new GetFilesInDirOperation(element);break;
+                case "JoinList": return new JoinListOperation(element);break;
                 default: throw new Exception($"Invalid Operation Type ({element.Attribute("type").Value})");
             }
         }
