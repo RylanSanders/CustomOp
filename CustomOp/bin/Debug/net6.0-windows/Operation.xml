@@ -68,6 +68,7 @@
 			</Vars>
 		</Operation>
 		<Operation type="ProcessList" name="ListProcessor">
+			<WaitTime>1000</WaitTime>
 			<Vars>
 				<Mapping methodName="InputList" varName="IntListOutput" />
 			</Vars>
@@ -386,6 +387,7 @@
 					<Col name="penny_rank" />
 					<Col name="color_identity" />
 					<Col name="keywords" />
+					<Col name="reprint" />
 				</KeepOnly>
 				<CreateCols>
 					<!--<Col name="" type="string">
@@ -432,4 +434,285 @@
 			</Vars>
 		</Operation>
 	</Process>
+	
+	
+	<Process name="Generate App ID list">
+		<Operation type="ReadFile" name="ReadAllSteamGames">
+			<Vars>
+				<Data name="FilePath" type = "string" value="C:/test/SteamGames.json" />
+			</Vars>
+		</Operation>
+		<Operation type="JSONToMap" name="AppList Json to Map">
+			<Vars>
+				<Mapping methodName="JSonString" varName="ReadText" />
+			</Vars>
+		</Operation>
+		<Operation type="GetMapValue" name="Get Applist Map">
+			<Vars>
+				<Mapping methodName="MapToRead" varName="DeserializedJSonMap" />
+				<Data name="MapKey" type="string" value="applist" />
+			</Vars>
+		</Operation>
+		<Operation type="JSONToMap" name="Parse Applist">
+			<Vars>
+				<Mapping methodName="JSonString" varName="MapKeyValue" />
+			</Vars>
+		</Operation>
+		<Operation type="GetMapValue" name="Get Apps">
+			<Vars>
+				<Mapping methodName="MapToRead" varName="DeserializedJSonMap" />
+				<Data name="MapKey" type="string" value="apps" />
+			</Vars>
+		</Operation>
+		<Operation type="JSONListToTable" name="Get All AppIDs ">
+			<Vars>
+				<Mapping methodName="JSonListString" varName="MapKeyValue" />
+			</Vars>
+		</Operation>
+		<Operation type="ModifyDTCol" name="Fix the App List Int ID ">
+			<MappingProcess>
+				<Process name="Modify Sub Process">
+					<Operation type="RegexReplace" name="Replace Quotes in AppID ">
+						<Vars>
+							<Mapping methodName="RegexInput" varName="TableValue" />
+							<Data name="RegexMatch" type="string" value='"' />
+							<Data name="RegexReplace" type="string" value='' />
+						</Vars>
+					</Operation>
+					<Operation type="SetVar" name="Set Mapping Var">
+						<Vars>
+							<Data name="ObjectID" type="string" value="RegexOutput" />
+							<Data name="OutputID" type="string" value='MappingOutput' />
+						</Vars>
+					</Operation>
+				</Process>
+			</MappingProcess>
+			<Vars>
+				<Mapping methodName="ToModifyDT" varName="JSONDataTable" />
+				<Data name="ColName" type="string" value="appid" />
+			</Vars>
+		</Operation>
+		<Operation type="TableColToIntList" name="Put all App IDs into a list ">
+			<Vars>
+				<Mapping methodName="InputTable" varName="JSONDataTable" />
+				<Data name="ColumnName" type="string" value="appid" />
+			</Vars>
+		</Operation>
+		<Operation type="Cast" name="DataTable Reduction">
+			<CastType>IntListToStringList</CastType>
+			<Vars>
+				<Data name="IntListID" type="string" value="ColIntList" />
+			</Vars>
+		</Operation>
+		<Operation type="Reduce" name="DataTable Reduction">
+			<Accumulator>JSonList</Accumulator>
+			<Vars>
+				<Mapping methodName="ToReduceList" varName="CastedStringList" />
+			</Vars>
+		</Operation>
+		<Operation type="WriteFile" name="Save App list ">
+			<Vars>
+				<Mapping methodName="TextToWrite" varName="ReducedListString" />
+				<Data name="WriteFilePath" type="string" value="C:/test/allAppIDs" />
+			</Vars>
+		</Operation>
+		</Process>
+	
+	<Process name="Dir Test">
+		<Operation type="GetFilesInDir"  name="Get Dirs">
+			<Vars>
+				<Data name="DirectoryPath" type="string" value="E:\Data\SteamGames\" />
+			</Vars>
+		</Operation>
+		<Operation type="MapListOperation"  name="Map List to Nums">
+			<Vars>
+				<Mapping methodName="ToMapList" varName="DirectoryList" />
+			</Vars>
+			<MappingProcess>
+				<Process name="File Path to App ID">
+					<Operation type="ModifyString" name="String Modify">
+						<StringOps>
+							<StringOp type="remove" base="ListValue" removeVal="E:\Data\SteamGames\" />
+							<StringOp type="remove" base="$current$" removeVal=".json" />
+						</StringOps>
+					</Operation>
+					<Operation type="SetVar" name="Set mapping output">
+						<Vars>
+							<Data name="ObjectID" type="string" value="ModifiedString" />
+							<Data name="OutputID" type="string" value='MappingOutput' />
+						</Vars>
+					</Operation>
+				</Process>
+			</MappingProcess>
+		</Operation>
+		<Operation type="Reduce" name="DataTable Reduction">
+			<Accumulator>JSonList</Accumulator>
+			<Vars>
+				<Mapping methodName="ToReduceList" varName="MappedList" />
+			</Vars>
+		</Operation>
+		<Operation type="WriteFile"  name="WriteFile">
+			<Vars>
+				<Data name="WriteFilePath" type="string" value="C:/test/DoneAppIDs.txt" />
+				<Mapping methodName="TextToWrite" varName="ReducedListString" />
+			</Vars>
+		</Operation>
+	</Process>
+	
+	<Process name="TODO Steam App Generator">
+		<Operation type="GetFilesInDir"  name="Get Dirs">
+			<Vars>
+				<Data name="DirectoryPath" type="string" value="E:\Data\SteamGames\" />
+			</Vars>
+		</Operation>
+		<Operation type="MapListOperation"  name="Map List to Nums">
+			<Vars>
+				<Mapping methodName="ToMapList" varName="DirectoryList" />
+			</Vars>
+			<MappingProcess>
+				<Process name="File Path to App ID">
+					<Operation type="ModifyString" name="String Modify">
+						<StringOps>
+							<StringOp type="remove" base="ListValue" removeVal="E:\Data\SteamGames\" />
+							<StringOp type="remove" base="$current$" removeVal=".json" />
+						</StringOps>
+					</Operation>
+					<Operation type="SetVar" name="Set mapping output">
+						<Vars>
+							<Data name="ObjectID" type="string" value="ModifiedString" />
+							<Data name="OutputID" type="string" value='MappingOutput' />
+						</Vars>
+					</Operation>
+				</Process>
+			</MappingProcess>
+		</Operation>
+		<Operation type="SetVar" name="Set the done app ids">
+			<Vars>
+				<Data name="ObjectID" type="string" value="MappedList" />
+				<Data name="OutputID" type="string" value='FinishedAppIDs' />
+			</Vars>
+		</Operation>
+		<Operation type="ReadFile" name="Read all of the app ids">
+			<Vars>
+				<Data name="FilePath" type="string" value="C:\test\allAppIDs.txt" />
+			</Vars>
+		</Operation>
+		<Operation type="Cast" name="Cast the App IDs to a list">
+			<CastType>StringToStringList</CastType>
+			<Vars>
+				<Data name="StringID" type="string" value="ReadText" />
+			</Vars>
+		</Operation>
+		<Operation type="JoinList" name="Cast the App IDs to a list">
+			<Join type="Subtract" leftList="CastedStringList" rightList="FinishedAppIDs" />
+		</Operation>
+		<Operation type="Reduce" name="DataTable Reduction">
+			<Accumulator>JSonList</Accumulator>
+			<Vars>
+				<Mapping methodName="ToReduceList" varName="JoinedList" />
+			</Vars>
+		</Operation>
+		<Operation type="WriteFile"  name="WriteFile">
+			<Vars>
+				<Data name="WriteFilePath" type="string" value="C:/test/TODOAppIDs.txt" />
+				<Mapping methodName="TextToWrite" varName="ReducedListString" />
+			</Vars>
+		</Operation>
+	</Process>
+	
+	<Process name="Steam">
+		<Operation type="GetFilesInDir"  name="Get Dirs">
+			<Vars>
+				<Data name="DirectoryPath" type="string" value="E:\Data\SteamGames\" />
+			</Vars>
+		</Operation>
+		<Operation type="MapListOperation"  name="Map List to Nums">
+			<Vars>
+				<Mapping methodName="ToMapList" varName="DirectoryList" />
+			</Vars>
+			<MappingProcess>
+				<Process name="File Path to App ID">
+					<Operation type="ModifyString" name="String Modify">
+						<StringOps>
+							<StringOp type="remove" base="ListValue" removeVal="E:\Data\SteamGames\" />
+							<StringOp type="remove" base="$current$" removeVal=".json" />
+						</StringOps>
+					</Operation>
+					<Operation type="SetVar" name="Set mapping output">
+						<Vars>
+							<Data name="ObjectID" type="string" value="ModifiedString" />
+							<Data name="OutputID" type="string" value='MappingOutput' />
+						</Vars>
+					</Operation>
+				</Process>
+			</MappingProcess>
+		</Operation>
+		<Operation type="SetVar" name="Set the done app ids">
+			<Vars>
+				<Data name="ObjectID" type="string" value="MappedList" />
+				<Data name="OutputID" type="string" value='FinishedAppIDs' />
+			</Vars>
+		</Operation>
+		<Operation type="ReadFile" name="Read all of the app ids">
+			<Vars>
+				<Data name="FilePath" type="string" value="C:\test\allAppIDs.txt" />
+			</Vars>
+		</Operation>
+		<Operation type="Cast" name="Cast the App IDs to a list">
+			<CastType>StringToStringList</CastType>
+			<Vars>
+				<Data name="StringID" type="string" value="ReadText" />
+			</Vars>
+		</Operation>
+		<Operation type="JoinList" name="Cast the App IDs to a list">
+			<Join type="Subtract" leftList="CastedStringList" rightList="FinishedAppIDs" />
+		</Operation>
+		<Operation type="Cast" name="Cast the App IDs to a list">
+			<CastType>StringListToIntList</CastType>
+			<Vars>
+				<Data name="StringListID" type="string" value="JoinedList" />
+			</Vars>
+		</Operation>
+		<Operation type="ProcessList" name="Process App List ">
+			<Synchronous>False</Synchronous>
+			<WaitTime>2000</WaitTime>
+			<Vars>
+				<Mapping methodName="InputList" varName="CastedIntList" />
+			</Vars>
+			<OperatedProcess>
+				<Process name="SubProcess">
+					<Operation type="Cast" name="Cast Int to String">
+						<CastType>IntToString</CastType>
+						<Vars>
+							<Data name="IntID" type="string" value="ListIntVal" />
+						</Vars>
+					</Operation>
+					<Operation type="ModifyString" name="Make HTTP URL">
+						<StringOps>
+							<StringOp type="append" string1="https://store.steampowered.com/api/appdetails?appids=" string2="CastedString" />
+						</StringOps>
+					</Operation>
+					<Operation type="HttpRequest" name="Game get">
+						<Vars>
+							<Mapping methodName="HttpRequestURL" varName="ModifiedString" />
+						</Vars>
+					</Operation>
+					<Operation type="ModifyString" name="Make HTTP URL">
+						<StringOps>
+							<StringOp type="append" string1="E:/Data/SteamGames/" string2="CastedString" />
+							<StringOp type="append" string1="$current$" string2=".json" />
+						</StringOps>
+					</Operation>
+					<Operation type="WriteFile" name="WriteList">
+						<Vars>
+							<Mapping methodName="TextToWrite" varName="HttpResponse" />
+							<Mapping methodName="WriteFilePath" varName="ModifiedString" />
+						</Vars>
+					</Operation>
+				</Process>
+			</OperatedProcess>
+		</Operation>
+	</Process>
 </Processes>
+
+
