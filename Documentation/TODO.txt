@@ -1,11 +1,9 @@
-Operations need to execute in their own thread
 Inputs should just be a set operation, not a custom thing
 I shouldn't be passing around the data, I should really only have operations return data - atleast if I want to only do block coding
 		-Could instead make each variable have a unique identifier - like have the data have the name and an operation for comparison
 		then do a comparison where it picks the most recent operation - store all of the operations in order in the data
 
 Fix the XMLParser to load all of the operations from assemblies in an operations folder
-Add an option to the base operation config to let you manually set variables (something like <StaticVar methodVar="" value="">) and try to infer the type - Rename the var map and put it in there
 
 GUI - A gui library for configuring the starting up thing as well as any kind of form
 	-This would be for creating custom programs 
@@ -17,8 +15,7 @@ Threads - Implement Thread Pool
 
 Error Handeling Plan
 	When an Operation Errors out the process should stop and show a message detailing the issue. This should be an overridable method in Process
-	Improve error messages - Go through all of the code and clean up errors (for example opData needs to be improved) - maybe read a book on good error handeling
-	Also need to improve SQL and HTTP error handeling - should give detailed information on the issue
+	Improve error messages - Go through all of the code and clean up errors (for example opData needs to be improved)and HTTP error handeling should give detailed information on the issue
 	
 Add a verifier to things like the SQL and HTTP process to say that the process worked
 
@@ -26,16 +23,12 @@ Add another config element to Vars for OutputMap - at the end of the operation i
 
 SQL Config - Clean it up also change DataBase to Table
 
+Make a config util for validation, like the one in FLX (Look into attributes)
+
 There should be an overall Option that configures the program as a whole for example for logs and other stuff
 Operations:
 	String templating
-	Lists
-	Database operations
-	HTTP requests
-	JSON and XML
-	File Write Operations
 	GUIInput - Parent of many other guis - Configurable form gui for lazy gui coding
 	Persistent Variable save
 	Schema validation
-	Fix onError in base operation to print a log
 	Is is possible to dynamically compile code to run a method? so basically I can just run methods that aren't involved in the code for testing

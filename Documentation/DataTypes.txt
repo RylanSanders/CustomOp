@@ -1,5 +1,6 @@
 int
 string
 IntList
-Map - For now garunteeing a string to string map
+StringList
+Map - String to String
 DataTable

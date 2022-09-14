@@ -1,20 +1,19 @@
 -Custom Code editor specifically for building operations/GUIs
 -Comprehensive validation - may need to rethink how we handle OpData
 -Method of building parser - look at JSON parser for example of what I need
--Redo Datatypes and Vars - Need some way of defining things like tables or maps
+-Redo Datatypes and Vars - Need some way of defining things like tables or maps - Also need an easy way to persist data
 -Redo the structure of config files - should be able to reference other files's config and reference other processes by name
 	-Basically have a main config file then that file can reference other configs
 -Scopes/Domains - Specialty environments to make it easier for different purposes such as a stats/Data Science or Process Automation Profiles
--Add defuault Var values - like for SQL can set the config only once
--Maybe encapsulate all of the acutal behavior into an Action(Functional Interface) and operations can return the Action - makes Tasks easy and makes it easy to call other Operations from in code
+-Add default Var values - like for SQL can set the config only once
 -Composite Operations - need to be able to Make a custom operation just by chaining together Operations in the config
 -Actually be able to use names to reference things 
 
--There needs to be a better way to handle generics also need a language similar to the language use for power automate, it can be basic as long it has useful things like string manipulation and map hashing
+-There needs to be a better way to handle generics also need a language similar to the language used for power automate, it can be basic as long it has useful things like string manipulation and map hashing
 
-Some method of Multithreaded Byte reading for large amounts fo data
+-Some method of Multithreaded Byte reading for large amounts fo data
 
-GUI Default Behavior for operations so that things like loading bars can happen automatically
+-GUI Default Behavior for operations so that things like loading bars can happen automatically
 
 
 
