@@ -23,9 +23,22 @@ namespace CustomOp.Operations
             DataTable dt = data.getDataTable("InputTable");
 
             List<string> col = dt.getColumn(colName);
-            List<int> list = col.Select(x => int.Parse(x)).ToList();
+            List<int> list = col.Select(x => getInt(x)).ToList();
 
             data.put("ColIntList", list);
+        }
+
+        private int getInt(string s)
+        {
+            try
+            {
+                return int.Parse(s);
+            }
+            catch 
+            {
+
+            }
+           return 0;
         }
     }
 }
