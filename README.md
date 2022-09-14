@@ -9,7 +9,7 @@ The General structure of the program is centered around the Operations.xml that 
 In this repo, "Processes" refer to a string of operations that ocur on a thread. "Operations" are the actual behavior.
 Each Process in the Processes Element in the Operations.xml will have a button to kick off the process on the GUI that is launched when the program is ran.
 
-![alt text](https://github.com/RylanSanders/CustomOp/blob/main/Documentation/ReaMeImages/BasicGUI.PNG?raw=true)
+![alt text](https://github.com/RylanSanders/CustomOp/blob/'main'/Documentation/ReaMeImages/BasicGUI.PNG?raw=true)
 
 # Examples
 
