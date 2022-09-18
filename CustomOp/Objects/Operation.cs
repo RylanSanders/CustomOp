@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using System.Text.RegularExpressions;
 
 namespace CustomOp.Objects
 {
@@ -55,9 +56,10 @@ namespace CustomOp.Objects
         {
            foreach(string mapping in varMappings.Keys)
             {
-                if (data.contains(mapping))
+                if (data.contains(mapping) || data.contains(mapping.Substring(0, mapping.IndexOf("["))))
                 {
-                    data.put(varMappings[mapping], data.getObject(mapping));
+                    //varMappings[mapping]=methodVar mapping=varName in config
+                    data.put(varMappings[mapping], parseVars(mapping, data, null));
                     //If we are adding a new variable from the var map, remove it in the on exit (if the variable already existed and we are just changing it, keep it)
                     if (!data.contains(varMappings[mapping]))
                     {
@@ -72,6 +74,54 @@ namespace CustomOp.Objects
         public void onError()
         {
 
+        }
+
+        private Object parseVars(string mapping, OpData data, Object preParsedObj)
+        {
+           //TODO just make parsing way better and more encompassing
+            if (mapping.Contains("["))
+            {
+                //Finds the keys gets the bracket if not immediately follow by another bracket
+                MatchCollection keys = Regex.Matches(mapping, "\\[.*\\]\\[");
+                string mainKeyName = mapping.Substring(0, mapping.IndexOf("["));
+                Object obj = data.getObject(mainKeyName);
+                if (obj.GetType().Equals(typeof(Dictionary<String, String>)))
+                {
+                    return (data.getMap(mainKeyName))[keys.First().ToString().Trim().Replace("[", "").Replace("]", "")];
+                }
+                else if (obj.GetType().Equals(typeof(JSONObject)))
+                {
+                    if (keys.Count >= 1 && preParsedObj==null)
+                    {
+                        //Go one deeper - removes the first mapping 
+                        JSONObject oneLayerDeeper = data.getJSONObject(mainKeyName).getMapValue(keys.First().ToString().Trim().Replace("[", "").Replace("]", ""));
+                        return parseVars(mapping.Replace(keys.First().ToString().Substring(0, keys.First().ToString().Length-1), ""), data, oneLayerDeeper);
+                    } else if (keys.Count >= 1)
+                    {
+                        return parseVars(mapping.Replace(keys.First().ToString(), ""), data, ((JSONObject)preParsedObj).getMapValue(keys.First().ToString().Trim().Replace("[", "").Replace("]", "")));
+                    }
+                    else
+                    {
+                        
+                        string key = Regex.Matches(mapping, "\\[.*\\]").First().ToString().Trim().Replace("[", "").Replace("]", "");
+                        if (preParsedObj == null)
+                        {
+                            return (data.getJSONObject(mainKeyName)).getMapValue(key);
+                        }
+                        else
+                        {
+                            return ((JSONObject)preParsedObj).getMapValue(key);
+                        }
+                    }
+                }
+                else if (obj.GetType().Equals(typeof(List<string>)))
+                {
+                    string index = keys.First().ToString().Trim().Replace("[", "").Replace("]", "");
+                    int intIndex = Int16.Parse(index);
+                    return ((List<String>)obj)[intIndex];
+                }
+            }
+            return data.getObject(mapping);
         }
 
         public void onEnter(OpData data)

@@ -20,7 +20,19 @@ namespace CustomOp.Operations
 
             string path = data.getString("WriteFilePath");
             string txt = data.getString("TextToWrite");
-            File.WriteAllText(path, txt);
+            //File.WriteAllText(path, txt);
+
+            using (FileStream fs = File.Create(path))
+            {
+                // writing data in string
+                string dataasstring = txt;
+                byte[] info = new UTF8Encoding(true).GetBytes(dataasstring);
+                fs.Write(info, 0, info.Length);
+
+                // writing data in bytes already
+                byte[] bitData = new byte[] { 0x0 };
+                fs.Write(bitData, 0, bitData.Length);
+            }
         }
     }
 }

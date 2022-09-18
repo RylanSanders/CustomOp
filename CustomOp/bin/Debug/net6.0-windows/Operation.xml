@@ -712,7 +712,24 @@
 				</Process>
 			</OperatedProcess>
 		</Operation>
-	</Process>
+		</Process>
+		<Process name="ImpJSON">
+		<Operation type="ReadFile" name="ReadSQLFile">
+			<Vars>
+				<Data name="FilePath" type="string" value="ParseTest.Json" />
+			</Vars>
+		</Operation>
+		<Operation type="StringToJSONObject" name="CastJSON">
+			<Vars>
+				<Mapping methodName="JSonString" varName="ReadText" />
+			</Vars>
+		</Operation>
+		<Operation type="MessageBox" name="DeckList Name">
+			<Vars>
+				<Mapping methodName="Message" varName="ParsedJSON[Hello][Place]" />
+			</Vars>
+		</Operation>
+		</Process>
 </Processes>
 
 

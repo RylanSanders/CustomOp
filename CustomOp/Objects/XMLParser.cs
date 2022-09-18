@@ -51,6 +51,7 @@ namespace CustomOp.Objects
                 case "MapListOperation": return new MapListOperation(element);break;
                 case "GetFilesInDir": return new GetFilesInDirOperation(element);break;
                 case "JoinList": return new JoinListOperation(element);break;
+                case "StringToJSONObject": return new StringToJSONObjectOperation(element); break;
                 default: throw new Exception($"Invalid Operation Type ({element.Attribute("type").Value})");
             }
         }

@@ -63,6 +63,43 @@ namespace CustomOp.Objects
             }
         }
 
+        public String getString()
+        {
+            if (type == objTypes.String)
+            {
+                return str;
+            }
+            throw new Exception("Error in GetString in JSONObject - The Object type is not str: " + type);
+        }
+
+        public List<JSONObject> getList()
+        {
+            if (type == objTypes.List)
+            {
+                return list;
+            }
+            throw new Exception("Error in GetString in JSONObject - The Object type is not List: " + type);
+        }
+
+        public Dictionary<String,JSONObject> getMap()
+        {
+            if (type == objTypes.Map)
+            {
+                return map;
+            }
+            throw new Exception("Error in GetString in JSONObject - The Object type is not Map: " + type);
+        }
+
+        public JSONObject getMapValue(string id)
+        {
+            if (type != objTypes.Map || !map.ContainsKey(id))
+            {
+                throw new Exception("Error in getMapValue in JSONObject - Not map or map does not contain " + id);
+            }
+            return map[id];
+        }
+
+
         private Dictionary<string, JSONObject> parseMap(string jsonMap)
         {
             List<string> mapEntries = new List<string>();

@@ -97,6 +97,15 @@ namespace CustomOp.Objects
             return (Dictionary<string, MutableObject>)(data[id].getData());
         }
 
+        public JSONObject getJSONObject(string id)
+        {
+            if (!data.ContainsKey(id) || !data[id].getType().Equals(typeof(JSONObject)))
+            {
+                throw new Exception($"Error in getJSONObject Method in OpData. Invalid variable name ID: {id}");
+            }
+            return (JSONObject)(data[id].getData());
+        }
+
 
         public void put(String name, Object i)
         {
