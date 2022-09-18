@@ -1,3 +1,5 @@
+<Config>
+
 <Processes>
 	<Process name="Test1">
 		<Operation type="SetVar" name="SetVars">
@@ -747,7 +749,10 @@
 		</Operation>
 		</Process>
 		
-		
 </Processes>
 
+<ExtendedConfig>
+	<ConfigFile path="SteamJSONProcess.xml" />
+</ExtendedConfig>
 
+</Config>

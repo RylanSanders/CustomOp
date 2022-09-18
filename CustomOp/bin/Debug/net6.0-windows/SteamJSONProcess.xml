@@ -1,0 +1,11 @@
+<Config>
+	<Processes>
+		<Process name="NewConfigFile">
+			<Operation type="MessageBox" name="falseMessage">
+				<Vars>
+					<Data name="Message" type="string" value="Config!" />
+				</Vars>
+			</Operation>
+		</Process>
+	</Processes>
+</Config>

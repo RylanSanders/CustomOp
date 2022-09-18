@@ -17,7 +17,21 @@ namespace CustomOp.Objects
             //Load xml
             XDocument xdoc = XDocument.Load("Operation.xml");
             idProcesses = new Dictionary<string, Process>();
-            foreach(XElement e in xdoc.Root.Elements())
+
+            processProcesses(xdoc.Root.Element("Processes"), processes);
+
+            //Load external operation config files
+            foreach(XElement file in xdoc.Root.Element("ExtendedConfig").Elements("ConfigFile"))
+            {
+                string path = file.Attribute("path").Value.ToString();
+                XDocument externalConfigFile = XDocument.Load(path);
+                processProcesses(externalConfigFile.Root.Element("Processes"), processes);
+            }
+        }
+
+        private static void processProcesses(XElement procElement, List<Process> processes)
+        {
+            foreach (XElement e in procElement.Elements())
             {
                 if (e.Name.ToString().Equals("Process"))
                 {
@@ -25,7 +39,6 @@ namespace CustomOp.Objects
                     idProcesses.Add(e.Attribute("name").Value.ToString(), new Process(e));
                 }
             }
-
         }
 
         public static void runProcess(Process process)
