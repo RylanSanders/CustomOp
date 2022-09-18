@@ -76,7 +76,7 @@ namespace CustomOp.Objects
 
         }
 
-        private Object parseVars(string mapping, OpData data, Object preParsedObj)
+        public static Object parseVars(string mapping, OpData data, Object preParsedObj)
         {
            //TODO just make parsing way better and more encompassing
             if (mapping.Contains("["))

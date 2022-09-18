@@ -713,7 +713,21 @@
 			</OperatedProcess>
 		</Operation>
 		</Process>
-		<Process name="ImpJSON">
+		<Process name="FalseMessage">
+			<Operation type="MessageBox" name="falseMessage">
+				<Vars>
+					<Data name="Message" type="string" value="False" />
+				</Vars>
+			</Operation>
+		</Process>
+		<Process name="TrueMessage">
+			<Operation type="MessageBox" name="falseMessage">
+				<Vars>
+					<Data name="Message" type="string" value="True" />
+				</Vars>
+			</Operation>
+		</Process>
+		<Process name="IFTest">
 		<Operation type="ReadFile" name="ReadSQLFile">
 			<Vars>
 				<Data name="FilePath" type="string" value="ParseTest.Json" />
@@ -724,12 +738,16 @@
 				<Mapping methodName="JSonString" varName="ReadText" />
 			</Vars>
 		</Operation>
-		<Operation type="MessageBox" name="DeckList Name">
-			<Vars>
-				<Mapping methodName="Message" varName="ParsedJSON[Hello][Place]" />
-			</Vars>
+		<Operation type="If" name="DeckList Name">
+			<Conditions>
+				<strEqual varName="ParsedJSON[Hello][Place]" value="&quot;Hehe&quot;" />
+			</Conditions>
+			<TrueProcess name="TrueMessage" />
+			<FalseProcess name="FalseMessage" />
 		</Operation>
 		</Process>
+		
+		
 </Processes>
 
 
