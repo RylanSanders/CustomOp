@@ -24,8 +24,20 @@ namespace CustomOp.Operations
                 index = data.getInt("MapKeyIndex");
             }
 
-            Dictionary<string, string> map = data.getMap("KeyMap");
-            data.put("KeyFromMap",map.Keys.ToList()[index]);
+            //TODO should have a parent object - Hashable for lists and maps and stuff
+            Object o = data.getObject("KeyMap");
+            if (o.GetType() == typeof(Dictionary<string, string>))
+            {
+                data.put("KeyFromMap", ((Dictionary<string, string>)o).Keys.ToList()[index]);
+            }
+            else if(o.GetType() == typeof(JSONObject))
+            {
+                data.put("KeyFromMap", ((JSONObject)o).map.Keys.ToList()[index]);
+            }
+            else
+            {
+                throw new Exception("Error in GetMapKey Operation could not find the KeyMap variable");
+            }
         }
     }
 }
