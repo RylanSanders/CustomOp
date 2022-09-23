@@ -54,6 +54,7 @@ namespace CustomOp.Objects
                 case "StringToJSONObject": return new StringToJSONObjectOperation(element); break;
                 case "If": return new IfOperation(element);break;
                 case "ProcessStringList": return new StrProcessListOperation(element);break;
+                case "GetMapKey": return new GetMapKeyOperation(element);break;
                 default: throw new Exception($"Invalid Operation Type ({element.Attribute("type").Value})");
             }
         }
