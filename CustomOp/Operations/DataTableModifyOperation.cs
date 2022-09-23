@@ -13,6 +13,9 @@ namespace CustomOp.Operations
         bool isKeepOnly = false;
 
         Dictionary<String, Dictionary<String, String>> newBoolCols;
+        Dictionary<String, String> addNewCols;
+
+        List<Dictionary<string, string>> newRows = new List< Dictionary<string, string>>();
 
         public DataTableModifyOperation(XElement config) : base(config)
         {
@@ -42,7 +45,27 @@ namespace CustomOp.Operations
                    
                 }
             }
-            
+
+            //Add new rows
+            XElement CreateRowsElement = config.Element("CreateRows");
+            if (CreateRowsElement != null)
+            {
+                var newCols = from input in CreateRowsElement.Descendants()
+                              select new
+                              {
+                                  values = input.Attributes().ToList()
+                              };
+
+                foreach (var input in newCols)
+                {
+                    Dictionary<string, string> dict = new Dictionary<string, string>();
+                    foreach (XAttribute att in input.values)
+                    {
+                        dict.Add(att.Name.ToString(), att.Value);
+                    }
+                    newRows.Add(dict);
+                }
+            }
         }
 
         public override void execute(OpData data)
@@ -59,7 +82,12 @@ namespace CustomOp.Operations
             {
                 testCondition(dt, newCol, newBoolCols[newCol]);
             }
+            if (newRows.Count > 0)
+            {
+                dt.addRows(newRows);
+            }
 
+            
             data.put("ModifiedDataTable", dt);
         }
 
