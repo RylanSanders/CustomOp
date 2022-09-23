@@ -44,6 +44,11 @@ namespace CustomOp.Operations
                 str = str.Substring(1, str.Length - 3);
                 data.put("CastedStringList",str.Split(",").ToList());
             }
+            if (castType == "JSONObjectToString")
+            {
+                JSONObject obj = (JSONObject)(Operation.parseVars(data.getString("JSONID"),data,null));
+                data.put("CastedString", obj.ToString());
+            }
         }
 
         
