@@ -1,9 +1,45 @@
 <Config>
 	<Processes>
-		<Process name="NewConfigFile">
+		<Process name="CreateCompositeTable">
+			<Operation type="ReadFile" name="falseMessage">
+				<Vars>
+					<Data name="FilePath" type="string" value="BasicSteamGame.json" />
+				</Vars>
+			</Operation>
+			<Operation type="StringToJSONObject" name="falseMessage">
+				<Vars>
+					<Mapping methodName="JSonString" varName="ReadText" />
+				</Vars>
+			</Operation>
+			<Operation type="GetMapKey" name="falseMessage">
+				<Vars>
+					<Mapping methodName="KeyMap" varName="ParsedJSON" />
+				</Vars>
+			</Operation>
 			<Operation type="MessageBox" name="falseMessage">
 				<Vars>
-					<Data name="Message" type="string" value="Config!" />
+					<Mapping methodName="Message" varName="ParsedJSON[KeyFromMap][data][genres]" />
+				</Vars>
+			</Operation>
+			<Operation type="Cast" name="falseMessage">
+				<CastType>JSONObjectToString</CastType>
+				<Vars>
+					<Data name="JSONID" type="string" value="ParsedJSON[1674470][data][genres]" />
+				</Vars>
+			</Operation>
+			<Operation type="JSONListToTable" name="falseMessage">
+				<Vars>
+					<Mapping methodName="JSonListString" varName="CastedString" />
+				</Vars>
+			</Operation>
+			<Operation type="TableToString" name="falseMessage">
+				<Vars>
+					<Mapping methodName="TableToString" varName="JSONDataTable" />
+				</Vars>
+			</Operation>
+			<Operation type="MessageBox" name="falseMessage">
+				<Vars>
+					<Mapping methodName="Message" varName="TableString" />
 				</Vars>
 			</Operation>
 		</Process>

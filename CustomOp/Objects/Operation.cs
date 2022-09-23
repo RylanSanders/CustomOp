@@ -82,7 +82,7 @@ namespace CustomOp.Objects
             if (mapping.Contains("["))
             {
                 //Finds the keys gets the bracket if not immediately follow by another bracket
-                MatchCollection keys = Regex.Matches(mapping, "\\[.*\\]\\[");
+                List<String> keys = getKeys(mapping);
                 string mainKeyName = mapping.Substring(0, mapping.IndexOf("["));
                 Object obj = data.getObject(mainKeyName);
                 if (obj.GetType().Equals(typeof(Dictionary<String, String>)))
@@ -91,14 +91,14 @@ namespace CustomOp.Objects
                 }
                 else if (obj.GetType().Equals(typeof(JSONObject)))
                 {
-                    if (keys.Count >= 1 && preParsedObj==null)
+                    if (keys.Count > 1 && preParsedObj==null)
                     {
                         //Go one deeper - removes the first mapping 
                         JSONObject oneLayerDeeper = data.getJSONObject(mainKeyName).getMapValue(keys.First().ToString().Trim().Replace("[", "").Replace("]", ""));
-                        return parseVars(mapping.Replace(keys.First().ToString().Substring(0, keys.First().ToString().Length-1), ""), data, oneLayerDeeper);
-                    } else if (keys.Count >= 1)
+                        return parseVars(mapping.Replace($"[{keys.First()}]",""), data, oneLayerDeeper);
+                    } else if (keys.Count > 1)
                     {
-                        return parseVars(mapping.Replace(keys.First().ToString(), ""), data, ((JSONObject)preParsedObj).getMapValue(keys.First().ToString().Trim().Replace("[", "").Replace("]", "")));
+                        return parseVars(mapping.Replace($"[{keys.First()}]", ""), data, ((JSONObject)preParsedObj).getMapValue(keys.First().ToString().Trim().Replace("[", "").Replace("]", "")));
                     }
                     else
                     {
@@ -122,6 +122,21 @@ namespace CustomOp.Objects
                 }
             }
             return data.getObject(mapping);
+        }
+
+        private static List<string> getKeys(string mapping)
+        {
+            List<string> toRet = new List<string>();
+            while (mapping.Contains("["))
+            {
+                int firstBracketIndex = mapping.IndexOf("[");
+                int secondBracketIndex = mapping.IndexOf("]");
+                //First[sed]
+                //0123456789
+                toRet.Add(mapping.Substring(firstBracketIndex + 1, secondBracketIndex- firstBracketIndex-1));
+                mapping = mapping.Remove(firstBracketIndex, secondBracketIndex - firstBracketIndex+1);
+            }
+            return toRet;
         }
 
         public void onEnter(OpData data)
