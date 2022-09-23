@@ -87,14 +87,26 @@ namespace CustomOp.Objects
                 Object obj = data.getObject(mainKeyName);
                 if (obj.GetType().Equals(typeof(Dictionary<String, String>)))
                 {
-                    return (data.getMap(mainKeyName))[keys.First().ToString().Trim().Replace("[", "").Replace("]", "")];
+                    Dictionary<string, string> map = data.getMap(mainKeyName);
+                    string key = keys.First().ToString().Trim().Replace("[", "").Replace("]", "");
+                    if (!map.ContainsKey(key) && data.contains(key) && data.getObject(key).GetType() == typeof(string))
+                    {
+                        key = data.getString(key);
+                    }
+                    return (map)[key];
                 }
                 else if (obj.GetType().Equals(typeof(JSONObject)))
                 {
                     if (keys.Count > 1 && preParsedObj==null)
                     {
                         //Go one deeper - removes the first mapping 
-                        JSONObject oneLayerDeeper = data.getJSONObject(mainKeyName).getMapValue(keys.First().ToString().Trim().Replace("[", "").Replace("]", ""));
+                        JSONObject json = data.getJSONObject(mainKeyName);
+                        string key = keys.First().ToString().Trim().Replace("[", "").Replace("]", "");
+                        if (!json.map.ContainsKey(key) && data.contains(key) && data.getObject(key).GetType() == typeof(string))
+                        {
+                            key = data.getString(key);
+                        }
+                        JSONObject oneLayerDeeper = data.getJSONObject(mainKeyName).getMapValue(key);
                         return parseVars(mapping.Replace($"[{keys.First()}]",""), data, oneLayerDeeper);
                     } else if (keys.Count > 1)
                     {
@@ -106,6 +118,11 @@ namespace CustomOp.Objects
                         string key = Regex.Matches(mapping, "\\[.*\\]").First().ToString().Trim().Replace("[", "").Replace("]", "");
                         if (preParsedObj == null)
                         {
+                            JSONObject json = data.getJSONObject(mainKeyName);
+                            if (!json.map.ContainsKey(key) && data.contains(key) && data.getObject(key).GetType() == typeof(string))
+                            {
+                                key = data.getString(key);
+                            }
                             return (data.getJSONObject(mainKeyName)).getMapValue(key);
                         }
                         else
