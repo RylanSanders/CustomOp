@@ -20,6 +20,8 @@ namespace CustomOp.Operations
         {
             base.execute(data);
 
+            //string s = (string)Operation.parseVars(data.getString("HttpRequestURL"), data, null);
+            Logger.log.Info(data.getString("HttpRequestURL"));
             string response = CallUrl(data.getString("HttpRequestURL")).Result;
             data.put("HttpResponse",response);
         }

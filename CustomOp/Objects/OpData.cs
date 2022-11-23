@@ -25,7 +25,7 @@ namespace CustomOp.Objects
 
         public bool containsType(string id, Type t)
         {
-            return data.ContainsKey(id) && data[id].getType().Equals(t);
+            return data.ContainsKey(id) && data[id].getType().Equals(t) ;
         }
 
         public Object getObject(String id)
@@ -132,7 +132,7 @@ namespace CustomOp.Objects
 
         public void remove(string id)
         {
-            if (data.ContainsKey(id))
+            if (id!=null && data.ContainsKey(id) && data[id]!=null)
             {
                 data.Remove(id);
             }

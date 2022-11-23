@@ -1,0 +1,81 @@
+<Config>
+	<Processes>
+	
+
+		<Process name="Get Deck Response">
+		<!--<Operation type="ModifyString" name="Make HTTP URL">
+						<StringOps>
+						<StringOp type="append" string1="" string2="2804499" />
+						</StringOps>
+			</Operation>-->
+		<!--<Operation type="SetVar" name="Mapping ">
+				<Vars>
+					<Data name="DirectoryPath" type="string" value="C:\Data\star-odyssey\" />
+					<Data name="OutputID" type="string" value="ListStringVal" />
+					<Data name="ObjectID" type="string" value="ModifiedString" />
+				</Vars>
+		</Operation>-->
+			<Operation type="ModifyString" name="Make HTTP URL">
+						<StringOps>
+						<StringOp type="append" string1="https://archidekt.com/api/decks/" string2="ListStringVal" />
+						<StringOp type="append" string1="$current$" string2="/" />
+						</StringOps>
+			</Operation>
+			<Operation type="HttpRequest" name="DeckGet">
+				<Vars>
+					<Mapping methodName="HttpRequestURL" varName='ModifiedString' />
+				</Vars>
+			</Operation>
+			<Operation type="ModifyString" name="Make HTTP URL">
+						<StringOps>
+						<StringOp type="append" string1="C:/Data/MTG Decks/" string2="ListStringVal" />
+						<StringOp type="append" string1="$current$" string2=".txt" />
+						</StringOps>
+					</Operation>
+			<Operation type="WriteFile" name="WriteList">
+						<Vars>
+							<Mapping methodName="TextToWrite" varName="HttpResponse" />
+							<Mapping methodName="WriteFilePath" varName="ModifiedString" />
+						</Vars>
+			</Operation>
+		</Process>
+		
+		<Process name="Process MTG Decks">
+		<Operation type="ReadFile" name="ReadSQLFile">
+			<Vars>
+				<Data name="FilePath" type="string" value="DeckSQLSelect.txt" />
+			</Vars>
+		</Operation>
+		<Operation type="SQLSelect" name="MakeTable">
+			<DataSource>.</DataSource>
+			<InitialCatalog>MTG</InitialCatalog>
+			<Password>TestUser</Password>
+			<User>TestUser</User>
+			<DataBase>Decks</DataBase>
+			<Vars>
+				<Mapping methodName="SQLSelectStatement" varName="ReadText" />
+			</Vars>
+		</Operation>
+		<Operation type="DataTableColToList" name="MakeColIDs">
+			<Vars>
+				<Data name="ColName" type="string" value="DeckID" />
+				<Mapping methodName="DataTableToList" varName="SelectedTable" />
+			</Vars>
+		</Operation>
+		<Operation type="ProcessStringList" name="ListProcessor">
+			<Synchronous>False</Synchronous>
+			<WaitTime>200</WaitTime>
+			<Vars>
+				<Mapping methodName="InputList" varName="DataTableColList" />
+			</Vars>
+			<OperatedProcess>
+				<Process name="Process Steam Data">
+					<Operation type="RunDataProcess" name="App">
+						<ProcessID>Get Deck Response</ProcessID>
+					</Operation>
+				</Process>
+			</OperatedProcess>
+		</Operation>
+		</Process>
+	</Processes>
+</Config>

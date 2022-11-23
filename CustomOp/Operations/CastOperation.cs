@@ -26,6 +26,11 @@ namespace CustomOp.Operations
             {
                 data.put("CastedString", data.getInt(data.getString("IntID")).ToString());
             }
+            if (castType == "StringToInt")
+            {
+                string s = (string)Operation.parseVars(data.getString("StringID"), data, null);
+                data.put("CastedInt", int.Parse(s));
+            }
             if (castType == "IntListToStringList")
             {
                 List<int> inputList = data.getIntList(data.getString("IntListID"));

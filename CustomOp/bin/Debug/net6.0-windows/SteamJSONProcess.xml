@@ -1,47 +1,348 @@
 <Config>
 	<Processes>
-		<Process name="CreateCompositeTable">
-			<Operation type="ReadFile" name="falseMessage">
-				<Vars>
-					<Data name="FilePath" type="string" value="BasicSteamGame.json" />
-				</Vars>
-			</Operation>
-			<Operation type="StringToJSONObject" name="falseMessage">
-				<Vars>
-					<Mapping methodName="JSonString" varName="ReadText" />
-				</Vars>
-			</Operation>
-			<Operation type="GetMapKey" name="falseMessage">
-				<Vars>
-					<Mapping methodName="KeyMap" varName="ParsedJSON" />
-				</Vars>
-			</Operation>
-			<Operation type="MessageBox" name="falseMessage">
-				<Vars>
-					<Mapping methodName="Message" varName="ParsedJSON[KeyFromMap][data][genres]" />
-				</Vars>
-			</Operation>
-			<Operation type="Cast" name="falseMessage">
+		<Process name="Store Genres Data Table">
+			<Operation type="Cast" name="Genrese JSON Cast">
 				<CastType>JSONObjectToString</CastType>
 				<Vars>
-					<Data name="JSONID" type="string" value="ParsedJSON[1674470][data][genres]" />
+					<Data name="JSONID" type="string" value="ParsedJSON[KeyFromMap][data][genres]" />
 				</Vars>
 			</Operation>
-			<Operation type="JSONListToTable" name="falseMessage">
+			<Operation type="JSONListToTable" name="To Table">
 				<Vars>
 					<Mapping methodName="JSonListString" varName="CastedString" />
 				</Vars>
 			</Operation>
-			<Operation type="TableToString" name="falseMessage">
+			<Operation type="DataTableModify" name="DT Modify">
+				<DTOperations>
+					<CreateCols>
+						<Col type="staticVarString" ColName="appid" VarName="KeyFromMap" />
+					</CreateCols>
+				</DTOperations>
 				<Vars>
-					<Mapping methodName="TableToString" varName="JSONDataTable" />
+					<Mapping methodName="InputDataTable" varName="JSONDataTable" />
 				</Vars>
 			</Operation>
-			<Operation type="MessageBox" name="falseMessage">
+		<Operation type="StoreTableToDB" name="StoreMap">
+			<DataSource>.</DataSource>
+			<InitialCatalog>Steam</InitialCatalog>
+			<Password>TestUser</Password>
+			<User>TestUser</User>
+			<DataBase>Genre</DataBase>
+			<DBCols DBCol="id" VarName="id" />
+			<DBCols DBCol="description" VarName="description" />
+			<DBCols DBCol="appid" VarName="appid" />
+			<Vars>
+				<Mapping methodName="TableToDB" varName="JSONDataTable" />
+			</Vars>
+		</Operation>
+		</Process>
+		
+		<Process name="Store Categories Data Table">
+			<Operation type="Cast" name="Cast">
+				<CastType>JSONObjectToString</CastType>
 				<Vars>
-					<Mapping methodName="Message" varName="TableString" />
+					<Data name="JSONID" type="string" value="ParsedJSON[KeyFromMap][data][categories]" />
 				</Vars>
+			</Operation>
+			<Operation type="JSONListToTable" name="Table">
+				<Vars>
+					<Mapping methodName="JSonListString" varName="CastedString" />
+				</Vars>
+			</Operation>
+			<Operation type="DataTableModify" name="DT Modify">
+				<DTOperations>
+					<CreateCols>
+						<Col type="staticVarString" ColName="appid" VarName="KeyFromMap" />
+					</CreateCols>
+				</DTOperations>
+				<Vars>
+					<Mapping methodName="InputDataTable" varName="JSONDataTable" />
+				</Vars>
+			</Operation>
+		<Operation type="StoreTableToDB" name="StoreMap">
+			<DataSource>.</DataSource>
+			<InitialCatalog>Steam</InitialCatalog>
+			<Password>TestUser</Password>
+			<User>TestUser</User>
+			<DataBase>Categories</DataBase>
+			<DBCols DBCol="id" VarName="id" />
+			<DBCols DBCol="description" VarName="description" />
+			<DBCols DBCol="appid" VarName="appid" />
+			<Vars>
+				<Mapping methodName="TableToDB" varName="JSONDataTable" />
+			</Vars>
+		</Operation>
+		</Process>
+		<Process name="Parse App DataTable">
+			<Operation type="StringOp" name="String Op">
+				<DoTrim>True</DoTrim>
+				<RemoveQuotes>True</RemoveQuotes>
+				<Vars>
+					<Mapping methodName="InputString" varName="ParsedJSON[KeyFromMap][data][recommendations][total]" />
+					<OutputMapping methodName="OutputString" outputVarName="total_recs" />
+				</Vars>
+			</Operation>
+			<Operation type="StringOp" name="Format DateTime">
+				<DoTrim>True</DoTrim>
+				<RemoveQuotes>True</RemoveQuotes>
+				<FormatDateTime>True</FormatDateTime>
+				<Vars>
+					<Mapping methodName="InputString" varName="ParsedJSON[KeyFromMap][data][release_date][date]" />
+				</Vars>
+			</Operation>
+			<Operation type="DataTableModify" name="DT Modify">
+				<GenerateNewDataTable>True</GenerateNewDataTable>
+				<EmptyRows>1</EmptyRows>
+				<IgnoreBadColumns>True</IgnoreBadColumns>
+				<DTOperations>
+					<CreateCols>
+						<Col type="staticVarString" ColName="appid" VarName="KeyFromMap" />
+						<Col type="staticVarString" ColName="type" VarName="ParsedJSON[KeyFromMap][data][type]" />
+						<Col type="staticVarString" ColName="name" VarName="ParsedJSON[KeyFromMap][data][name]" />
+						<Col type="staticVarString" ColName="required_age" VarName="ParsedJSON[KeyFromMap][data][required_age]" />
+						<Col type="staticVarString" ColName="is_free" VarName="ParsedJSON[KeyFromMap][data][is_free]" />
+						<Col type="staticVarString" ColName="detailed_description" VarName="ParsedJSON[KeyFromMap][data][detailed_description]" />
+						<Col type="staticVarString" ColName="about_the_game" VarName="ParsedJSON[KeyFromMap][data][about_the_game]" />
+						<Col type="staticVarString" ColName="short_description" VarName="ParsedJSON[KeyFromMap][data][short_description]" />
+						<Col type="staticVarString" ColName="supported_languages" VarName="ParsedJSON[KeyFromMap][data][supported_languages]" />
+						<Col type="staticVarString" ColName="header_image" VarName="ParsedJSON[KeyFromMap][data][header_image]" />
+						<Col type="staticVarString" ColName="website" VarName="ParsedJSON[KeyFromMap][data][website]" />
+						<Col type="staticVarString" ColName="minimum_pc_requirements" VarName="ParsedJSON[KeyFromMap][data][pc_requirements][minimum]" />
+						<Col type="staticVarString" ColName="recommended_pc_requirements" VarName="ParsedJSON[KeyFromMap][data][pc_requirements][recommended]" />
+						<Col type="staticVarString" ColName="is_windows_platform" VarName="ParsedJSON[KeyFromMap][data][platforms][windows]" />
+						<Col type="staticVarString" ColName="is_mac_platform" VarName="ParsedJSON[KeyFromMap][data][platforms][mac]" />
+						<Col type="staticVarString" ColName="is_linux_platform" VarName="ParsedJSON[KeyFromMap][data][platforms][linux]" />
+						<Col type="staticVarString" ColName="recommendations" VarName="total_recs" />
+						<Col type="staticVarString" ColName="release_date" VarName="OutputString" />
+						<Col type="staticVarString" ColName="coming_soon" VarName="ParsedJSON[KeyFromMap][data][release_date][coming_soon]" />
+					</CreateCols>
+				</DTOperations>
+				<Vars>
+				</Vars>
+			</Operation>
+		<Operation type="StoreTableToDB" name="StoreMap">
+			<DataSource>.</DataSource>
+			<InitialCatalog>Steam</InitialCatalog>
+			<Password>TestUser</Password>
+			<User>TestUser</User>
+			<DataBase>Apps</DataBase>
+			<DBCols DBCol="type" VarName="type" />
+			<DBCols DBCol="name" VarName="name" />
+			<DBCols DBCol="appid" VarName="appid" />
+			<DBCols DBCol="required_age" VarName="required_age" />
+			<DBCols DBCol="is_free" VarName="is_free" />
+			<DBCols DBCol="detailed_description" VarName="detailed_description" />
+			<DBCols DBCol="about_the_game" VarName="about_the_game" />
+			<DBCols DBCol="short_description" VarName="short_description" />
+			<DBCols DBCol="supported_languages" VarName="supported_languages" />
+			<DBCols DBCol="header_image" VarName="header_image" />
+			<DBCols DBCol="website" VarName="website" />
+			<DBCols DBCol="minimum_pc_requirements" VarName="minimum_pc_requirements" />
+			<DBCols DBCol="recommended_pc_requirements" VarName="recommended_pc_requirements" />
+			<DBCols DBCol="is_windows_platform" VarName="is_windows_platform" />
+			<DBCols DBCol="is_mac_platform" VarName="is_mac_platform" />
+			<DBCols DBCol="is_linux_platform" VarName="is_linux_platform" />
+			<DBCols DBCol="recommendations" VarName="recommendations" />
+			<DBCols DBCol="release_date" VarName="release_date" />
+			<DBCols DBCol="coming_soon" VarName="coming_soon" />
+			<Vars>
+				<Mapping methodName="TableToDB" varName="ModifiedDataTable" />
+			</Vars>
+		</Operation>
+		</Process>
+		
+		<Process name="Store Publishers Data Table">
+			<Operation type="Cast" name="Cast">
+				<CastType>JSONObjectToString</CastType>
+				<Vars>
+					<Data name="JSONID" type="string" value="ParsedJSON[KeyFromMap][data][publishers]" />
+				</Vars>
+			</Operation>
+			<Operation type="JSONListToTable" name="To Table">
+				<Vars>
+					<Mapping methodName="JSonListString" varName="CastedString" />
+				</Vars>
+			</Operation>
+			<Operation type="DataTableModify" name="falseMessage">
+				<DTOperations>
+					<CreateCols>
+						<Col type="staticVarString" ColName="appid" VarName="KeyFromMap" />
+					</CreateCols>
+				</DTOperations>
+				<Vars>
+					<Mapping methodName="InputDataTable" varName="JSONDataTable" />
+				</Vars>
+			</Operation>
+		<Operation type="StoreTableToDB" name="StoreMap">
+			<DataSource>.</DataSource>
+			<InitialCatalog>Steam</InitialCatalog>
+			<Password>TestUser</Password>
+			<User>TestUser</User>
+			<DataBase>Publishers</DataBase>
+			<DBCols DBCol="publisher_name" VarName="ListName" />
+			<DBCols DBCol="appid" VarName="appid" />
+			<Vars>
+				<Mapping methodName="TableToDB" varName="JSONDataTable" />
+			</Vars>
+		</Operation>
+		</Process>
+		
+		<Process name="Store Developers Data Table">
+			<Operation type="Cast" name="Cast ">
+				<CastType>JSONObjectToString</CastType>
+				<Vars>
+					<Data name="JSONID" type="string" value="ParsedJSON[KeyFromMap][data][developers]" />
+				</Vars>
+			</Operation>
+			<Operation type="JSONListToTable" name="To Table">
+				<Vars>
+					<Mapping methodName="JSonListString" varName="CastedString" />
+				</Vars>
+			</Operation>
+			<Operation type="DataTableModify" name="DT Modify">
+				<DTOperations>
+					<CreateCols>
+						<Col type="staticVarString" ColName="appid" VarName="KeyFromMap" />
+					</CreateCols>
+				</DTOperations>
+				<Vars>
+					<Mapping methodName="InputDataTable" varName="JSONDataTable" />
+				</Vars>
+			</Operation>
+		<Operation type="StoreTableToDB" name="StoreMap">
+			<DataSource>.</DataSource>
+			<InitialCatalog>Steam</InitialCatalog>
+			<Password>TestUser</Password>
+			<User>TestUser</User>
+			<DataBase>Developers</DataBase>
+			<DBCols DBCol="developer_name" VarName="ListName" />
+			<DBCols DBCol="appid" VarName="appid" />
+			<Vars>
+				<Mapping methodName="TableToDB" varName="JSONDataTable" />
+			</Vars>
+		</Operation>
+		</Process>
+		
+		<Process name="Store Prices Data Table">
+			<Operation type="DataTableModify" name="Dt Modify">
+				<GenerateNewDataTable>True</GenerateNewDataTable>
+				<EmptyRows>1</EmptyRows>
+				<DTOperations>
+					<CreateCols>
+						<Col type="staticVarString" ColName="appid" VarName="KeyFromMap" />
+						<Col type="staticVarString" ColName="currency" VarName="ParsedJSON[KeyFromMap][data][price_overview][currency]" />
+						<Col type="staticVarString" ColName="normal_price" VarName="ParsedJSON[KeyFromMap][data][price_overview][initial]" />
+						<Col type="staticVarString" ColName="final_price" VarName="ParsedJSON[KeyFromMap][data][price_overview][final]" />
+						<Col type="staticVarString" ColName="discount_percent" VarName="ParsedJSON[KeyFromMap][data][price_overview][discount_percent]" />
+						<Col type="staticVarString" ColName="final_formatted" VarName="ParsedJSON[KeyFromMap][data][price_overview][final_formatted]" />
+						<Col type="staticVarString" ColName="initial_formatted"  VarName="ParsedJSON[KeyFromMap][data][price_overview][initial_formatted]" />
+					</CreateCols>
+				</DTOperations>
+				<Vars>
+				</Vars>
+			</Operation>
+		<Operation type="StoreTableToDB" name="StoreMap">
+			<DataSource>.</DataSource>
+			<InitialCatalog>Steam</InitialCatalog>
+			<Password>TestUser</Password>
+			<User>TestUser</User>
+			<DataBase>Prices</DataBase>
+			<DBCols DBCol="currency" VarName="currency" />
+			<DBCols DBCol="appid" VarName="appid" />
+			<DBCols DBCol="normal_price" VarName="normal_price" />
+			<DBCols DBCol="initial_formatted" VarName="initial_formatted" />
+			<DBCols DBCol="final_price" VarName="final_price" />
+			<DBCols DBCol="discount_percent" VarName="discount_percent" />
+			<DBCols DBCol="final_formatted" VarName="final_formatted" />
+			<Vars>
+				<Mapping methodName="TableToDB" varName="ModifiedDataTable" />
+			</Vars>
+		</Operation>
+		</Process>
+		
+		<Process name="Store Prices Data Table - Condition">
+			<Operation type="If" name="Price Condition">
+				<Conditions>
+					<mapContainsKey mapName="ParsedJSON[KeyFromMap][data]" key="price_overview" />
+				</Conditions>
+				<TrueProcess name="Store Prices Data Table" />
 			</Operation>
 		</Process>
+		
+		<Process name="Store Categories Data Table - Condition">
+			<Operation type="If" name="Price Condition">
+				<Conditions>
+					<mapContainsKey mapName="ParsedJSON[KeyFromMap][data]" key="categories" />
+				</Conditions>
+				<TrueProcess name="Store Categories Data Table" />
+			</Operation>
+		</Process>
+		
+		<Process name="Store Genres Data Table - Condition">
+			<Operation type="If" name="Price Condition">
+				<Conditions>
+					<mapContainsKey mapName="ParsedJSON[KeyFromMap][data]" key="genres" />
+				</Conditions>
+				<TrueProcess name="Store Genres Data Table" />
+			</Operation>
+		</Process>
+		
+		
+		<Process name="Process SteamResponse">
+		<Operation type="ReadFile" name="Read File">
+				<Vars>
+					<Mapping methodName="FilePath" varName="ListStringVal" />
+				</Vars>
+			</Operation>
+			<Operation type="StringToJSONObject" name="JSOn Obj">
+				<Vars>
+					<Mapping methodName="JSonString" varName="ReadText" />
+				</Vars>
+			</Operation>
+			<Operation type="GetMapKey" name="Get Map Key">
+				<Vars>
+					<Mapping methodName="KeyMap" varName="ParsedJSON" />
+				</Vars>
+			</Operation>
+			<Operation type="RunDataProcess" name="App">
+				<ProcessID>Parse App DataTable</ProcessID>
+			</Operation>
+			<Operation type="RunDataProcess" name="Categories">
+				<ProcessID>Store Categories Data Table - Condition</ProcessID>
+			</Operation>
+			<Operation type="RunDataProcess" name="Genre">
+				<ProcessID>Store Genres Data Table - Condition</ProcessID>
+			</Operation>
+			<Operation type="RunDataProcess" name="Publishers">
+				<ProcessID>Store Publishers Data Table</ProcessID>
+			</Operation>
+			<Operation type="RunDataProcess" name="Develoeper">
+				<ProcessID>Store Developers Data Table</ProcessID>
+			</Operation>
+			<Operation type="RunDataProcess" name="Develoeper">
+				<ProcessID>Store Prices Data Table - Condition</ProcessID>
+			</Operation>
+		</Process>
+		
+		<Process name="Whole Process">
+		<Operation type="GetFilesInDir" name="Read File">
+				<Vars>
+					<Data name="DirectoryPath" type="string" value="E:\Data\SteamGames" />
+				</Vars>
+		</Operation>
+		<Operation type="ProcessStringList" name="Process Dir Op">
+			<Vars>
+				<Mapping methodName="InputList" varName="DirectoryList" />
+			</Vars>
+			<OperatedProcess>
+				<Process name="Process Steam Data">
+					<Operation type="RunDataProcess" name="App">
+						<ProcessID>Process SteamResponse</ProcessID>
+					</Operation>
+				</Process>
+			</OperatedProcess>
+		</Operation>
+		</Process>
+		
 	</Processes>
 </Config>

@@ -132,7 +132,7 @@ namespace CustomOp.Objects
             sb.Remove(sb.Length - 1, 1);
             sb.Append(") VALUES ");
 
-            IEnumerable<string> usedColumns = colValues.Keys.Intersect(colMap.Keys);
+            IEnumerable<string> usedColumns = colValues.Keys.Intersect(colMap.Values);
             int rowNum = 0;
             while (rowNum < colValues[colValues.Keys.FirstOrDefault()].Count)
             {

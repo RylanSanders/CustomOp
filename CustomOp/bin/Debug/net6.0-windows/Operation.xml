@@ -748,11 +748,149 @@
 			<FalseProcess name="FalseMessage" />
 		</Operation>
 		</Process>
+		<Process name="ToCSV">
+		<Operation type="SQLSelect" name="Get Data">
+		<DataSource>.</DataSource>
+			<InitialCatalog>Steam</InitialCatalog>
+			<Password>TestUser</Password>
+			<User>TestUser</User>
+			<DataBase>Categories</DataBase>
+				<Vars>
+					<Data name="SQLSelectStatement" type="string" value="SELECT * From Categories" />
+				</Vars>
+		</Operation>
+		<Operation type="DataTableToCSV" name="Process Dir Op">
+			<Vars>
+				<Mapping methodName="DataTableToCSV" varName="SelectedTable" />
+				<Data name="CSVFilePath" type="string" value="C:/test/Categories.csv" />
+			</Vars>
+		</Operation>
+		</Process>
+		<Process name="Overgeared">
+			<Operation type="ReadFile" name="Read File">
+				<Vars>
+					<Data name="FilePath" type="string" value="C:/Data/OG/1.txt" />
+				</Vars>
+			</Operation>
+			<Operation type="StrParseList" name="GetURL">
+				<Vars>
+					<Data name="StartTag" type="string" value="&lt;p dir=&quot;ltr&quot;&gt;&lt;span style=&quot;font-weight:400;font-style:normal&quot;&gt;&lt;span&gt;" />
+					<Data name="EndTag" type="string" value="&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;" />
+					<Mapping methodName="InputString" varName="ReadText" />
+				</Vars>
+			</Operation>
+			<!--<Operation type="RegexReplace" name="GetURL">
+				<Vars>
+					<Data name="RegexMatch" type="string" value="&lt;/span&gt;&lt;/span&gt;&lt;span style=&quot;font-weight:400;font-style:normal&quot;&gt;&lt;span&gt;" />
+					<Data name="RegexReplace" type="string" value="&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;" />
+					<Mapping methodName="RegexInput" varName="ParseStringList" />
+				</Vars>
+			</Operation>-->
+			<Operation type="WriteFile" name="ShowResults">
+				<Vars>
+					<Data name="WriteFilePath" type="string" value="C:/Data/OG-Processed/1.txt" />
+					<Mapping methodName="TextToWrite" varName="ParseStringList" />
+				</Vars>
+			</Operation>
+		</Process>
+		<Process name="Thing">
+		<Operation type="GenerateIntList" name="Generate Ints">
+			<Vars>
+				<Data name="StartInt" type="int" value="0" />
+				<Data name="EndInt" type="int" value="639" />
+				<Data name="Step" type="int" value="1" />
+			</Vars>
+		</Operation>
+		<Operation type="ProcessList" name="Process Overgeared">
+			<Synchronous>False</Synchronous>
+			<WaitTime>200</WaitTime>
+			<Vars>
+				<Mapping methodName="InputList" varName="IntListOutput" />
+			</Vars>
+			<OperatedProcess>
+				<Process name="SubProcess">
+					<Operation type="Cast" name="Cast Int to String">
+						<CastType>IntToString</CastType>
+						<Vars>
+							<Data name="IntID" type="string" value="ListIntVal" />
+						</Vars>
+					</Operation>
+					<Operation type="ModifyString" name="Make HTTP URL">
+						<StringOps>
+							<StringOp type="append" string1="https://www.wuxiaworld.com/novel/absolute-resonance/ar-chapter-" string2="CastedString" />
+						</StringOps>
+					</Operation>
+					<Operation type="HttpRequest" name="Game get">
+						<Vars>
+							<Mapping methodName="HttpRequestURL" varName="ModifiedString" />
+						</Vars>
+					</Operation>
+					<Operation type="ModifyString" name="Make HTTP URL">
+						<StringOps>
+							<StringOp type="append" string1="C:/Data/AWillEternal/" string2="CastedString" />
+							<StringOp type="append" string1="$current$" string2=".txt" />
+						</StringOps>
+					</Operation>
+					<Operation type="WriteFile" name="WriteList">
+						<Vars>
+							<Mapping methodName="TextToWrite" varName="HttpResponse" />
+							<Mapping methodName="WriteFilePath" varName="ModifiedString" />
+						</Vars>
+					</Operation>
+				</Process>
+			</OperatedProcess>
+			</Operation>
+		</Process>
+		<Process name="OG3">
+		<Operation type="GetFilesInDir" name="Read File">
+				<Vars>
+					<Data name="DirectoryPath" type="string" value="C:\Data\OG\" />
+				</Vars>
+		</Operation>
+		<Operation type="ProcessStringList" name="Process Dir Op">
+			<Synchronous>True</Synchronous>
+			<Vars>
+				<Mapping methodName="InputList" varName="DirectoryList" />
+			</Vars>
+			<OperatedProcess>
+				<Process name="Hellow">
+				<Operation type="ReadFile" name="Read File">
+				<Vars>
+					<Mapping methodName="FilePath" varName="ListStringVal" />
+				</Vars>
+			</Operation>
+			<!--<Operation type="StrParseList" name="GetURL">
+				<Vars>
+					<Data name="StartTag" type="string" value="&lt;p dir=&quot;ltr&quot;&gt;&lt;span style=&quot;font-weight:400;font-style:normal&quot;&gt;&lt;span&gt;" />
+					<Data name="EndTag" type="string" value="&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;" />
+					<Mapping methodName="InputString" varName="ReadText" />
+				</Vars>
+			</Operation>-->
+			<Operation type="RegexReplace" name="GetURL">
+				<Vars>
+					<Data name="RegexMatch" type="string" value="&lt;.*&gt;" />
+					<Data name="RegexReplace" type="string" value="" />
+					<Mapping methodName="RegexInput" varName="ReadText" />
+				</Vars>
+			</Operation>
+			<Operation type="FileAppend" name="ShowResults">
+				<Vars>
+					<Data name="AppendFilePath" type="string" value="C:\Data\OG-Processed\OGCorpus.txt" />
+					<Mapping methodName="ToWriteText" varName="RegexOutput" />
+				</Vars>
+			</Operation>
+			</Process>
+			</OperatedProcess>
+		</Operation>
+		</Process>
+
 		
 </Processes>
 
 <ExtendedConfig>
 	<ConfigFile path="SteamJSONProcess.xml" />
+	<ConfigFile path="LNOperations.xml" />
+	<ConfigFile path="ArchidektOp.xml" />
 </ExtendedConfig>
 
 </Config>

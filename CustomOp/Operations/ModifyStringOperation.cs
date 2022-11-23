@@ -64,9 +64,13 @@ namespace CustomOp.Operations
             {
                 return current;
             }
-            if(data.containsType(st, typeof(String)))
+            else if(data.containsType(st, typeof(String)))
             {
                 return data.getString(st);
+            }
+            else if (st.Contains("["))
+            {
+                return (string)Operation.parseVars(st, data, null);
             }
             return st;
         }

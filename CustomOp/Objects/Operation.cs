@@ -20,11 +20,13 @@ namespace CustomOp.Objects
         Dictionary<string, string> varMappings;
         public string name;
         List<String> tempVars;
+        Dictionary<string, string> outputVarMappings;
         OpData storedVars;
         public Operation(XElement config)
         {
             storedVars = new OpData();
             varMappings = new Dictionary<string, string>();
+            outputVarMappings = new Dictionary<string, string>();
             tempVars = new List<string>();
             Configure(config);
         }
@@ -33,6 +35,7 @@ namespace CustomOp.Objects
             name = element.Attribute("name").Value.ToString();
             if (!(element.Element("Vars") is null))
             {
+                //Process the Mappings
                 var mappings = from mapping in element.Element("Vars").Descendants("Mapping")
                                select new
                                {
@@ -43,7 +46,19 @@ namespace CustomOp.Objects
                 {
                     varMappings.Add(mapping.Original, mapping.New);
                 }
+                //Stores the data Vars to the StoredVars OpData
                 XMLParser.parseDataTags(element.Element("Vars"), storedVars);
+                //Process the OutputVarMappings
+                var outputMappings = from mapping in element.Element("Vars").Descendants("OutputMapping")
+                               select new
+                               {
+                                   New = mapping.Attribute("outputVarName").Value.ToString(),
+                                   Original = mapping.Attribute("methodName").Value.ToString()
+                               };
+                foreach (var mapping in outputMappings)
+                {
+                    outputVarMappings.Add(mapping.Original, mapping.New);
+                }
             }
         }
 
@@ -56,7 +71,7 @@ namespace CustomOp.Objects
         {
            foreach(string mapping in varMappings.Keys)
             {
-                if (data.contains(mapping) || data.contains(mapping.Substring(0, mapping.IndexOf("["))))
+                if (data.contains(mapping) || (mapping.Contains("[") && data.contains(mapping.Substring(0, mapping.IndexOf("[")))))
                 {
                     //varMappings[mapping]=methodVar mapping=varName in config
                     data.put(varMappings[mapping], parseVars(mapping, data, null));
@@ -169,6 +184,12 @@ namespace CustomOp.Objects
                 data.remove(key);
             }
             tempVars.Clear();
+
+            //Add the OutputVarMappings
+            foreach(string methodVar in outputVarMappings.Keys)
+            {
+                data.put(outputVarMappings[methodVar], data.getObject(methodVar));
+            }
             Logger.log.Info($"Finished Operation: {name}");
         }
     }

@@ -1,0 +1,4 @@
+SELECT [DeckID]
+      ,[name]
+      ,[updatedAt]
+  FROM [MTG].[dbo].[Decks]

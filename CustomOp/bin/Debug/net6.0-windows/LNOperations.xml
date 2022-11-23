@@ -1,0 +1,296 @@
+<Config>
+	<Processes>
+	<Process name="Process Light Novel">
+		<Operation type="Cast" name="Cast Int">
+			<CastType>StringToInt</CastType>
+				<Vars>
+					<Data name="StringID" type="string" value="SplitStringList[2]" />
+				</Vars>
+		</Operation>
+		<Operation type="GenerateIntList" name="Generate Ints">
+			<Vars>
+				<Data name="StartInt" type="int" value="0" />
+				<Mapping methodName="EndInt" varName="CastedInt" />
+				<Data name="Step" type="int" value="1" />
+			</Vars>
+		</Operation>
+		<Operation type="ProcessList" name="Process Overgeared">
+			<Synchronous>False</Synchronous>
+			<WaitTime>200</WaitTime>
+			<Vars>
+				<Mapping methodName="InputList" varName="IntListOutput" />
+			</Vars>
+			<OperatedProcess>
+				<Process name="SubProcess">
+					<Operation type="Cast" name="Cast Int to String">
+						<CastType>IntToString</CastType>
+						<Vars>
+							<Data name="IntID" type="string" value="ListIntVal" />
+						</Vars>
+					</Operation>
+					<Operation type="ModifyString" name="Make HTTP URL">
+						<StringOps>
+							<StringOp type="append" string1="SplitStringList[0]" string2="CastedString" />
+						</StringOps>
+					</Operation>
+					<Operation type="HttpRequest" name="Game get">
+						<Vars>
+							<Mapping methodName="HttpRequestURL" varName="ModifiedString" />
+						</Vars>
+					</Operation>
+					<Operation type="ModifyString" name="Make HTTP URL">
+						<StringOps>
+						<StringOp type="append" string1="C:/Data/" string2="SplitStringList[1]" />
+						<StringOp type="append" string1="$current$" string2="/" />
+						<StringOp type="append" string1="$current$" string2="CastedString" />
+						<StringOp type="append" string1="$current$" string2=".txt" />
+						</StringOps>
+					</Operation>
+					<Operation type="WriteFile" name="WriteList">
+						<Vars>
+							<Mapping methodName="TextToWrite" varName="HttpResponse" />
+							<Mapping methodName="WriteFilePath" varName="ModifiedString" />
+						</Vars>
+					</Operation>
+				</Process>
+			</OperatedProcess>
+			</Operation>
+		</Process>
+		<Process name="Fun">
+			<Operation type="GenerateStringList" name="Generate Str List">
+				<Values>
+					<Val>https://www.wuxiaworld.com/novel/emperors-domination/emperor-chapter- emperors-domination 4736</Val>
+					<Val>https://www.wuxiaworld.com/novel/the-regressed-demon-lord-is-kind/rdl-chapter- regressed-demonlord-is-kind 547</Val>
+					<Val>https://www.wuxiaworld.com/novel/almighty-sword-domain/asd-chapter- almighty-sword-domain 2324</Val>
+					<Val>https://www.wuxiaworld.com/novel/record-of-a-thousand-lives/rotl-chapter- record-of-a-thousand-lives 192</Val>
+					<Val>https://www.wuxiaworld.com/novel/dio/dio-chapter- dio 173</Val>
+					<Val>https://www.wuxiaworld.com/novel/damn-reincarnation/dr-chapter- damn-reincarnation 122</Val>
+					<Val>https://www.wuxiaworld.com/novel/the-prodigies-war/tpw-chapter- the-prodigies-war 433</Val>
+					<Val>https://www.wuxiaworld.com/novel/return-of-the-disaster-class-hero/rdch-chapter- return-of-the-disaster-class-hero 346</Val>
+					<Val>https://www.wuxiaworld.com/novel/the-frozen-player-returns/fpr-chapter- the-frozen-player-returns 266</Val>
+					<Val>https://www.wuxiaworld.com/novel/player-who-cant-level-up/pwclu-chapter- the-player-who-cant-level-up 233</Val>
+					<Val>https://www.wuxiaworld.com/novel/regressor-instruction-manual/rim-chapter- regressor-instructor-manual 255</Val>
+					<Val>https://www.wuxiaworld.com/novel/first-immortal-of-the-sword/fiots-chapter- first-immortal-of-the-sword 255</Val>
+					<Val>https://www.wuxiaworld.com/novel/life-once-again/loa-chapter- life-once-again 960</Val>
+					<Val>https://www.wuxiaworld.com/novel/keyboard-immortal/ki-chapter- keyboard-immortal 1370</Val>
+					<Val>https://www.wuxiaworld.com/novel/star-odyssey/so-chapter- star-odyssey 1702</Val>
+					<Val>https://www.wuxiaworld.com/novel/ultragene-warlord/uw-chapter- ultragene-warlord 431</Val>
+				</Values>
+			</Operation>
+		<Operation type="ProcessStringList" name="Message List">
+			<Synchronous>True</Synchronous>
+			<Vars>
+				<Mapping methodName="InputList" varName="GeneratedStringList" />
+			</Vars>
+			<OperatedProcess>
+				<Process name="Process Steam Data">
+					<Operation type="SplitString" name="SplitString">
+						<Vars>
+							<Mapping methodName="StringToSplit" varName="ListStringVal" />
+							<Data name="SplitItem" type="string" value=" " />
+						</Vars>
+					</Operation>
+					<Operation type="ModifyString" name="Dir Path">
+						<StringOps>
+						<StringOp type="append" string1="C:/Data/" string2="SplitStringList[1]" />
+						<StringOp type="append" string1="$current$" string2="/" />
+						</StringOps>
+					</Operation>
+					<Operation type="MakeDir" name="Make Dir to store">
+						<Vars>
+							<Mapping methodName="NewDirPath" varName="ModifiedString" />
+						</Vars>
+					</Operation>
+					<Operation type="RunDataProcess" name="App">
+						<ProcessID>Process Light Novel</ProcessID>
+					</Operation>
+				</Process>
+			</OperatedProcess>
+		</Operation>
+		</Process>
+		
+		<Process name="Chop LN">
+		<Operation type="GetFilesInDir" name="Read File">
+				<Vars>
+					<Data name="DirectoryPath" type="string" value="C:\Data\ultragene-warlord\" />
+				</Vars>
+		</Operation>
+		<Operation type="ProcessStringList" name="Process Dir Op">
+			<Synchronous>True</Synchronous>
+			<Vars>
+				<Mapping methodName="InputList" varName="DirectoryList" />
+			</Vars>
+			<OperatedProcess>
+				<Process name="Hellow">
+				<Operation type="ReadFile" name="Read File">
+				<Vars>
+					<Mapping methodName="FilePath" varName="ListStringVal" />
+				</Vars>
+			</Operation>
+			<!--<Operation type="StrParseList" name="GetURL">
+				<Vars>
+					<Data name="StartTag" type="string" value="&lt;p dir=&quot;ltr&quot;&gt;&lt;span style=&quot;font-weight:400;font-style:normal&quot;&gt;&lt;span&gt;" />
+					<Data name="EndTag" type="string" value="&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;" />
+					<Mapping methodName="InputString" varName="ReadText" />
+				</Vars>
+			</Operation>-->
+			<Operation type="RegexReplace" name="GetURL">
+				<Vars>
+					<Data name="RegexMatch" type="string" value="&lt;.*&gt;" />
+					<Data name="RegexReplace" type="string" value="" />
+					<Mapping methodName="RegexInput" varName="ReadText" />
+				</Vars>
+			</Operation>
+			<Operation type="FileAppend" name="ShowResults">
+				<Vars>
+					<Data name="AppendFilePath" type="string" value="C:\Data\processed\ultragene-warlord.txt" />
+					<Mapping methodName="ToWriteText" varName="RegexOutput" />
+				</Vars>
+			</Operation>
+			</Process>
+			</OperatedProcess>
+		</Operation>
+		</Process>
+		
+		<Process name="OG2">
+		<Operation type="ModifyString" name="Dir Path">
+					<StringOps>
+						<StringOp type="append" string1="C:/Data/" string2="ListStringVal" />
+						<StringOp type="append" string1="$current$" string2="/" />
+					</StringOps>
+		</Operation>
+		<Operation type="SetVar" name="Mapping ">
+				<Vars>
+					<!--<Data name="DirectoryPath" type="string" value="C:\Data\star-odyssey\" />-->
+					<Data name="OutputID" type="string" value="OutputFile" />
+					<Data name="ObjectID" type="string" value="ListStringVal" />
+				</Vars>
+		</Operation>
+		<Operation type="GetFilesInDir" name="Read File">
+				<Vars>
+					<!--<Data name="DirectoryPath" type="string" value="C:\Data\star-odyssey\" />-->
+					<Mapping methodName="DirectoryPath" varName="ModifiedString" />
+				</Vars>
+		</Operation>
+		<Operation type="ProcessStringList" name="Process Dir Op">
+			<Synchronous>True</Synchronous>
+			<Vars>
+				<Mapping methodName="InputList" varName="DirectoryList" />
+			</Vars>
+			<OperatedProcess>
+				<Process name="Hellow">
+				<Operation type="ReadFile" name="Read File">
+				<Vars>
+					<Mapping methodName="FilePath" varName="ListStringVal" />
+				</Vars>
+			</Operation>
+			<Operation type="StrParseList" name="GetURL">
+				<Vars>
+					<Data name="StartTag" type="string" value="&lt;p dir=&quot;ltr&quot;&gt;&lt;span style=&quot;font-weight:400;font-style:normal&quot;&gt;&lt;span&gt;" />
+					<Data name="EndTag" type="string" value="&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;" />
+					<Mapping methodName="InputString" varName="ReadText" />
+				</Vars>
+			</Operation>
+			<!--<Operation type="RegexReplace" name="GetURL">
+				<Vars>
+					<Data name="RegexMatch" type="string" value="&lt;/span&gt;&lt;/span&gt;&lt;span style=&quot;font-weight:400;font-style:normal&quot;&gt;&lt;span&gt;" />
+					<Data name="RegexReplace" type="string" value="&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;" />
+					<Mapping methodName="RegexInput" varName="ParseStringList" />
+				</Vars>
+			</Operation>-->
+			<Operation type="RegexReplace" name="GetURL">
+				<Vars>
+					<Data name="RegexMatch" type="string" value="&lt;.*&gt;" />
+					<Data name="RegexReplace" type="string" value="" />
+					<Mapping methodName="RegexInput" varName="ParseStringList" />
+				</Vars>
+			</Operation>
+			<Operation type="ModifyString" name="Dir Path">
+					<StringOps>
+						<StringOp type="append" string1="C:/Data/processed/" string2="OutputFile" />
+						<StringOp type="append" string1="$current$" string2=".txt" />
+					</StringOps>
+			</Operation>
+			<Operation type="FileAppend" name="ShowResults">
+				<Vars>
+					<Mapping methodName="AppendFilePath" varName="ModifiedString" />
+					<Mapping methodName="ToWriteText" varName="RegexOutput" />
+				</Vars>
+			</Operation>
+			</Process>
+			</OperatedProcess>
+		</Operation>
+		</Process>
+		<Process name="Fun2">
+			<Operation type="GenerateStringList" name="Generate Str List">
+				<Values>
+					<Val>keyboard-immortal</Val>
+					<Val>life-once-again</Val>
+					<Val>first-immortal-of-the-sword</Val>
+					<Val>regressor-instructor-manual</Val>
+					<Val>the-player-who-cant-level-up</Val>
+					<Val>the-frozen-player-returns</Val>
+					<Val>return-of-the-disaster-class-hero</Val>
+					<Val>the-prodigies-war</Val>
+					<Val>damn-reincarnation</Val>
+					<Val>dio</Val>
+					<Val>record-of-a-thousand-lives</Val>
+					<Val>almighty-sword-domain</Val>
+					<Val>regressed-demonlord-is-kind</Val>
+					<Val>emperors-domination</Val>
+					<Val>overgeared</Val>
+					<Val>ultragene-warlord</Val>
+					<Val>star-odyssey</Val>
+				</Values>
+			</Operation>
+		<Operation type="ProcessStringList" name="Message List">
+			<Synchronous>True</Synchronous>
+			<Vars>
+				<Mapping methodName="InputList" varName="GeneratedStringList" />
+			</Vars>
+			<OperatedProcess>
+				<Process name="Process Steam Data">
+					<Operation type="RunDataProcess" name="App">
+						<ProcessID>OG2</ProcessID>
+					</Operation>
+				</Process>
+			</OperatedProcess>
+		</Operation>
+		</Process>
+	<Process name="Join Parsed LNs">
+		<Operation type="GetFilesInDir" name="Read File">
+				<Vars>
+					<Data name="DirectoryPath" type="string" value="C:\Data\processed\" />
+				</Vars>
+		</Operation>
+		<Operation type="ProcessStringList" name="Process Dir Op">
+			<Synchronous>True</Synchronous>
+			<Vars>
+				<Mapping methodName="InputList" varName="DirectoryList" />
+			</Vars>
+			<OperatedProcess>
+				<Process name="Hellow">
+				<Operation type="ReadFile" name="Read File">
+				<Vars>
+					<Mapping methodName="FilePath" varName="ListStringVal" />
+				</Vars>
+			</Operation>
+			<!--<Operation type="StrParseList" name="GetURL">
+				<Vars>
+					<Data name="StartTag" type="string" value="&lt;p dir=&quot;ltr&quot;&gt;&lt;span style=&quot;font-weight:400;font-style:normal&quot;&gt;&lt;span&gt;" />
+					<Data name="EndTag" type="string" value="&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;" />
+					<Mapping methodName="InputString" varName="ReadText" />
+				</Vars>
+			</Operation>-->
+			<Operation type="FileAppend" name="ShowResults">
+				<Vars>
+					<Data name="AppendFilePath" type="string" value="C:\Data\AllCorpus.txt" />
+					<Mapping methodName="ToWriteText" varName="ReadText" />
+				</Vars>
+			</Operation>
+			</Process>
+			</OperatedProcess>
+		</Operation>
+		</Process>
+		</Processes>
+</Config>

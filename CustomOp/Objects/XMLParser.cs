@@ -55,6 +55,13 @@ namespace CustomOp.Objects
                 case "If": return new IfOperation(element);break;
                 case "ProcessStringList": return new StrProcessListOperation(element);break;
                 case "GetMapKey": return new GetMapKeyOperation(element);break;
+                case "StringOp": return new StringOperation(element);break;
+                case "RunDataProcess": return new RunDataProcessOperation(element);break;
+                case "StrParseList": return new StrParseListOperation(element);break;
+                case "FileAppend": return new FileAppendOperation(element);break;
+                case "GenerateStringList": return new GenerateStringListOperation(element); break;
+                case "SplitString": return new SplitStringOperation(element);break;
+                case "MakeDir": return new MakeDirOperation(element);break;
                 default: throw new Exception($"Invalid Operation Type ({element.Attribute("type").Value})");
             }
         }

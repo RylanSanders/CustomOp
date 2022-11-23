@@ -12,6 +12,7 @@ namespace CustomOp.Operations
     {
         string accumulator = "";
         string start_value = "";
+
         public ReduceOperation(XElement config) : base(config)
         {
             XElement e = config.Element("Accumulator");
@@ -20,6 +21,7 @@ namespace CustomOp.Operations
                 throw new Exception("ReduceOperation is Missing Accumulator Config!");
             }
             accumulator = e.Value.ToString();
+            
         }
 
         public override void execute(OpData data)

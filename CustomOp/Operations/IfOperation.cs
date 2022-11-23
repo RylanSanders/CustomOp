@@ -11,6 +11,7 @@ namespace CustomOp.Operations
     internal class IfOperation : Operation
     {
         Dictionary<string, string> strEqualsCondition = new Dictionary<string, string>();
+        Dictionary<string, string> mapContainsCondition = new Dictionary<string, string>();
         Process trueProcess;
         Process falseProcess;
         public IfOperation(XElement config) : base(config)
@@ -18,6 +19,10 @@ namespace CustomOp.Operations
             foreach(XElement element in config.Element("Conditions").Elements("strEqual"))
             {
                 strEqualsCondition.Add(element.Attribute("varName").Value.ToString(), element.Attribute("value").Value.ToString());
+            }
+            foreach (XElement element in config.Element("Conditions").Elements("mapContainsKey"))
+            {
+                mapContainsCondition.Add(element.Attribute("mapName").Value.ToString(), element.Attribute("key").Value.ToString());
             }
             XElement staticProcess = config.Element("TrueProcess").Element("Process");
             if (staticProcess == null)
@@ -29,15 +34,18 @@ namespace CustomOp.Operations
             {
                 trueProcess = new Process(config.Element("TrueProcess").Element("Process"));
             }
-            XElement falseStaticProcess = config.Element("FalseProcess").Element("Process");
-            if (staticProcess == null)
+            if (config.Element("FalseProcess") != null)
             {
-                string processName = config.Element("FalseProcess").Attribute("name").Value.ToString();
-                falseProcess = ExecutionController.getNewProcessInstance(processName);
-            }
-            else
-            {
-                falseProcess = new Process(config.Element("FalseProcess").Element("Process"));
+                XElement falseStaticProcess = config.Element("FalseProcess").Element("Process");
+                if (falseStaticProcess == null)
+                {
+                    string processName = config.Element("FalseProcess").Attribute("name").Value.ToString();
+                    falseProcess = ExecutionController.getNewProcessInstance(processName);
+                }
+                else
+                {
+                    falseProcess = new Process(config.Element("FalseProcess").Element("Process"));
+                }
             }
         }
 
@@ -47,17 +55,20 @@ namespace CustomOp.Operations
 
             OpData tempData = new OpData();
             tempData.merge(data);
-            Process spawnedThread;
-            if (meetsCondition(data))
+            Process spawnedThread = null;
+            if (meetsCondition(data) && trueProcess!=null)
             {
                 spawnedThread = trueProcess.clone();
             }
-            else
+            else if(falseProcess!=null)
             {
                 spawnedThread = falseProcess.clone();
             }
-            spawnedThread.addOpData(tempData);
-            ExecutionController.runProcess(spawnedThread);
+            if (spawnedThread != null)
+            {
+                spawnedThread.addOpData(tempData);
+                ExecutionController.runProcess(spawnedThread);
+            }
         }
         
 
@@ -71,7 +82,28 @@ namespace CustomOp.Operations
                     return false;
                 }
             }
+            foreach(string mapName in mapContainsCondition.Keys)
+            {
+                Object o = Operation.parseVars(mapName, data, null);
+                if (o.GetType() == typeof(Dictionary<string, string>))
+                {
+                    Dictionary<string, string> map = (Dictionary<string, string>)o;
+                    if (!map.ContainsKey(mapContainsCondition[mapName]))
+                    {
+                        return false;
+                    }
+                }else if(o.GetType() == typeof(JSONObject))
+                {
+                    JSONObject map = (JSONObject)o;
+                    if (!map.map.ContainsKey(mapContainsCondition[mapName]))
+                    {
+                        return false;
+                    }
+                }
+                
+            }
             return true;
         }
+
     }
 }

@@ -50,6 +50,10 @@ namespace CustomOp.Operations
             {
                 return "\"\"";
             }
+            if (!str.Contains("\""))
+            {
+                return "\""+str+"\"";
+            }
             string toRet = str;
             toRet = toRet.Replace("\n", "");
             toRet = toRet.Replace("\r", "");

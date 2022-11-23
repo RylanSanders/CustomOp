@@ -55,16 +55,22 @@ namespace CustomOp.Operations
             csb.Password = Password;
             csb.UserID = User;
             SqlConnection sqlConnection1 = new SqlConnection(csb.ToString());
-            using (SqlConnection connection = sqlConnection1)
+            try
             {
-                // Connect to the database then retrieve the schema information.  
-                connection.Open();
-                SqlCommand cmd = new SqlCommand();
-                cmd.CommandType = System.Data.CommandType.Text;
-                cmd.Connection = sqlConnection1;
-                cmd.CommandText = dt.generateInsertStatement(DataBase, ColToVar);
-                cmd.ExecuteNonQuery();
-                connection.Close();
+                using (SqlConnection connection = sqlConnection1)
+                {
+                    // Connect to the database then retrieve the schema information.  
+                    connection.Open();
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.CommandType = System.Data.CommandType.Text;
+                    cmd.Connection = sqlConnection1;
+                    cmd.CommandText = dt.generateInsertStatement(DataBase, ColToVar);
+                    cmd.ExecuteNonQuery();
+                    connection.Close();
+                }
+            } catch(Exception e)
+            {
+                throw new Exception($"SQL Error in StoreTableToDB: {e.Message} at {e.StackTrace} with querry: {dt.generateInsertStatement(DataBase, ColToVar)}");
             }
         }
     }

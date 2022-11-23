@@ -61,13 +61,26 @@ namespace CustomOp.Operations
                     IDataRecord row = ((IDataRecord)reader);
                     for(int i = 0; i < row.FieldCount; i++)
                     {
-                        if(row.GetDataTypeName(i) == "int")
+                        string datatype = row.GetDataTypeName(i);
+                        if (row.IsDBNull(i))
                         {
-                            table[row.GetName(i)].Add( row.GetInt32(i).ToString());
+                            table[row.GetName(i)].Add("NA");
                         }
-                        else if(row.GetDataTypeName(i) == "nchar")
+                        else if(datatype == "tinyint")
                         {
-                            table[row.GetName(i)].Add(row.GetString(i));
+                            table[row.GetName(i)].Add(((int)row.GetByte(i)).ToString());
+                        }
+                        else if (datatype == "int" )
+                        {
+                            table[row.GetName(i)].Add(row.GetInt32(i).ToString());
+                        }
+                        else if (datatype == "nchar" || datatype=="varchar")
+                        {
+                           table[row.GetName(i)].Add(row.GetString(i));
+                        }
+                        else if(datatype == "datetime")
+                        {
+                            table[row.GetName(i)].Add(row.GetDateTime(i).ToString());
                         }
                        
                     }

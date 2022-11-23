@@ -29,9 +29,16 @@ namespace CustomOp.Operations
             {
                 if (map.map == null)
                 {
-                    throw new Exception("Error in JSONListToTable Operation: JSonString list has a non map element!");
+                    //If the list doesn't contain maps make the table a single column with a name of ListName
+                    Dictionary<string, string> newRow = new Dictionary<string, string>();
+                    newRow.Add("ListName", map.ToString());
+                    dt.addRow(newRow);
                 }
-                dt.addRow(processJSonMap(map));
+                else
+                {
+                    dt.addRow(processJSonMap(map));
+                }
+                
             }
 
             data.put("JSONDataTable", dt);

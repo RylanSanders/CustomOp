@@ -1,0 +1,264 @@
+{
+	"1674470": {
+		"success": true,
+		"data": {
+			"type": "game",
+			"name": "ELYON",
+			"steam_appid": 1674470,
+			"required_age": 0,
+			"is_free": false,
+			"detailed_description": "<img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1674470/extras/Class_Race_Banner.gif?t=1662568816\" /><br><br>The world is in turmoil - Vulpin and Ontari are at war for the control of Elyon, a portal leading to paradise, soaring high in the sky. Meanwhile, the Dark Apostles are invading Harth from another dimension through a space-time rift, their objectives still unknown.<h2 class=\"bb_tag\"><strong>Massive Realm Wars</strong></h2>Along each faction's territorial borders lie fortresses packed with manamechs, artillery, and soldiers. Both factions are called to hold their ground in massive Realm vs Realm wars!<br><br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1674470/extras/RvR_Banner.gif?t=1662568816\" /><h2 class=\"bb_tag\"><strong>Extensive Skill Customization</strong></h2>A plethora of skill addons, runestones, and &quot;Mana Awakening&quot; are at your disposal. Combine them and create your own combat style, from bursty glass-cannons to tanky front-liners.<h2 class=\"bb_tag\"><strong>Dimensional Portals</strong></h2>Cross these purple-shaded portals to reach planes filled with rich resources that will help you get stronger, but be prepared - both factions have unrestricted access to them.<h2 class=\"bb_tag\"><strong>Dungeons</strong></h2>Gather your friends to tackle fearsome bosses with complex mechanics and multiple phases. Feel like challenging yourself? Enter the solo floor-based dungeons and test your limits!<br><br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1674470/extras/Dungeons_Banner.gif?t=1662568816\" /><h2 class=\"bb_tag\"><strong>Choose Your Path</strong></h2>Whether you are a solitary traveller, looking for a party, or fighting with a Clan, a vast open world awaits, filled with all kinds of challenges and secrets - on the ground, and in the air. Field bosses, treasure hunts, riddle quests, instanced &amp; open world housing, lifeskills, and so much more await!<br><br><br>Looking for a place to talk about Elyon? <a href=\"https://steamcommunity.com/linkfilter/?url=https://discord.com/invite/elyon\" target=\"_blank\" rel=\"noopener\"  >Join our Discord server</a>!<h2 class=\"bb_tag\"></h2><a href=\"https://steamcommunity.com/linkfilter/?url=https://discord.com/invite/elyon\" target=\"_blank\" rel=\"noopener\"  ><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1674470/extras/Discord_Server_Image.png?t=1662568816\" /></a>",
+			"about_the_game": "<img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1674470/extras/Class_Race_Banner.gif?t=1662568816\" /><br><br>The world is in turmoil - Vulpin and Ontari are at war for the control of Elyon, a portal leading to paradise, soaring high in the sky. Meanwhile, the Dark Apostles are invading Harth from another dimension through a space-time rift, their objectives still unknown.<h2 class=\"bb_tag\"><strong>Massive Realm Wars</strong></h2>Along each faction's territorial borders lie fortresses packed with manamechs, artillery, and soldiers. Both factions are called to hold their ground in massive Realm vs Realm wars!<br><br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1674470/extras/RvR_Banner.gif?t=1662568816\" /><h2 class=\"bb_tag\"><strong>Extensive Skill Customization</strong></h2>A plethora of skill addons, runestones, and &quot;Mana Awakening&quot; are at your disposal. Combine them and create your own combat style, from bursty glass-cannons to tanky front-liners.<h2 class=\"bb_tag\"><strong>Dimensional Portals</strong></h2>Cross these purple-shaded portals to reach planes filled with rich resources that will help you get stronger, but be prepared - both factions have unrestricted access to them.<h2 class=\"bb_tag\"><strong>Dungeons</strong></h2>Gather your friends to tackle fearsome bosses with complex mechanics and multiple phases. Feel like challenging yourself? Enter the solo floor-based dungeons and test your limits!<br><br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1674470/extras/Dungeons_Banner.gif?t=1662568816\" /><h2 class=\"bb_tag\"><strong>Choose Your Path</strong></h2>Whether you are a solitary traveller, looking for a party, or fighting with a Clan, a vast open world awaits, filled with all kinds of challenges and secrets - on the ground, and in the air. Field bosses, treasure hunts, riddle quests, instanced &amp; open world housing, lifeskills, and so much more await!<br><br><br>Looking for a place to talk about Elyon? <a href=\"https://steamcommunity.com/linkfilter/?url=https://discord.com/invite/elyon\" target=\"_blank\" rel=\"noopener\"  >Join our Discord server</a>!<h2 class=\"bb_tag\"></h2><a href=\"https://steamcommunity.com/linkfilter/?url=https://discord.com/invite/elyon\" target=\"_blank\" rel=\"noopener\"  ><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1674470/extras/Discord_Server_Image.png?t=1662568816\" /></a>",
+			"short_description": "Elyon is an open-world action-combat MMORPG set in the continent of Harth, where the two sovereign realms, Vulpin and Ontari, are at war for the control of a portal that leads to paradise.",
+			"supported_languages": "English<strong>*</strong>, French, German<br><strong>*</strong>languages with full audio support",
+			"header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1674470/header.jpg?t=1662568816",
+			"website": "https://elyon.playkakaogames.com/",
+			"pc_requirements": {
+				"minimum": "<strong>Minimum:</strong><br><ul class=\"bb_ul\"><li>Requires a 64-bit processor and operating system<br></li><li><strong>OS:</strong> Windows 8.1 (64-bit)<br></li><li><strong>Processor:</strong> Intel i3<br></li><li><strong>Memory:</strong> 8 GB RAM<br></li><li><strong>Graphics:</strong> NVIDIA GeForce GTX 760 / AMD Radeon R9 280<br></li><li><strong>DirectX:</strong> Version 11<br></li><li><strong>Network:</strong> Broadband Internet connection<br></li><li><strong>Storage:</strong> 60 GB available space</li></ul>",
+				"recommended": "<strong>Recommended:</strong><br><ul class=\"bb_ul\"><li>Requires a 64-bit processor and operating system<br></li><li><strong>OS:</strong> Windows 10 (64-bit)<br></li><li><strong>Processor:</strong> Intel i5<br></li><li><strong>Memory:</strong> 16 GB RAM<br></li><li><strong>Graphics:</strong> NVIDIA GeForce GTX 970 / AMD Radeon RX 580<br></li><li><strong>DirectX:</strong> Version 11<br></li><li><strong>Network:</strong> Broadband Internet connection<br></li><li><strong>Storage:</strong> 60 GB available space</li></ul>"
+			},
+			"mac_requirements": {
+				"minimum": "<strong>Minimum:</strong><br><ul class=\"bb_ul\"><li>Requires a 64-bit processor and operating system</li></ul>",
+				"recommended": "<strong>Recommended:</strong><br><ul class=\"bb_ul\"><li>Requires a 64-bit processor and operating system</li></ul>"
+			},
+			"linux_requirements": {
+				"minimum": "<strong>Minimum:</strong><br><ul class=\"bb_ul\"><li>Requires a 64-bit processor and operating system</li></ul>",
+				"recommended": "<strong>Recommended:</strong><br><ul class=\"bb_ul\"><li>Requires a 64-bit processor and operating system</li></ul>"
+			},
+			"ext_user_account_notice": "Kakao Games (Supports Linking to Steam Account)",
+			"developers": [
+				"Bluehole Studio, Inc.", "Fake Developer"
+			],
+			"publishers": [
+				"Kakao Games Europe B.V.", "Fake Publisher"
+			],
+			"package_groups": [],
+			"platforms": {
+				"windows": true,
+				"mac": false,
+				"linux": false
+			},
+			"categories": [
+				{
+					"id": 1,
+					"description": "Multi-player"
+				},
+				{
+					"id": 20,
+					"description": "MMO"
+				},
+				{
+					"id": 49,
+					"description": "PvP"
+				},
+				{
+					"id": 36,
+					"description": "Online PvP"
+				},
+				{
+					"id": 9,
+					"description": "Co-op"
+				},
+				{
+					"id": 38,
+					"description": "Online Co-op"
+				},
+				{
+					"id": 35,
+					"description": "In-App Purchases"
+				}
+			],
+			"genres": [
+				{
+					"id": "1",
+					"description": "Action"
+				},
+				{
+					"id": "25",
+					"description": "Adventure"
+				},
+				{
+					"id": "37",
+					"description": "Free to Play"
+				},
+				{
+					"id": "29",
+					"description": "Massively Multiplayer"
+				}
+			],
+			"screenshots": [
+				{
+					"id": 0,
+					"path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1674470/ss_3eec5360e36baab63a4240153acc4ed493efa5d1.600x338.jpg?t=1662568816",
+					"path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1674470/ss_3eec5360e36baab63a4240153acc4ed493efa5d1.1920x1080.jpg?t=1662568816"
+				},
+				{
+					"id": 1,
+					"path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1674470/ss_0a3d67e8093004d2a3798bece2e5080d76bcb75b.600x338.jpg?t=1662568816",
+					"path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1674470/ss_0a3d67e8093004d2a3798bece2e5080d76bcb75b.1920x1080.jpg?t=1662568816"
+				},
+				{
+					"id": 2,
+					"path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1674470/ss_0cb2c0a90c787e3998e346abb4fa44d58c3c89da.600x338.jpg?t=1662568816",
+					"path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1674470/ss_0cb2c0a90c787e3998e346abb4fa44d58c3c89da.1920x1080.jpg?t=1662568816"
+				},
+				{
+					"id": 3,
+					"path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1674470/ss_fe072ae08a3423d595cd0c0fc9fbf0873c4ef7b8.600x338.jpg?t=1662568816",
+					"path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1674470/ss_fe072ae08a3423d595cd0c0fc9fbf0873c4ef7b8.1920x1080.jpg?t=1662568816"
+				},
+				{
+					"id": 4,
+					"path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1674470/ss_ba5da6b9d0627c1f5d2fbff6a8559df8f2035128.600x338.jpg?t=1662568816",
+					"path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1674470/ss_ba5da6b9d0627c1f5d2fbff6a8559df8f2035128.1920x1080.jpg?t=1662568816"
+				},
+				{
+					"id": 5,
+					"path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1674470/ss_3a87a2a8fa410f36ca49d7b291bdf40241fc8345.600x338.jpg?t=1662568816",
+					"path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1674470/ss_3a87a2a8fa410f36ca49d7b291bdf40241fc8345.1920x1080.jpg?t=1662568816"
+				},
+				{
+					"id": 6,
+					"path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1674470/ss_d19a1a884ece2d6082b30cbd524ebf25f028408a.600x338.jpg?t=1662568816",
+					"path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1674470/ss_d19a1a884ece2d6082b30cbd524ebf25f028408a.1920x1080.jpg?t=1662568816"
+				},
+				{
+					"id": 7,
+					"path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1674470/ss_8dac6d4b5647ad6214553c219f66e1cf62008f67.600x338.jpg?t=1662568816",
+					"path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1674470/ss_8dac6d4b5647ad6214553c219f66e1cf62008f67.1920x1080.jpg?t=1662568816"
+				}
+			],
+			"movies": [
+				{
+					"id": 256847064,
+					"name": "Elyon Trailer",
+					"thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/256847064/movie.293x165.jpg?t=1634305652",
+					"webm": {
+						"480": "http://cdn.akamai.steamstatic.com/steam/apps/256847064/movie480_vp9.webm?t=1634305652",
+						"max": "http://cdn.akamai.steamstatic.com/steam/apps/256847064/movie_max_vp9.webm?t=1634305652"
+					},
+					"mp4": {
+						"480": "http://cdn.akamai.steamstatic.com/steam/apps/256847064/movie480.mp4?t=1634305652",
+						"max": "http://cdn.akamai.steamstatic.com/steam/apps/256847064/movie_max.mp4?t=1634305652"
+					},
+					"highlight": true
+				},
+				{
+					"id": 256855932,
+					"name": "Elyon Cinematic Trailer",
+					"thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/256855932/movie.293x165.jpg?t=1634305645",
+					"webm": {
+						"480": "http://cdn.akamai.steamstatic.com/steam/apps/256855932/movie480_vp9.webm?t=1634305645",
+						"max": "http://cdn.akamai.steamstatic.com/steam/apps/256855932/movie_max_vp9.webm?t=1634305645"
+					},
+					"mp4": {
+						"480": "http://cdn.akamai.steamstatic.com/steam/apps/256855932/movie480.mp4?t=1634305645",
+						"max": "http://cdn.akamai.steamstatic.com/steam/apps/256855932/movie_max.mp4?t=1634305645"
+					},
+					"highlight": true
+				},
+				{
+					"id": 256840163,
+					"name": "Assassin Gameplay",
+					"thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/256840163/movie.293x165.jpg?t=1625131378",
+					"webm": {
+						"480": "http://cdn.akamai.steamstatic.com/steam/apps/256840163/movie480_vp9.webm?t=1625131378",
+						"max": "http://cdn.akamai.steamstatic.com/steam/apps/256840163/movie_max_vp9.webm?t=1625131378"
+					},
+					"mp4": {
+						"480": "http://cdn.akamai.steamstatic.com/steam/apps/256840163/movie480.mp4?t=1625131378",
+						"max": "http://cdn.akamai.steamstatic.com/steam/apps/256840163/movie_max.mp4?t=1625131378"
+					},
+					"highlight": true
+				},
+				{
+					"id": 256840166,
+					"name": "Elementalist Gameplay",
+					"thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/256840166/movie.293x165.jpg?t=1625131386",
+					"webm": {
+						"480": "http://cdn.akamai.steamstatic.com/steam/apps/256840166/movie480_vp9.webm?t=1625131386",
+						"max": "http://cdn.akamai.steamstatic.com/steam/apps/256840166/movie_max_vp9.webm?t=1625131386"
+					},
+					"mp4": {
+						"480": "http://cdn.akamai.steamstatic.com/steam/apps/256840166/movie480.mp4?t=1625131386",
+						"max": "http://cdn.akamai.steamstatic.com/steam/apps/256840166/movie_max.mp4?t=1625131386"
+					},
+					"highlight": true
+				},
+				{
+					"id": 256840164,
+					"name": "Gunner Gameplay",
+					"thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/256840164/movie.293x165.jpg?t=1625131395",
+					"webm": {
+						"480": "http://cdn.akamai.steamstatic.com/steam/apps/256840164/movie480_vp9.webm?t=1625131395",
+						"max": "http://cdn.akamai.steamstatic.com/steam/apps/256840164/movie_max_vp9.webm?t=1625131395"
+					},
+					"mp4": {
+						"480": "http://cdn.akamai.steamstatic.com/steam/apps/256840164/movie480.mp4?t=1625131395",
+						"max": "http://cdn.akamai.steamstatic.com/steam/apps/256840164/movie_max.mp4?t=1625131395"
+					},
+					"highlight": true
+				},
+				{
+					"id": 256840165,
+					"name": "Mystic Gameplay",
+					"thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/256840165/movie.293x165.jpg?t=1625131403",
+					"webm": {
+						"480": "http://cdn.akamai.steamstatic.com/steam/apps/256840165/movie480_vp9.webm?t=1625131403",
+						"max": "http://cdn.akamai.steamstatic.com/steam/apps/256840165/movie_max_vp9.webm?t=1625131403"
+					},
+					"mp4": {
+						"480": "http://cdn.akamai.steamstatic.com/steam/apps/256840165/movie480.mp4?t=1625131403",
+						"max": "http://cdn.akamai.steamstatic.com/steam/apps/256840165/movie_max.mp4?t=1625131403"
+					},
+					"highlight": true
+				},
+				{
+					"id": 256840168,
+					"name": "Slayer Gameplay",
+					"thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/256840168/movie.293x165.jpg?t=1625131411",
+					"webm": {
+						"480": "http://cdn.akamai.steamstatic.com/steam/apps/256840168/movie480_vp9.webm?t=1625131411",
+						"max": "http://cdn.akamai.steamstatic.com/steam/apps/256840168/movie_max_vp9.webm?t=1625131411"
+					},
+					"mp4": {
+						"480": "http://cdn.akamai.steamstatic.com/steam/apps/256840168/movie480.mp4?t=1625131411",
+						"max": "http://cdn.akamai.steamstatic.com/steam/apps/256840168/movie_max.mp4?t=1625131411"
+					},
+					"highlight": true
+				},
+				{
+					"id": 256840167,
+					"name": "Warlord Gameplay",
+					"thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/256840167/movie.293x165.jpg?t=1625131419",
+					"webm": {
+						"480": "http://cdn.akamai.steamstatic.com/steam/apps/256840167/movie480_vp9.webm?t=1625131419",
+						"max": "http://cdn.akamai.steamstatic.com/steam/apps/256840167/movie_max_vp9.webm?t=1625131419"
+					},
+					"mp4": {
+						"480": "http://cdn.akamai.steamstatic.com/steam/apps/256840167/movie480.mp4?t=1625131419",
+						"max": "http://cdn.akamai.steamstatic.com/steam/apps/256840167/movie_max.mp4?t=1625131419"
+					},
+					"highlight": true
+				}
+			],
+			"recommendations": {
+				"total": 439
+			},
+			"release_date": {
+				"coming_soon": false,
+				"date": "Oct 20, 2021"
+			},
+			"support_info": {
+				"url": "https://elyon.zendesk.com/hc/en-us",
+				"email": ""
+			},
+			"background": "https://cdn.akamai.steamstatic.com/steam/apps/1674470/page_bg_generated_v6b.jpg?t=1662568816",
+			"background_raw": "https://cdn.akamai.steamstatic.com/steam/apps/1674470/page.bg.jpg?t=1662568816",
+			"content_descriptors": {
+				"ids": [],
+				"notes": null
+			}
+		}
+	}
+}
