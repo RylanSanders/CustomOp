@@ -1,0 +1,100 @@
+<Config>
+	<Processes>
+	<Process name="Process MTG Deck">
+		<Operation type="ReadFile" name="Read File">
+			<Vars>
+				<Data name="FilePath" type="string" value="1000036.txt" />
+			</Vars>
+		</Operation>
+		<!--<Operation type="ModifyString" name="String Modify">
+			<StringOps>
+				<StringOp type="append" string1="{" string2="ReadText" />
+				<StringOp type="append" string1="$current$" string2="}" />
+			</StringOps>
+		</Operation>-->
+		<Operation type="JSONToMap" name="CastJSON">
+			<Vars>
+				<Mapping methodName="JSonString" varName="ReadText" />
+			</Vars>
+		</Operation>
+		<Operation type="JSONListToTable" name="Cards Table Maker">
+			<Vars>
+				<Mapping methodName="JSonListString" varName="DeserializedJSonMap[cards]" />
+			</Vars>
+		</Operation>
+		<!-- Going to need a Data Table Modify Here to parse out the card string -->
+		<Operation type="ModifyDTCol" name="Fix the Card Object ">
+			<MappingProcess>
+				<Process name="Modify Sub Process">
+					<Operation type="JSONToMap" name="CastJSON">
+						<Vars>
+							<Mapping methodName="JSonString" varName="TableValue" />
+						</Vars>
+					</Operation>
+					<Operation type="SetVar" name="Set Mapping Var">
+						<Vars>
+							<Data name="ObjectID" type="string" value="DeserializedJSonMap[uid]" />
+							<Data name="OutputID" type="string" value='MappingOutput' />
+						</Vars>
+					</Operation>
+				</Process>
+			</MappingProcess>
+			<Vars>
+				<Mapping methodName="ToModifyDT" varName="JSONDataTable" />
+				<Data name="ColName" type="string" value="card" />
+			</Vars>
+		</Operation>
+		<Operation type="DataTableModify" name="Cards Table Maker">
+			<DTOperations>
+				<!--<RemoveCols>
+					<Col name="" />
+				</RemoveCols>-->
+				<KeepOnly>
+					<Col name="quantity" />
+					<Col name="card" />
+					<Col name="categories" />
+				</KeepOnly>
+				<CreateCols>
+					<!--<Col name="" type="string">
+						<Combine>
+							<Col name="thing" />
+							<col name="thing2" />
+						</Combine> 
+					</Col>-->
+					<Col name="is_commander" type="bool">
+						<Conditions>
+							<Condition type="contains" col="categories" value="Commander" />
+						</Conditions>
+					</Col>
+					<Col type="staticVarString" ColName="deck_id" VarName="DeckID" />
+				</CreateCols>
+			</DTOperations>
+			<Vars>
+				<Data name="DeckID" type="string" value="1000036" />
+				<Mapping methodName="InputDataTable" varName="JSONDataTable" />
+			</Vars>
+		</Operation>
+		<Operation type="DataTableToCSV" name="MapToString">
+			<Vars>
+				<Mapping methodName="DataTableToCSV" varName="ModifiedDataTable" />
+				<Data name="CSVFilePath" type="string" value="MTGDeckCards.csv" />
+			</Vars>
+		</Operation>
+		
+		<Operation type="StoreTableToDB" name="StoreMap">
+			<DataSource>.</DataSource>
+			<InitialCatalog>MTG</InitialCatalog>
+			<Password>TestUser</Password>
+			<User>TestUser</User>
+			<DataBase>deck_card</DataBase>
+			<DBCols DBCol="deck_id" VarName = "deck_id" />
+			<DBCols DBCol="card_id" VarName = "card" />
+			<DBCols DBCol="is_commander" VarName = "is_commander" />
+			<DBCols DBCol="quantity" VarName = "quantity" />
+			<Vars>
+				<Mapping methodName="TableToDB" varName="ModifiedDataTable" />
+			</Vars>
+		</Operation>
+	</Process>
+	</Processes>
+</Config>

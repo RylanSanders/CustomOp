@@ -21,7 +21,6 @@ namespace CustomOp.Operations
         {
             base.execute(data);
             //The Var will be TableValue and the output should be MappingOutput
-
             DataTable dt = data.getDataTable("ToModifyDT");
             string colName = data.getString("ColName");
 

@@ -18,7 +18,7 @@ namespace CustomOp.Operations
         {
             base.execute(data);
 
-            data.put(data.getString("OutputID"), data.getObject(data.getString("ObjectID")));
+            data.put(data.getString("OutputID"), Operation.parseVars(data.getString("ObjectID"), data, null));
         }
 
     }

@@ -891,6 +891,7 @@
 	<ConfigFile path="SteamJSONProcess.xml" />
 	<ConfigFile path="LNOperations.xml" />
 	<ConfigFile path="ArchidektOp.xml" />
+	<ConfigFile path="MTGOperations.xml" />
 </ExtendedConfig>
 
 </Config>
