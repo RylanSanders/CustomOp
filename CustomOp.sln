@@ -5,6 +5,8 @@ VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomOp", "CustomOp\CustomOp.csproj", "{BABCBFA5-EC40-40C3-BBEA-5B97CBA10735}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommandPanel", "..\CommandPanel\CommandPanel\CommandPanel.csproj", "{4677029E-56BE-4CC9-9019-AA41AEDB7078}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,10 +17,10 @@ Global
 		{BABCBFA5-EC40-40C3-BBEA-5B97CBA10735}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BABCBFA5-EC40-40C3-BBEA-5B97CBA10735}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BABCBFA5-EC40-40C3-BBEA-5B97CBA10735}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E9C969C8-31AF-462A-BCB8-0B2012E17C67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E9C969C8-31AF-462A-BCB8-0B2012E17C67}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E9C969C8-31AF-462A-BCB8-0B2012E17C67}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E9C969C8-31AF-462A-BCB8-0B2012E17C67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4677029E-56BE-4CC9-9019-AA41AEDB7078}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4677029E-56BE-4CC9-9019-AA41AEDB7078}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4677029E-56BE-4CC9-9019-AA41AEDB7078}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4677029E-56BE-4CC9-9019-AA41AEDB7078}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

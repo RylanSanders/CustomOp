@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace CustomOp.Objects
 {
-    internal static class XMLParser
+    public static class XMLParser
     {
 
         public static Operation parseOpXML(XElement element)
@@ -64,6 +64,7 @@ namespace CustomOp.Objects
                 case "MakeDir": return new MakeDirOperation(element);break;
                 case "Set": return new SetOperation(element);break;
                 case "StringToStringMapping": return new StringToStringMappingOperation(element); break;
+                case "UnZip": return new UnZipOperation(element); break;
                 default: throw new Exception($"Invalid Operation Type ({element.Attribute("type").Value})");
             }
         }
