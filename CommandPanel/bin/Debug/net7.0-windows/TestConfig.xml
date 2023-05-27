@@ -1,0 +1,47 @@
+<Root>
+<GlobalVars>
+    <Var Name="SQLConnectionString">Data Source=.;Initial Catalog=MTG;Integrated Security=True;User ID=TestUser;Password=TestUser</Var>
+</GlobalVars>
+<Panels>
+<Panel Type="Action">
+		<Inputs>
+			<Input Name="Program" Type="String"/>
+			<Input Name="Kill" Type="Button"/>
+		</Inputs>
+		<Processes>
+			<Process Type="KillProgram">
+				<ProgramName>$Program</ProgramName>
+			</Process>
+			<!--<Process Type="StartProgram">
+				<FilePath>Sabre-FLX</FilePath>
+			</Process>
+			<Process Type="OpenFile">
+				<FileName>Sabre-FLX</FileName>
+			</Process>-->
+		</Processes>
+</Panel>
+<Panel Type="Action">
+		<Inputs>
+			<Input Name="Win" Type="Button"/>
+		</Inputs>
+		<Processes>
+			<Process Type="KillProgram">
+				<ProgramName>$Program</ProgramName>
+			</Process>
+			<!--<Process Type="StartProgram">
+				<FilePath>Sabre-FLX</FilePath>
+			</Process>
+			<Process Type="OpenFile">
+				<FileName>Sabre-FLX</FileName>
+			</Process>-->
+		</Processes>
+</Panel>
+<Panel Type="Display">
+		<DisplayType type="Table"/>
+		<DataRetreiver type="SQLSelect">
+				<SQLQuery>Select * From Decks</SQLQuery>
+				<ConnectionString>$SQLConnectionString</ConnectionString>
+		</DataRetreiver>
+	</Panel>
+</Panels>
+</Root>
