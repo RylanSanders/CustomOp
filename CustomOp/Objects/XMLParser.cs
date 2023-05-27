@@ -62,6 +62,8 @@ namespace CustomOp.Objects
                 case "GenerateStringList": return new GenerateStringListOperation(element); break;
                 case "SplitString": return new SplitStringOperation(element);break;
                 case "MakeDir": return new MakeDirOperation(element);break;
+                case "Set": return new SetOperation(element);break;
+                case "StringToStringMapping": return new StringToStringMappingOperation(element); break;
                 default: throw new Exception($"Invalid Operation Type ({element.Attribute("type").Value})");
             }
         }

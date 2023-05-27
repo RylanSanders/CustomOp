@@ -12,6 +12,7 @@ namespace CustomOp.Operations
     {
         Dictionary<string, string> strEqualsCondition = new Dictionary<string, string>();
         Dictionary<string, string> mapContainsCondition = new Dictionary<string, string>();
+        Dictionary<string, string> listContainsCondition = new Dictionary<string, string>();
         Process trueProcess;
         Process falseProcess;
         public IfOperation(XElement config) : base(config)
@@ -23,6 +24,10 @@ namespace CustomOp.Operations
             foreach (XElement element in config.Element("Conditions").Elements("mapContainsKey"))
             {
                 mapContainsCondition.Add(element.Attribute("mapName").Value.ToString(), element.Attribute("key").Value.ToString());
+            }
+            foreach (XElement element in config.Element("Conditions").Elements("listContainsValue"))
+            {
+                listContainsCondition.Add(element.Attribute("listName").Value.ToString(), element.Attribute("value").Value.ToString());
             }
             XElement staticProcess = config.Element("TrueProcess").Element("Process");
             if (staticProcess == null)
@@ -101,6 +106,14 @@ namespace CustomOp.Operations
                     }
                 }
                 
+            }
+            foreach (string varName in listContainsCondition.Keys)
+            {
+                List<string> lst = (List<string>)Operation.parseVars(varName, data, null);
+                if (!lst.Contains(listContainsCondition[varName]))
+                {
+                    return false;
+                }
             }
             return true;
         }

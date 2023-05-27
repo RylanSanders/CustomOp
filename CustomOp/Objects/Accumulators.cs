@@ -9,7 +9,7 @@ namespace CustomOp.Objects
     internal static class Accumulators
     {
 
-        public static Accumulator<String> getStringAcc(string acc)
+        public static Accumulator<StringBuilder, String> getStringAcc(string acc)
         {
             switch (acc)
             {
@@ -20,45 +20,45 @@ namespace CustomOp.Objects
 
         public static string strAccumulate(List<string> input, string accType, string startingString)
         {
-            Accumulator<String> acc = getStringAcc(accType);
-            string usedValue = startingString;
+            Accumulator<StringBuilder, String> acc = getStringAcc(accType);
+            StringBuilder usedValue = new StringBuilder(startingString);
             usedValue = acc.preAction(usedValue);
             foreach(string val in input)
             {
                 usedValue = acc.combine(usedValue, val);
             }
             usedValue = acc.postAction(usedValue);
-            return usedValue;
+            return usedValue.ToString();
         }
         
 
     }
 
-    abstract class  Accumulator<T>
+    //K is the accumulator object, sometimes this will be the same as T but for strings it will be StringBuilder, String for Efficiency
+    abstract class  Accumulator<K,T>
     {
 
-        public abstract T combine(T e1, T e2);
+        public abstract K combine(K e1, T e2);
 
-        public virtual T preAction(T element) { return element; }
-        public virtual T postAction(T element) { return element; }
+        public virtual K preAction(K element) { return element; }
+        public virtual K postAction(K element) { return element; }
     }
 
-    class JSonListAccumulator : Accumulator<String>
+    class JSonListAccumulator : Accumulator<StringBuilder, String>
     {
-        public override String combine(String e1, String e2)
+        public override StringBuilder combine(StringBuilder e1, String e2)
         {
-            string s1 = e1.ToString();
-            string s2 = e2.ToString();
-            String toRet = s1+ "," + s2;
-            return toRet ;
+            e1.Append(",");
+            e1.Append(e2);
+            return e1 ;
         }
 
 
-        public override String postAction(String element)
+        public override StringBuilder postAction(StringBuilder element)
         {
             base.postAction(element);
 
-            return "[" + element.Substring(1, element.Length - 1) + "]";
+            return new StringBuilder("[" + element.ToString().Substring(1, element.Length - 1) + "]");
         }
     }
 }

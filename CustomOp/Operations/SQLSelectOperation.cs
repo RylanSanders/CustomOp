@@ -74,9 +74,17 @@ namespace CustomOp.Operations
                         {
                             table[row.GetName(i)].Add(row.GetInt32(i).ToString());
                         }
-                        else if (datatype == "nchar" || datatype=="varchar")
+                        else if (datatype == "bigint")
+                        {
+                            table[row.GetName(i)].Add(row.GetInt64(i).ToString());
+                        }
+                        else if (datatype == "nchar" || datatype=="varchar" || datatype=="nvarchar" || datatype=="xml")
                         {
                            table[row.GetName(i)].Add(row.GetString(i));
+                        }
+                        else if (datatype == "bit")
+                        {
+                            table[row.GetName(i)].Add(row.GetBoolean(i).ToString());
                         }
                         else if(datatype == "datetime")
                         {

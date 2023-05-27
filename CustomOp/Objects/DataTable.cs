@@ -25,6 +25,17 @@ namespace CustomOp.Objects
             return colValues[colName];
         }
 
+        public int searchRowForValue(string colToSearch, string value)
+        {
+            List<string> listToSearch = colValues[colToSearch];
+            for(int i = 0; i < listToSearch.Count; i++)
+            {
+                if (listToSearch[i] == value)
+                    return i;
+            }
+            return -1;
+        }
+
         public void addRow(Dictionary<string, string> values)
         {
             foreach(string key in values.Keys)
