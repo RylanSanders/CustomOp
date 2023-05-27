@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace CustomOp.Objects
 {
-    internal class ExecutionController
+    public class ExecutionController
     {
         public List<Process> processes;
         public static Dictionary<string, Process> idProcesses;

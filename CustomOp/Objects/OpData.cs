@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 namespace CustomOp.Objects
 {
-    internal class OpData
+    public class OpData
     {
 
         protected Dictionary<String, MutableObject> data;

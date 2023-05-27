@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CustomOp.Objects
 {
-    internal class MutableObject
+    public class MutableObject
     {
         Type t;
         Object o;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CustomOp.Objects
 {
-    internal class JSONObject
+    public class JSONObject
     {
         enum objTypes
         {

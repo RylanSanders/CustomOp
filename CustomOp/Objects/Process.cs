@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace CustomOp.Objects
 {
-    internal class Process
+    public class Process
     {
         public OpData inputData;
         public string name;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CustomOp.Objects
 {
-    internal class DataTable
+    public class DataTable
     {
         public Dictionary<string, List<string>> colValues;
 

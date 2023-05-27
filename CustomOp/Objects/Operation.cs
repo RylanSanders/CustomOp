@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 
 namespace CustomOp.Objects
 {
-    internal abstract class Operation
+    public abstract class Operation
     {
         //TODO build getInputsTypes and getOutputTypes methods here to validate Operation orders
         //TODO also do the validation for the var type to make sure the vars actually exist 
