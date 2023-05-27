@@ -65,6 +65,7 @@ namespace CustomOp.Objects
                 case "Set": return new SetOperation(element);break;
                 case "StringToStringMapping": return new StringToStringMappingOperation(element); break;
                 case "UnZip": return new UnZipOperation(element); break;
+                case "DetachDatabase": return new DetachDatabaseOperation(element); break;
                 default: throw new Exception($"Invalid Operation Type ({element.Attribute("type").Value})");
             }
         }
