@@ -60,8 +60,10 @@ namespace CustomOp.Objects
                 }
                 catch(Exception e)
                 {
+                    MessageBox.Show($"Error in {op.name} of type {op.GetType()}. \nMessage:{e.Message}. \nStackTrace:{e.StackTrace}");
                     Logger.log.Error("Error in run method of process message: " + e.Message + "\n StackTrace:" + e.StackTrace);
                     op.onError();
+                    break;
                 }
             }
         }
