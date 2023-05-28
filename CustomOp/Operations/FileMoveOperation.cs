@@ -18,8 +18,15 @@ namespace CustomOp.Operations
         public override void execute(OpData data)
         {
             base.execute(data);
-
-            File.Move(data.getString("SourceFile"), data.getString("DestinationFile"));
+            bool isDir = Directory.Exists(data.getString("SourceFile"));
+            if (isDir)
+            {
+                Directory.Move(data.getString("SourceFile"), data.getString("DestinationFile"));
+            }
+            else
+            {
+                File.Move(data.getString("SourceFile"), data.getString("DestinationFile"));
+            }
         }
     }
 }
