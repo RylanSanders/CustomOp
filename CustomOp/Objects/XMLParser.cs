@@ -67,6 +67,7 @@ namespace CustomOp.Objects
                 case "UnZip": return new UnZipOperation(element); break;
                 case "DetachDatabase": return new DetachDatabaseOperation(element); break;
                 case "AttachDatabase": return new AttachDatabaseOperation(element); break;
+                case "OpenFile":return new OpenFileOperation(element);
                 default: throw new Exception($"Invalid Operation Type ({element.Attribute("type").Value})");
             }
         }
