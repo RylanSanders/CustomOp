@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
@@ -94,6 +95,28 @@ namespace CustomOp.Objects
                 }
             }
             return data;
+        }
+
+        public static OpData parseGlobalDataTags(XElement element, OpData data)
+        {
+            OpData inputs = parseDataTags(element, data);
+
+            var globalMappings = from input in element.Descendants("Mapping")
+                         select new
+                         {
+                             VarName = input.Attribute("varName").Value.ToString(),
+                             MethodName = input.Attribute("methodName").Value.ToString(),
+                         };
+
+            foreach (var mapping in globalMappings)
+            {
+                // Use regular expression to remove letters
+                int argIndex = int.Parse(Regex.Replace(mapping.VarName, "[^0-9]", ""));
+                string value = Environment.GetCommandLineArgs()[argIndex];
+
+                inputs.put(mapping.MethodName, value);
+            }
+            return inputs;
         }
 
 
