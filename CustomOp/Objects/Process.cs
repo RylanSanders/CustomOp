@@ -12,9 +12,11 @@ namespace CustomOp.Objects
         public OpData inputData;
         public string name;
         List<Operation> ops;
+        private XElement savedConfig;
 
         public Process(XElement config)
         {
+            savedConfig= config;
             ops = new List<Operation>();
             foreach (XElement x in config.Elements())
             {
@@ -70,11 +72,16 @@ namespace CustomOp.Objects
 
         public void addOpData(OpData data)
         {
-            inputData = data.merge(inputData);
+            inputData = inputData.merge(data);
         }
 
         public Process clone()
         {
+            if (savedConfig != null)
+            {
+                Process newProcess = new Process(savedConfig);
+                return newProcess;
+            }
             Process c = new Process(ops, inputData);
             c.name = name;
             return c;
