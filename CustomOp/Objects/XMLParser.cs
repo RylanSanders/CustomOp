@@ -70,6 +70,7 @@ namespace CustomOp.Objects
                 case "AttachDatabase": return new AttachDatabaseOperation(element); break;
                 case "OpenFile":return new OpenFileOperation(element);
                 case "CopyFile": return new CopyFileOperation(element);
+                case "ExecuteSQL": return new ExecuteSQLOperation(element);
                 default: throw new Exception($"Invalid Operation Type ({element.Attribute("type").Value})");
             }
         }
@@ -112,9 +113,23 @@ namespace CustomOp.Objects
             {
                 // Use regular expression to remove letters
                 int argIndex = int.Parse(Regex.Replace(mapping.VarName, "[^0-9]", ""));
-                string value = Environment.GetCommandLineArgs()[argIndex];
+                try
+                {
+                    if (Environment.GetCommandLineArgs().Length <= argIndex)
+                    {
+                        MessageBox.Show($"Launching with Following Error:\nInvalid Argument Index ({mapping.VarName}) for variable {mapping.MethodName}");
+                    }
+                    else
+                    {
+                        string value = Environment.GetCommandLineArgs()[argIndex];
 
-                inputs.put(mapping.MethodName, value);
+                        inputs.put(mapping.MethodName, value);
+                    }
+                } catch (Exception ex)
+                {
+                    MessageBox.Show($"Launching with Following Error:\n {ex.Message} + {ex.StackTrace}");
+                
+                }
             }
             return inputs;
         }
