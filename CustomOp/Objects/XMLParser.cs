@@ -83,7 +83,8 @@ namespace CustomOp.Objects
                          {
                              Name = input.Attribute("name").Value.ToString(),
                              Value = input.Attribute("value").Value.ToString(),
-                             Type = input.Attribute("type").Value.ToString()
+                             Type = input.Attribute("type").Value.ToString(),
+                             Config = input
                          };
 
             foreach(var input in inputs)
@@ -94,6 +95,9 @@ namespace CustomOp.Objects
                 }
                 else if(input.Type.Equals("int")){
                     data.put(input.Name, Int32.Parse(input.Value));
+                }else if (input.Type.Equals("SQLLogin"))
+                {
+                    data.put(input.Name, new SQLLogin(input.Config));
                 }
             }
             return data;

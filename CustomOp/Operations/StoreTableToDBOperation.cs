@@ -13,18 +13,14 @@ namespace CustomOp.Operations
     {
         Dictionary<string, string> ColToVar;
 
-        private string dataSource;
-        private string InitialCatalog;
-        private string Password;
-        private string User;
+        private SQLLogin login;
         private string DataBase;
         public StoreTableToDBOperation(XElement config) : base(config)
         {
-            //TODO put this in a connection section
-            dataSource = config.Element("DataSource").Value;
-            InitialCatalog = config.Element("InitialCatalog").Value;
-            Password = config.Element("Password").Value;
-            User = config.Element("User").Value;
+            if (SQLLogin.isSQLLogin(config))
+            {
+                login = new SQLLogin(config);
+            }
             DataBase = config.Element("DataBase").Value;
 
             //DBCol is the database column name and the VarName is the name of the variable in the map
@@ -49,11 +45,19 @@ namespace CustomOp.Operations
             DataTable dt = data.getDataTable("TableToDB");
 
             SqlConnectionStringBuilder csb = new SqlConnectionStringBuilder();
-            csb.DataSource = dataSource;
-            csb.InitialCatalog = InitialCatalog;
+            if (login == null)
+            {
+                if (!data.contains("SQLLogin"))
+                {
+                    throw new Exception("No Valid SQLLogin!");
+                }
+                login = data.getSQLLogin("SQLLogin");
+            }
+            csb.DataSource = login.DataSource;
+            csb.InitialCatalog = login.InitialCatalog;
             csb.IntegratedSecurity = true;
-            csb.Password = Password;
-            csb.UserID = User;
+            csb.Password = login.Password;
+            csb.UserID = login.UserID;
             SqlConnection sqlConnection1 = new SqlConnection(csb.ToString());
             try
             {

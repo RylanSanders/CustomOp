@@ -1,4 +1,5 @@
 ﻿using CustomOp.Objects;
+using Microsoft.VisualBasic.Logging;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -12,27 +13,32 @@ namespace CustomOp.Operations
 {
     internal class AttachDatabaseOperation : Operation
     {
-        private string dataSource;
-        private string InitialCatalog;
-        private string Password;
-        private string User;
+        private SQLLogin login;
         public AttachDatabaseOperation(XElement config) : base(config)
         {
-            dataSource = config.Element("DataSource").Value;
-            InitialCatalog = config.Element("InitialCatalog").Value;
-            Password = config.Element("Password").Value;
-            User = config.Element("User").Value;
+            if (SQLLogin.isSQLLogin(config))
+            {
+                login = new SQLLogin(config);
+            }
         }
 
         public override void execute(OpData data)
         {
             base.execute(data);
             SqlConnectionStringBuilder csb = new SqlConnectionStringBuilder();
-            csb.DataSource = dataSource;
-            csb.InitialCatalog = InitialCatalog;
+            if(login == null)
+            {
+                if (!data.contains("SQLLogin"))
+                {
+                    throw new Exception("No Valid SQLLogin!");
+                }
+                data.getString("SQLLogin");
+            }
+            csb.DataSource = login.DataSource;
+            csb.InitialCatalog = login.InitialCatalog;
             csb.IntegratedSecurity = true;
-            csb.Password = Password;
-            csb.UserID = User;
+            csb.Password = login.Password;
+            csb.UserID = login.UserID;
             SqlConnection sqlConnection = new SqlConnection(csb.ToString());
             string mdfFilePath = data.getString("MDFFilePath");
             string ldfFilePath = mdfFilePath.Replace("mdf","ldf");

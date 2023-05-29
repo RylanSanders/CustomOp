@@ -106,6 +106,15 @@ namespace CustomOp.Objects
             return (JSONObject)(data[id].getData());
         }
 
+        public SQLLogin getSQLLogin(string id)
+        {
+            if (!data.ContainsKey(id) || !data[id].getType().Equals(typeof(SQLLogin)))
+            {
+                throw new Exception($"Error in getSQLLogin Method in OpData. Invalid variable name ID: {id}");
+            }
+            return (SQLLogin)(data[id].getData());
+        }
+
 
         public void put(String name, Object i)
         {

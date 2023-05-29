@@ -11,29 +11,34 @@ namespace CustomOp.Operations
 {
     internal class DetachDatabaseOperation : Operation
     {
-        private string dataSource;
-        private string InitialCatalog;
-        private string Password;
-        private string User;
-        
+        private SQLLogin login;
+
         public DetachDatabaseOperation(XElement config) : base(config)
         {
-            dataSource = config.Element("DataSource").Value;
-            InitialCatalog = config.Element("InitialCatalog").Value;
-            Password = config.Element("Password").Value;
-            User = config.Element("User").Value;
+            if (SQLLogin.isSQLLogin(config))
+            {
+                login = new SQLLogin(config);
+            }
         }
 
         public override void execute(OpData data)
         {
+            base.execute(data);
 
             SqlConnectionStringBuilder csb = new SqlConnectionStringBuilder();
-            csb.DataSource = dataSource;
-            csb.InitialCatalog = InitialCatalog;
+            if (login == null)
+            {
+                if (!data.contains("SQLLogin"))
+                {
+                    throw new Exception("No Valid SQLLogin!");
+                }
+                login = data.getSQLLogin("SQLLogin");
+            }
+            csb.DataSource = login.DataSource;
+            csb.InitialCatalog = login.InitialCatalog;
             csb.IntegratedSecurity = true;
-            csb.Password = Password;
-            csb.UserID = User;
-            base.execute(data);
+            csb.Password = login.Password;
+            csb.UserID = login.UserID;
             SqlConnection sqlConnection1 = new SqlConnection(csb.ToString());
             string databaseName = data.getString("DBToDetach");
             using (SqlConnection connection = sqlConnection1)
