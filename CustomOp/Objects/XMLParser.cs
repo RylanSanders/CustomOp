@@ -71,6 +71,7 @@ namespace CustomOp.Objects
                 case "OpenFile":return new OpenFileOperation(element);
                 case "CopyFile": return new CopyFileOperation(element);
                 case "ExecuteSQL": return new ExecuteSQLOperation(element);
+                case "ExecuteProcess": return new ExecuteProcessOperation(element);
                 default: throw new Exception($"Invalid Operation Type ({element.Attribute("type").Value})");
             }
         }
