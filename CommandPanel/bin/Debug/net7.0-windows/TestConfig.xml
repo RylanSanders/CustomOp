@@ -1,16 +1,48 @@
 <Root>
 <GlobalVars>
-    <Var Name="SQLConnectionString">Data Source=.;Initial Catalog=MTG;Integrated Security=True;User ID=TestUser;Password=TestUser</Var>
+	<Data name="SQLConnectionString" type="string" value="Data Source=.;Initial Catalog=MTG;Integrated Security=True;User ID=TestUser;Password=TestUser" />
+	<Mapping varName="args(1)" methodName="TestVar"/>
 </GlobalVars>
+<Layout>
+    <Grid x:Name="Main" xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation' xmlns:x='http://schemas.microsoft.com/winfx/2006/xaml' Background="Brown"> 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+    </Grid>
+</Layout>
 <Panels>
-<Panel Type="Action">
+<Panel Type="Action" X="1" Y="1">
 		<Inputs>
 			<Input Name="Program" Type="String"/>
 			<Input Name="Kill" Type="Button"/>
 		</Inputs>
 		<Processes>
-			<Process Type="KillProgram">
-				<ProgramName>$Program</ProgramName>
+			<Process name="Test1">
+				<Operation type="FileMove" name="BasicFileMove">
+					<Vars>
+						<Data name="SourceFile" type="string" value="C:/test/test.txt" />
+						<Data name="DestinationFile" type="string" value="C:/test/final.txt" />
+					</Vars>
+				</Operation>
+				<Operation type="Wait" name="Wait">
+					<Vars>
+						<Data name="WaitTime" type="int" value="10000" />
+					</Vars>
+				</Operation>
+				<Operation type="KillProcess" name="KillFireFox">
+					<Vars>
+						<Data name="ToKillProcess" type="string" value="FireFox" />
+					</Vars>
+				</Operation>
 			</Process>
 			<!--<Process Type="StartProgram">
 				<FilePath>Sabre-FLX</FilePath>
@@ -22,11 +54,19 @@
 </Panel>
 <Panel Type="Action">
 		<Inputs>
-			<Input Name="Win" Type="Button"/>
+			<Input Name="OpenFile" Type="StackPanel" Width="2">
+				<Button>Test1</Button>
+				<Button>Test22</Button>
+				<Button>Test13</Button>
+			</Input>
 		</Inputs>
 		<Processes>
-			<Process Type="KillProgram">
-				<ProgramName>$Program</ProgramName>
+			<Process name="Test1">
+				<Operation type="MessageBox" name="BasicFileMove">
+					<Vars>
+						<Mapping methodName="Message" varName="Sender" />
+					</Vars>
+				</Operation>
 			</Process>
 			<!--<Process Type="StartProgram">
 				<FilePath>Sabre-FLX</FilePath>
@@ -36,12 +76,75 @@
 			</Process>-->
 		</Processes>
 </Panel>
-<Panel Type="Display">
-		<DisplayType type="Table"/>
-		<DataRetreiver type="SQLSelect">
-				<SQLQuery>Select * From Decks</SQLQuery>
-				<ConnectionString>$SQLConnectionString</ConnectionString>
+<Panel Type="Action">
+		<Inputs>
+			<Input Name="Test!!!" Type="Button"/>
+		</Inputs>
+		<Processes>
+		<Process name="FileTest">
+			<Operation type="ReadFile" name="Move">
+				<Vars>
+					<Data name="FilePath" type="string" value="C:\test\final.txt" />
+					<!--<Data name="OpenArgs" type="string" value="launched" />-->
+				</Vars>
+			</Operation>
+			<Operation type="RegexReplace" name="Move">
+				<Vars>
+					<Data name="RegexReplace" type="string" value="127.0.0.1" />
+					<Data name="RegexMatch" type="string" value="\b(?:\d{1,3}\.){3}\d{1,3}\b" />
+					<Mapping methodName="RegexInput" varName="ReadText" />
+					<!--<Data name="OpenArgs" type="string" value="launched" />-->
+				</Vars>
+			</Operation>
+			<Operation type="WriteFile" name="Move" >
+				<Vars>
+					<Data name="WriteFilePath" type="string" value="C:\test\final.txt" />
+					<Mapping methodName="TextToWrite" varName="RegexOutput" />
+					<!--<Data name="OpenArgs" type="string" value="launched" />-->
+				</Vars>
+			</Operation>
+		<!--<Process name="Test1">
+			<Operation type="AttachDatabase" name="MakeTable">
+				<DataSource>.</DataSource>
+				<InitialCatalog>MTG</InitialCatalog>
+				<Password>TestAdmin</Password>
+				<User>TestAdmin</User>
+				<Vars>
+					<Data name="MDFFilePath" type="string" value="C:\test\Test.mdf" />
+				</Vars>
+			</Operation>-->
+			<!--<Operation type="DetachDatabase" name="MakeTable">
+				<DataSource>.</DataSource>
+				<InitialCatalog>MTG</InitialCatalog>
+				<Password>TestUser</Password>
+				<User>TestUser</User>
+				<Vars>
+					<Data name="DBToDetach" type="string" value="Test" />
+				</Vars>
+			</Operation>-->
+		</Process>
+		</Processes>
+</Panel>
+<Panel Type="Action">
+		<Inputs>
+			<Input Name="Test Global" Type="Button"/>
+		</Inputs>
+		<Processes>
+		<Process name="FileTest">
+			<Operation type="MessageBox" name="Move">
+				<Vars>
+					<Mapping varName="TestVar" methodName="Message" />
+				</Vars>
+			</Operation>
+		</Process>
+		</Processes>
+		</Panel>
+<!--<Panel Type="Display">
+		<DisplayType>Table</DisplayType>
+		<DataRetreiver Type="SQLSelect">
+			<SQLQuery>Select * From Decks</SQLQuery>
+			<ConnectionString>$SQLConnectionString</ConnectionString>
 		</DataRetreiver>
-	</Panel>
+	</Panel>-->
 </Panels>
 </Root>
