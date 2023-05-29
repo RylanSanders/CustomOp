@@ -13,11 +13,11 @@ namespace CustomOp.Operations
         public GenerateMapOperation(XElement config) : base(config)
         {
             map = new Dictionary<string, string>();
-            var inputs = from input in config.Descendants("Data")
+            var inputs = from input in config.Descendants("Item")
                         select new
                         {
-                            Name = input.Attribute("name").Value.ToString(),
-                            Value = input.Attribute("value").Value.ToString(),
+                            Name = input.Attribute("Name").Value.ToString(),
+                            Value = input.Attribute("Value").Value.ToString(),
                         };
 
             foreach (var input in inputs)
