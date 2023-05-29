@@ -8,10 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace CustomOp
+namespace CustomOp.Operations
 {
 
-    internal class ExecuteSQLOperation: Operation
+    internal class ExecuteSQLOperation : Operation
     {
         private string dataSource;
         private string InitialCatalog;
