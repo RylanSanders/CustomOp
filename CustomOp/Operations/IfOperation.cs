@@ -11,6 +11,7 @@ namespace CustomOp.Operations
     internal class IfOperation : Operation
     {
         Dictionary<string, string> strEqualsCondition = new Dictionary<string, string>();
+        Dictionary<string, string> strContainsCondition = new Dictionary<string, string>();
         Dictionary<string, string> mapContainsCondition = new Dictionary<string, string>();
         Dictionary<string, string> listContainsCondition = new Dictionary<string, string>();
         Process trueProcess;
@@ -28,6 +29,10 @@ namespace CustomOp.Operations
             foreach (XElement element in config.Element("Conditions").Elements("listContainsValue"))
             {
                 listContainsCondition.Add(element.Attribute("listName").Value.ToString(), element.Attribute("value").Value.ToString());
+            }
+            foreach (XElement element in config.Element("Conditions").Elements("strContains"))
+            {
+                strContainsCondition.Add(element.Attribute("stringName").Value.ToString(), element.Attribute("value").Value.ToString());
             }
             XElement staticProcess = config.Element("TrueProcess").Element("Process");
             if (staticProcess == null)
@@ -111,6 +116,14 @@ namespace CustomOp.Operations
             {
                 List<string> lst = (List<string>)Operation.parseVars(varName, data, null);
                 if (!lst.Contains(listContainsCondition[varName]))
+                {
+                    return false;
+                }
+            }
+            foreach (string varName in strContainsCondition.Keys)
+            {
+                string s = Operation.parseVars(varName, data, null).ToString();
+                if (!s.GetType().Equals(typeof(string)) || !s.Contains(strContainsCondition[varName]))
                 {
                     return false;
                 }
